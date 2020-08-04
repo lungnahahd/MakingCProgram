@@ -40,7 +40,6 @@ int main(void) {
 	count = count + 1;
 	printf("정답입니다. 해당 숫자는 %d 이고 시도 횟수는 %d 입니다. \n", num, count);
 
-
 	system("pause");
 	return 0;
 }
