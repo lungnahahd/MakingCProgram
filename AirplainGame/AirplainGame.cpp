@@ -25,7 +25,10 @@ int main(void)
 			if (y < 0) {
 				y = 0;
 			}
+			
 		}
+
+		
 		if(GetAsyncKeyState(VK_DOWN) & 0x8000) {
 			y++;
 			if (y > 28) {
@@ -39,6 +42,8 @@ int main(void)
 			}
 		}
 
+		
+
 
 
 
@@ -47,8 +52,50 @@ int main(void)
 		printf("☆");
 		//커서가 while문을 돌면서 너무 빠르게 동작하는 것을 막기 위해 사용되는 코드
 		Sleep(50);
-	}
 
+		if (GetAsyncKeyState(VK_SPACE) & 0x8000) {
+			int bulX = x;
+			int bulY = y;
+			while (bulY != 0)
+			{	
+				Clear();
+				bulY--;
+				GotoXY(bulX, bulY);
+				printf("^");
+				if (GetAsyncKeyState(VK_LEFT) & 0x8000) {
+					x--;
+					if (x < 0) {
+						x = 0;
+					}
+				}
+				if (GetAsyncKeyState(VK_UP) & 0x8000) {
+					y--;
+					if (y < 0) {
+						y = 0;
+					}
+
+				}
+
+
+				if (GetAsyncKeyState(VK_DOWN) & 0x8000) {
+					y++;
+					if (y > 28) {
+						y = 28;
+					}
+				}
+				if (GetAsyncKeyState(VK_RIGHT) & 0x8000) {
+					x++;
+					if (x > 28) {
+						x = 28;
+					}
+				}
+				GotoXY(x, y);
+				printf("☆");
+				//Sleep(20);
+			}
+		}
+	}
+	
 	system("pause");
 	return 0;
 }
