@@ -3,8 +3,12 @@
 #include <time.h>
 #include "Evan.h"
 
+#define Max 30
+
+
 int main(void)
 {
+	int score = 0;
 	int x = 15, y = 28;
 	boolean bullet = false;
 	boolean onoff = false;
@@ -19,12 +23,19 @@ int main(void)
 
 	srand(time(NULL));
 
+	int eX[Max] = { 0 };
+	int eY[Max] = { 0 };
+	boolean Be[Max] = { false };
+
+
+
 	while (true)
 	{
 		//별 그림의 잔상을 지워주는 역할 수행
 		Clear();
 
-		if (!enmB) {
+		//별을 하나씩만 출력해서 게임을 하는 코드
+		/**if (!enmB) {
 			enmX = rand() % 15 * 2;
 			enmY = 0;
 			enmB = true;
@@ -45,6 +56,27 @@ int main(void)
 			system("pause");
 			return 0;
 
+		}**/
+
+		for (int i = 0; i < Max; i++) {
+			if (!Be[i]) {
+				eX[i] = rand() % 15 * 2;
+				eY[i] = 0;
+				Be[i] = true;
+				break;
+			}
+		}
+		for (int i = 0; i < Max; i++) {
+			if (Be[i]) {
+				GotoXY(eX[i], eY[i]);
+				printf("*");
+				eY[i]++;
+				if (eY[i] > 28) {
+					Be[i] = false;
+					score++;
+
+				}
+			}
 		}
 
 		//입력을 받아서 해당 커서의 위치를 이동시키는 부분, &0x8000을 통해서 꾹 누르던지 한번 누르던지 모두 입력을 받을 수 있다.
@@ -82,12 +114,26 @@ int main(void)
 				onoff = true;
 			}	
 		}
-		if (enmY == bY && enmX == bX) {
+		//단일 적기 출현시 적기 제거 동작
+		/**if (enmY == bY && enmX == bX) {
 			GotoXY(bX, bY);
 			printf("※");
 			enmB = false;
 			Sleep(100);
+		}**/
+
+		
+		for (int i = 0; i < Max; i++) {
+			if (Be[i] && eX[i] == x && eY[i] == y) {
+				GotoXY(x, y);
+				printf("점수 : %d \n", score );
+				system("pause");
+				return 0;
+			}
 		}
+
+		
+
 		if (onoff) {
 			bY--;
 			GotoXY(bX, bY);
@@ -112,45 +158,45 @@ int main(void)
 
 		
 		//총알 발사 기능 구현 Ver 1
-	//	if (GetAsyncKeyState(VK_SPACE) & 0x8000) {
-	//		int bulX = x;
-	//		int bulY = y;
-	//		while (bulY != 0)
-	//		{	
-	//			Clear();
-	//			bulY--;
-	//			GotoXY(bulX, bulY);
-	//			printf("^");
-	//			if (GetAsyncKeyState(VK_LEFT) & 0x8000) {
-	//				x--;
-	//				if (x < 0) {
-	//					x = 0;
-	//				}
-	//			}
-	//			if (GetAsyncKeyState(VK_UP) & 0x8000) {
-	//				y--;
-	//				if (y < 0) {
-	//					y = 0;
-	//				}
+		/**if (GetAsyncKeyState(VK_SPACE) & 0x8000) {
+			int bulX = x;
+			int bulY = y;
+			while (bulY != 0)
+			{	
+				Clear();
+				bulY--;
+				GotoXY(bulX, bulY);
+				printf("^");
+				if (GetAsyncKeyState(VK_LEFT) & 0x8000) {
+					x--;
+					if (x < 0) {
+						x = 0;
+					}
+				}
+				if (GetAsyncKeyState(VK_UP) & 0x8000) {
+					y--;
+					if (y < 0) {
+						y = 0;
+					}
 
-	//			}
-	//			if (GetAsyncKeyState(VK_DOWN) & 0x8000) {
-	//				y++;
-	//				if (y > 28) {
-	//					y = 28;
-	//				}
-	//			}
-	//			if (GetAsyncKeyState(VK_RIGHT) & 0x8000) {
-	//				x++;
-	//				if (x > 28) {
-	//					x = 28;
-	//				}
-	//			}
-	//			GotoXY(x, y);
-	//			printf("☆");
-	//			//Sleep(20);
-	//		}
-	//	}
+				}
+				if (GetAsyncKeyState(VK_DOWN) & 0x8000) {
+					y++;
+					if (y > 28) {
+						y = 28;
+					}
+				}
+				if (GetAsyncKeyState(VK_RIGHT) & 0x8000) {
+					x++;
+					if (x > 28) {
+						x = 28;
+					}
+				}
+				GotoXY(x, y);
+				printf("☆");
+				//Sleep(20);
+			}
+		}**/
 	}
 	
 	system("pause");
