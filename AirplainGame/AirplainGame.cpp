@@ -1,5 +1,6 @@
 ﻿#include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "Evan.h"
 
 int main(void)
@@ -12,10 +13,39 @@ int main(void)
 	int bX = 0;
 	int bY = 0;
 
+	//적기 관련 변수
+	int enmX = 0, enmY = 0;
+	boolean enmB = false;
+
+	srand(time(NULL));
+
 	while (true)
 	{
 		//별 그림의 잔상을 지워주는 역할 수행
 		Clear();
+
+		if (!enmB) {
+			enmX = rand() % 15 * 2;
+			enmY = 0;
+			enmB = true;
+		}
+		if (enmB) {
+			GotoXY(enmX, enmY);
+			printf("㉿");
+			if (enmY > 28) {
+				enmB = false;
+			}
+			enmY++;
+			
+		
+		}
+		if (enmX == x && enmY == y) {
+			GotoXY(x, y);
+			printf("게임이 종료되었습니다.");
+			system("pause");
+			return 0;
+
+		}
 
 		//입력을 받아서 해당 커서의 위치를 이동시키는 부분, &0x8000을 통해서 꾹 누르던지 한번 누르던지 모두 입력을 받을 수 있다.
 		if (GetAsyncKeyState(VK_LEFT) & 0x8000) { 
@@ -50,12 +80,13 @@ int main(void)
 				bY = y;
 				bullet = true;
 				onoff = true;
-			}
-			
-			
-
-			
-			
+			}	
+		}
+		if (enmY == bY && enmX == bX) {
+			GotoXY(bX, bY);
+			printf("※");
+			enmB = false;
+			Sleep(100);
 		}
 		if (onoff) {
 			bY--;
@@ -66,6 +97,7 @@ int main(void)
 				bullet = false;
 			}
 		}
+		
 
 		
 
