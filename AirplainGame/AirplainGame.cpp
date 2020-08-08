@@ -5,79 +5,86 @@
 
 #define Max 30
 
+//연관성 있는 변수를 함께 관리해 줄 구조체
+struct OBJECT
+{
+	int x = 0;
+	int y = 0;
+	bool Bcheck = false;
+};
+
+OBJECT Enemy[Max];
+
+OBJECT Player;
+
+int score = 0;
+
+void makeStar() {
+	for (int i = 0; i < Max; i++) {
+		if (!Enemy[i].Bcheck) {
+			Enemy[i].x = rand() % 15 * 2;
+			Enemy[i].y = 0;
+			Enemy[i].Bcheck = true;
+			break;
+		}
+	}
+}
+
+void showStar() {
+	for (int i = 0; i < Max; i++) {
+		if (Enemy[i].Bcheck) {
+			GotoXY(Enemy[i].x, Enemy[i].y);
+			printf("*");
+			Enemy[i].y++;
+			if (Enemy[i].y > 28) {
+				Enemy[i].Bcheck = false;
+				score++;
+
+			}
+		}
+	}
+}
+
+int crush() {
+	for (int i = 0; i < Max; i++) {
+		if (Enemy[i].Bcheck && Enemy[i].x == Player.x && Enemy[i].y == Player.y) {
+			GotoXY(Player.x, Player.y);
+			printf("점수 : %d \n", score);
+			system("pause");
+			return 0;
+		}
+	}
+}
 
 int main(void)
 {
-	int score = 0;
+
+	
+
+	
 	int x = 15, y = 28;
 	boolean bullet = false;
 	boolean onoff = false;
+	
 	//콘솔창의 크기를 (30,30)으로 조정하는 Evan헤더의 함수
 	SetConsoleSize(30, 30);
 	int bX = 0;
 	int bY = 0;
 
-	//적기 관련 변수
-	int enmX = 0, enmY = 0;
-	boolean enmB = false;
 
 	srand(time(NULL));
-
-	int eX[Max] = { 0 };
-	int eY[Max] = { 0 };
-	boolean Be[Max] = { false };
-
-
 
 	while (true)
 	{
 		//별 그림의 잔상을 지워주는 역할 수행
 		Clear();
 
-		//별을 하나씩만 출력해서 게임을 하는 코드
-		/**if (!enmB) {
-			enmX = rand() % 15 * 2;
-			enmY = 0;
-			enmB = true;
-		}
-		if (enmB) {
-			GotoXY(enmX, enmY);
-			printf("㉿");
-			if (enmY > 28) {
-				enmB = false;
-			}
-			enmY++;
-			
+		//별을 만드는 함수
+		makeStar();
+
+		//별을 보여주는 함수
+		showStar();
 		
-		}
-		if (enmX == x && enmY == y) {
-			GotoXY(x, y);
-			printf("게임이 종료되었습니다.");
-			system("pause");
-			return 0;
-
-		}**/
-
-		for (int i = 0; i < Max; i++) {
-			if (!Be[i]) {
-				eX[i] = rand() % 15 * 2;
-				eY[i] = 0;
-				Be[i] = true;
-				break;
-			}
-		}
-		for (int i = 0; i < Max; i++) {
-			if (Be[i]) {
-				GotoXY(eX[i], eY[i]);
-				printf("*");
-				eY[i]++;
-				if (eY[i] > 28) {
-					Be[i] = false;
-					score++;
-
-				}
-			}
-		}
 
 		//입력을 받아서 해당 커서의 위치를 이동시키는 부분, &0x8000을 통해서 꾹 누르던지 한번 누르던지 모두 입력을 받을 수 있다.
 		if (GetAsyncKeyState(VK_LEFT) & 0x8000) { 
@@ -114,23 +121,11 @@ int main(void)
 				onoff = true;
 			}	
 		}
-		//단일 적기 출현시 적기 제거 동작
-		/**if (enmY == bY && enmX == bX) {
-			GotoXY(bX, bY);
-			printf("※");
-			enmB = false;
-			Sleep(100);
-		}**/
+		
 
 		
-		for (int i = 0; i < Max; i++) {
-			if (Be[i] && eX[i] == x && eY[i] == y) {
-				GotoXY(x, y);
-				printf("점수 : %d \n", score );
-				system("pause");
-				return 0;
-			}
-		}
+		//충돌 시 동작 함수
+		crush();
 
 		
 
