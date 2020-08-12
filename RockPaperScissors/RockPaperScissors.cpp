@@ -42,13 +42,26 @@ void PlayGameVer1()
 		if (player == com) {
 			printf("비겼습니다. 플레이어 = %d, 컴퓨터 = %d \n", presult, cresult);
 		}
-		else if (player > com) {
-			presult++;
-			printf("이겼습니다. 플레이어 = %d, 컴퓨터 = %d \n", presult, cresult);
+		else if (player > com ) {
+			if (player == 3 && com == 1) {
+				cresult++;
+				printf("졌습니다. 플레이어 = %d, 컴퓨터 = %d \n", presult, cresult);
+			}
+			else {
+				presult++;
+				printf("이겼습니다. 플레이어 = %d, 컴퓨터 = %d \n", presult, cresult);
+			}
+		
 		}
 		else {
-			cresult++;
-			printf("졌습니다. 플레이어 = %d, 컴퓨터 = %d \n", presult, cresult);
+			if (player == 1 && com == 3) {
+				presult++;
+				printf("이겼습니다. 플레이어 = %d, 컴퓨터 = %d \n", presult, cresult);
+			}
+			else {
+				cresult++;
+				printf("졌습니다. 플레이어 = %d, 컴퓨터 = %d \n", presult, cresult);
+			}
 		}
 
 		if (presult == 3) {
