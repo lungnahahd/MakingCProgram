@@ -14,12 +14,36 @@ struct OBJECT
 	bool Bcheck = false;
 };
 
+
 OBJECT Enemy[Max];
 
 OBJECT Player;
 
+OBJECT Bullet;
+
 int score = 0;
 bool endgame = true;
+bool onoff = true;
+
+void shot() {
+	if (GetAsyncKeyState(VK_SPACE) & 0x8000) {
+		if (!Bullet.Bcheck) {
+			Bullet.x = Player.x;
+			Bullet.y = Player.y;
+			Bullet.Bcheck = true;
+			onoff = true;
+		}
+	}
+	if (onoff) {
+		Bullet.y--;
+		GotoXY(Bullet.x, Bullet.y);
+		printf("↑");
+		if (Bullet.y < 0) {
+			onoff = false;
+			Bullet.Bcheck = false;
+		}
+	}
+}
 
 
 void startSet() {
@@ -47,7 +71,7 @@ void showStar() {
 	for (int i = 0; i < Max; i++) {
 		if (Enemy[i].Bcheck) {
 			GotoXY(Enemy[i].x, Enemy[i].y);
-			printf("*");
+			printf("◆");
 			Enemy[i].y++;
 			if (Enemy[i].y > 28) 
 			{
@@ -66,7 +90,18 @@ void crush() {
 			endgame = false;
 			GotoXY(Player.x, Player.y);
 			printf("점수 : %d \n", score);	
-
+		}
+	}
+}
+void boom() 
+{
+	for (int i = 0; i < Max; i++) {
+		if (Enemy[i].x == Bullet.x && Enemy[i].y == Bullet.y) {
+			GotoXY(Bullet.x, Bullet.y);
+			printf("▒");
+			Enemy[i].Bcheck = false;
+			onoff = false;
+			Bullet.Bcheck = false;
 		}
 	}
 }
@@ -201,33 +236,11 @@ int main(void)
 				main();
 			}
 		}
+		//총알이 발사되는 함수
+		shot();
+		//적을 격파하는 함수
+		boom();
 		
-		
-		
-		//총알 발사 Ver 2
-		if (GetAsyncKeyState(VK_SPACE) & 0x8000) {
-			if (!bullet) {
-				bX = Player.x;
-				bY = Player.y;
-				bullet = true;
-				onoff = true;
-			}	
-		}
-		if (onoff) {
-			bY--;
-			GotoXY(bX, bY);
-			printf("º");
-			if (bY < 0) {
-				onoff = false;
-				bullet = false;
-			}
-		}
-		
-
-		
-
-
-
 
 		//커서의 위치를 변경하고 해당 위치에서 출력 동작 실행
 		GotoXY(Player.x, Player.y);
