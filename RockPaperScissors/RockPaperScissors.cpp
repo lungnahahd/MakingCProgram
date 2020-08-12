@@ -4,15 +4,15 @@
 #include <windows.h>
 #include <conio.h>
 
-//구성 : 메인 화면 + 게임 화면 + 결과 화면
-int main(void)
+//main함수 위에다 만들지 않으면 식별자 인식 못하는 오류 발생
+void PlayGameVer1()
 {
-	printf("가위(1), 바위(2), 보(3) 중에 하나를 선택하세요! \n");
 	int presult = 0;
 	int cresult = 0;
-	
+
 
 	while (true) {
+		printf("가위(1), 바위(2), 보(3) 중에 하나를 선택하세요! \n");
 		Sleep(50);
 		int player = 0;
 		int com = 0;
@@ -56,14 +56,22 @@ int main(void)
 			break;
 		}
 		else if (cresult == 3) {
-			printf("패배하셨습니다. (%d : %d) \n", presult, cresult );
+			printf("패배하셨습니다. (%d : %d) \n", presult, cresult);
 			break;
 		}
 
 
 	}
+}
 
+//구성 : 메인 화면 + 게임 화면 + 결과 화면
+int main(void)
+{
+	
+	
+	PlayGameVer1();
 
 	system("pause");
 	return 0;
 }
+
