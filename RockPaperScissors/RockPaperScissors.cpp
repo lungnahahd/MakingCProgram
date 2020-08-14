@@ -210,7 +210,9 @@ int main(void)
 		//가위, 바위, 보 화면 출력 연습
 		user = rand() % 3;
 		com = rand() % 3;
+		SetColor(0,9);
 		showhand(10, 10, sizeof(hand[0][0]), sizeof(hand[0]) / sizeof(hand[0][0]), (char*)hand[user]);
+		SetColor(0,12);
 		showhand(60, 10, sizeof(hand[0][0]), sizeof(hand[0]) / sizeof(hand[0][0]), (char*)hand[com]);
 		Sleep(500);
 	}
