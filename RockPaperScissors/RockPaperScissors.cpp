@@ -3,6 +3,7 @@
 #include <time.h>
 #include <windows.h>
 #include <conio.h>
+#include "Evan.h"
 
 //main함수 위에다 만들지 않으면 식별자 인식 못하는 오류 발생
 void PlayGameVer1()
@@ -12,6 +13,7 @@ void PlayGameVer1()
 
 
 	while (true) {
+		printf("\n");
 		printf("가위 < 1 >, 바위 < 2 >, 보 < 3 > 중에 하나를 선택하세요! \n");
 		Sleep(50);
 		int player = 0;
@@ -134,13 +136,90 @@ void PlayGameVer2() {
 	}
 
 }
+//가위, 바위, 보를 보여주는 3차식 배열
+char hand[][10][50] = 
+{
+	
+	{"□□□□□□□□□□",
+	 "□□■■□■■□□□",
+	 "□□■■□■■□□□",
+	 "□□■■□■■□□□",
+	 "□□■■■■■□□□",
+	 "□□■■■■■■□□",
+	 "□□■■■■■■□□",
+	 "□□■■■■■■□□",
+	 "□□□■■■■□□□",
+	 "□□□■■■■□□□"},
+
+	{"□□□□□□□□□□",
+	 "□■■■■■■■□□",
+	 "□■■■■■■■□□",
+	 "□■■■■■■■□□",
+	 "□■■■■■■■■□",
+	 "□■■■■■■■■□",
+	 "□■■■■■■■■□",
+	 "□■■■■■■■■□",
+	 "□□□■■■■□□□",
+	 "□□□■■■■□□□"},
+	
+	{"□□□□□□□□□□",
+	 "□□■□■□■□■□",
+	 "□□■□■□■□■□",
+	 "□□■□■□■□■□",
+	 "□□■■■■■■■□",
+	 "□□■■■■■■■□",
+	 "□■■■■■■■■□",
+	 "□■■■■■■■■□",
+	 "□□□■■■■□□□",
+	 "□□□■■■■□□□"}
+};
+
+
+//특정한 위치에 원하는 text를 출력하는 함수
+void wantprint(int _x, int _y, const char* _text) 
+{
+	GotoXY(_x, _y);
+	printf(_text);
+}
+
+//해당 위치에 가위, 바위, 보를 출력하는 함수
+void showhand(int _x, int _y, int _xsize, int _ysize, char* _text)
+{
+	char* show = _text;
+
+	for (int y = 0; y < _ysize; y++)
+	{
+		wantprint(_x, _y+y, show);
+		show = show + _xsize;
+	}
+}
+
+
+
 
 //구성 : 메인 화면 + 게임 화면 + 결과 화면
 int main(void)
 {
+	int user;
+	int com;
+	srand(time(NULL));
 	
+
+	while (1)
+	{	
+		//가위, 바위, 보 화면 출력 연습
+		user = rand() % 3;
+		com = rand() % 3;
+		showhand(10, 10, sizeof(hand[0][0]), sizeof(hand[0]) / sizeof(hand[0][0]), (char*)hand[user]);
+		showhand(60, 10, sizeof(hand[0][0]), sizeof(hand[0]) / sizeof(hand[0][0]), (char*)hand[com]);
+		Sleep(500);
+	}
+
+
+
+	//showhand(10, 10, sizeof(hand[0][0]), sizeof(hand[0]) / sizeof(hand[0][0]), (char*)hand[0]);
 	
-	PlayGameVer1();
+	//PlayGameVer1();
 
 	//PlayGameVer2();
 
