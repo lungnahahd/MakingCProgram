@@ -354,13 +354,13 @@ void StartGame()
 					break;
 				}
 			}
-			
+			Sleep(500);
 			if (_kbhit()) 
 			{
 				_getch();
 			}
 		}
-		Sleep(500);
+		//Sleep(500);
 	}
 }
 
