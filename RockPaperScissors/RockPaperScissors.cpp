@@ -5,6 +5,11 @@
 #include <conio.h>
 #include "Evan.h"
 
+
+
+int g_playerscore = 0;
+int g_comscore = 0;
+
 //main함수 위에다 만들지 않으면 식별자 인식 못하는 오류 발생
 void PlayGameVer1()
 {
@@ -136,6 +141,16 @@ void PlayGameVer2() {
 	}
 
 }
+char showvs[5][30] =
+{"□□□□■■",
+ "□□□■□□",
+ "■□■□■□",
+ "■□■□□■",
+ "□■□■■□"};
+
+
+
+
 //가위, 바위, 보를 보여주는 3차식 배열
 char hand[][10][50] = 
 {
@@ -171,7 +186,13 @@ char hand[][10][50] =
 	 "□■■■■■■■■□",
 	 "□■■■■■■■■□",
 	 "□□□■■■■□□□",
-	 "□□□■■■■□□□"}
+	 "□□□■■■■□□□"},
+
+	{"□□□□■■",
+	 "□□□■□□",
+	 "■□■□■□",
+	 "■□■□□■",
+	 "□■□■■□"}
 };
 
 
@@ -196,156 +217,185 @@ void showhand(int _x, int _y, int _xsize, int _ysize, char* _text)
 
 
 
-void PlayGameVer3()
+
+
+//게임 시작 화면
+void GameStart()
 {
-	int presult = 0;
-	int cresult = 0;
-	int user;
-	int player = 0;
-	int com;
-	bool stop = true;
-	srand(time(NULL));
-
-
-
-	while (true) {
+	int user = 0;
+	int com = 0;
+	int blink = 1;
+	
+	while (true)
+	{	
 		Clear();
-		
+		wantprint(30, 5, "재미있는 컴퓨터와의 가위, 바위, 보 게임!!!");
 		user = rand() % 3 + 1;
 		com = rand() % 3 + 1;
-		GotoXY(35, 2);
-		printf("가위 < 1 >, 바위 < 2 >, 보 < 3 > 중에 하나를 선택하세요! \n");
-		GotoXY(35, 3);
-		printf("플레이어 = %d, 컴퓨터 = %d", presult, cresult);
+		SetColor(0, 9);
+		showhand(15, 10, sizeof(hand[0][0]), sizeof(hand[0]) / sizeof(hand[0][0]), (char*)hand[user - 1]);
+		SetColor(0, 12);
+		showhand(65, 10, sizeof(hand[0][0]), sizeof(hand[0]) / sizeof(hand[0][0]), (char*)hand[com - 1]);
+		SetColor(0, 2);
+		if(blink == 1)
+		{
+			wantprint(40, 20, "PRESS ANY KEY...");
+			blink = 2;
+		}
+		else
+		{
+			wantprint(40, 20, "                    ");
+			blink = 1;
+		}
+		if(_kbhit())
+		{
+			_getch();
+			break;
+		}
 		
 
+
+		Sleep(500);
+	}
+}
+//게임 화면 
+void StartGame()
+{
+	int user = 0;
+	int com = 0;
+	int blink = 1;
+
+	while (true)
+	{
+		Clear();
+		wantprint(30, 5, "가위 < 1 >, 바위 < 2 >, 보 < 3 > 중에 하나를 선택하세요!");
+		user = rand() % 3 + 1;
+		com = rand() % 3 + 1;
+		SetColor(0, 9);
+		showhand(15, 10, sizeof(hand[0][0]), sizeof(hand[0]) / sizeof(hand[0][0]), (char*)hand[user - 1]);
+		SetColor(0, 12);
+		showhand(65, 10, sizeof(hand[0][0]), sizeof(hand[0]) / sizeof(hand[0][0]), (char*)hand[com - 1]);
+		SetColor(0, 6);
+		showhand(45, 15, sizeof(hand[3][0]), sizeof(hand[3]) / sizeof(hand[3][0]), (char*)hand[3]);
+		
+		SetColor(0, 15);
+	
 		if (_kbhit())
 		{
-			
-			
-			GotoXY(35, 2);
-			printf("가위 < 1 >, 바위 < 2 >, 보 < 3 > 중에 하나를 선택하세요! \n");
-			wantprint(20, 10, "플레이어 ");
-			wantprint(70, 10, "컴퓨터 ");
-			//Sleep(500);
-			//_getch();
 			if (GetAsyncKeyState('1') & 0x8000) {
-				player = 1;
+				user = 1;
+				wantprint(20, 20, "가위");
+				showhand(15, 10, sizeof(hand[0][0]), sizeof(hand[0]) / sizeof(hand[0][0]), (char*)hand[0]);
 			}
 			else if (GetAsyncKeyState('2') & 0x8000) {
-				player = 2;
+				user = 2;
+				wantprint(20, 20, "바위");
+				showhand(15, 10, sizeof(hand[0][0]), sizeof(hand[0]) / sizeof(hand[0][0]), (char*)hand[1]);
 			}
 			else if (GetAsyncKeyState('3') & 0x8000) {
-				player = 3;
-			}
-			if (player == 1) {
-				wantprint(40, 10, "가위");
-				showhand(20, 15, sizeof(hand[0][0]), sizeof(hand[0]) / sizeof(hand[0][0]), (char*)hand[0]);
-			}
-			else if (player == 2) {
-				wantprint(40, 10, "바위");
-				showhand(20, 15, sizeof(hand[0][0]), sizeof(hand[0]) / sizeof(hand[0][0]), (char*)hand[1]);
-			}
-			else if (player == 3) {
-				wantprint(40, 10, "보");
-				showhand(20, 15, sizeof(hand[0][0]), sizeof(hand[0]) / sizeof(hand[0][0]), (char*)hand[2]);
+				user = 3;
+				wantprint(20, 20, "보");
+				showhand(15, 10, sizeof(hand[0][0]), sizeof(hand[0]) / sizeof(hand[0][0]), (char*)hand[2]);
 			}
 			if (com == 1) {
-				wantprint(80, 10, "가위");
-				showhand(70, 15, sizeof(hand[0][0]), sizeof(hand[0]) / sizeof(hand[0][0]), (char*)hand[0]);
+				wantprint(80, 20, "가위");
+				showhand(65, 10, sizeof(hand[0][0]), sizeof(hand[0]) / sizeof(hand[0][0]), (char*)hand[0]);
 			}
 			else if (com == 2) {
-				wantprint(80, 10, "바위");
-				showhand(70, 15, sizeof(hand[0][0]), sizeof(hand[0]) / sizeof(hand[0][0]), (char*)hand[1]);
+				wantprint(80, 20, "바위");
+				showhand(65, 10, sizeof(hand[0][0]), sizeof(hand[0]) / sizeof(hand[0][0]), (char*)hand[1]);
 			}
 			else if (com == 3) {
-				wantprint(80, 10, "보");
-				showhand(70, 15, sizeof(hand[0][0]), sizeof(hand[0]) / sizeof(hand[0][0]), (char*)hand[2]);
+				wantprint(80, 20, "보");
+				showhand(65, 10, sizeof(hand[0][0]), sizeof(hand[0]) / sizeof(hand[0][0]), (char*)hand[2]);
 			}
-			if (player == com) {
-				GotoXY(35, 5);
-				printf("이번 판은 비겼습니다. 플레이어 = %d, 컴퓨터 = %d \n", presult, cresult);
-				showhand(20, 15, sizeof(hand[0][0]), sizeof(hand[0]) / sizeof(hand[0][0]), (char*)hand[player-1]);
-				showhand(70, 15, sizeof(hand[0][0]), sizeof(hand[0]) / sizeof(hand[0][0]), (char*)hand[com-1]);
+			if (user == com) {
+				GotoXY(40, 25);
+				printf("이번 판은 비겼습니다.");
+				showhand(15, 10, sizeof(hand[0][0]), sizeof(hand[0]) / sizeof(hand[0][0]), (char*)hand[user - 1]);
+				showhand(65, 10, sizeof(hand[0][0]), sizeof(hand[0]) / sizeof(hand[0][0]), (char*)hand[com - 1]);
+				Sleep(1000);
+				break;
 			}
-			else if (player > com) {
-				if (player == 3 && com == 1) {
-					cresult++;
-					GotoXY(35, 5);
-					printf("이번 판은 졌습니다. 플레이어 = %d, 컴퓨터 = %d \n", presult, cresult);
-					showhand(20, 15, sizeof(hand[0][0]), sizeof(hand[0]) / sizeof(hand[0][0]), (char*)hand[player - 1]);
-					showhand(70, 15, sizeof(hand[0][0]), sizeof(hand[0]) / sizeof(hand[0][0]), (char*)hand[com - 1]);
+			else if (user > com) {
+				if (user == 3 && com == 1) {
+					g_comscore++;
+					GotoXY(40, 25);
+					printf("이번 판은 졌습니다.");
+					showhand(15, 10, sizeof(hand[0][0]), sizeof(hand[0]) / sizeof(hand[0][0]), (char*)hand[user - 1]);
+					showhand(65, 10, sizeof(hand[0][0]), sizeof(hand[0]) / sizeof(hand[0][0]), (char*)hand[com - 1]);
+					Sleep(1000);
+					break;
 				}
 				else {
-					presult++;
-					GotoXY(35, 5);
-					printf("이번 판은 이겼습니다. 플레이어 = %d, 컴퓨터 = %d \n", presult, cresult);
-					showhand(20, 15, sizeof(hand[0][0]), sizeof(hand[0]) / sizeof(hand[0][0]), (char*)hand[player - 1]);
-					showhand(70, 15, sizeof(hand[0][0]), sizeof(hand[0]) / sizeof(hand[0][0]), (char*)hand[com - 1]);
+					g_playerscore++;
+					GotoXY(40, 25);
+					printf("이번 판은 이겼습니다.");
+					showhand(15, 10, sizeof(hand[0][0]), sizeof(hand[0]) / sizeof(hand[0][0]), (char*)hand[user - 1]);
+					showhand(65, 10, sizeof(hand[0][0]), sizeof(hand[0]) / sizeof(hand[0][0]), (char*)hand[com - 1]);
+					Sleep(1000);
+					break;
 				}
 
 			}
 			else {
-				if (player == 1 && com == 3) {
-					presult++;
-					GotoXY(35, 5);
-					printf("이번 판은 이겼습니다. 플레이어 = %d, 컴퓨터 = %d \n", presult, cresult);
+				if (user == 1 && com == 3) {
+					g_playerscore++;
+					GotoXY(40, 25);
+					printf("이번 판은 이겼습니다.");
+					Sleep(1000);
+					break;
 				}
 				else {
-					cresult++;
-					GotoXY(35, 5);
-					printf("이번 판은 졌습니다. 플레이어 = %d, 컴퓨터 = %d \n", presult, cresult);
+					g_comscore++;
+					GotoXY(40, 25);
+					printf("이번 판은 졌습니다.");
+					Sleep(1000);
+					break;
 				}
 			}
-			Sleep(1000);
 			
-			if (presult == 3) {
-				Clear();
-				GotoXY(35, 5);
-				printf("승리하셨습니다. (%d : %d) \n", presult, cresult);
-				break;
+			if (_kbhit()) 
+			{
+				_getch();
 			}
-			else if (cresult == 3) {
-				Clear();
-				GotoXY(35, 5);
-				printf("패배하셨습니다. (%d : %d) \n", presult, cresult);
-				break;
-				
-			}
-			
 		}
-		while (_kbhit()) {
-			_getch();
-		}
-		SetColor(0, 9);
-		showhand(20, 15, sizeof(hand[0][0]), sizeof(hand[0]) / sizeof(hand[0][0]), (char*)hand[user - 1]);
-		SetColor(0, 12);
-		showhand(70, 15, sizeof(hand[0][0]), sizeof(hand[0]) / sizeof(hand[0][0]), (char*)hand[com - 1]);
-		wantprint(20, 10, "플레이어 ");
-		wantprint(70, 10, "컴퓨터 ");
-		wantprint(40, 27, "준비!! 시작 !!");
 		Sleep(500);
-		
-
 	}
 }
 
-
-//구성 : 메인 화면 + 게임 화면 + 결과 화면
-int main(void)
+void EndPage(int _player, int _computer)
 {
-	
-	
+	Clear();
+	if (_kbhit())
+	{
+		_getch();
+	}
+	GotoXY(40, 20);
+	printf("플레이어 : %d          VS           컴퓨터 : %d", _player, _computer);
+	Sleep(500);
+}
 
-	
 
-	PlayGameVer3();
 
-	//showhand(10, 10, sizeof(hand[0][0]), sizeof(hand[0]) / sizeof(hand[0][0]), (char*)hand[0]);
-	
-	//PlayGameVer1();
 
-	//PlayGameVer2();
+int main(void)
+//구성 : 메인 화면 + 게임 화면 + 결과 화면
+{
+	GameStart();
+	while (g_playerscore != 3 && g_comscore != 3)
+	{
+		StartGame();
+		EndPage(g_playerscore,g_comscore);
+	}
+	GotoXY(40, 10);
+	if (g_playerscore == 3) {
+		printf("당신이 이겼습니다. 축하드립니다.\n");
+	}
+	else
+	{
+		printf("당신이 졌습니다. ㅋㅋㅋ \n");
+	}
 
 	system("pause");
 	return 0;
