@@ -4,6 +4,7 @@
 #include <conio.h>
 #define NAME_SIZE  32
 #define DESCRIPTION 1024
+#define BAG_SIZE 30
 
 using namespace std;
 //메인 메뉴 분류
@@ -77,6 +78,7 @@ struct g_PlayerInfo
     int g_exp;
     int g_level;
     int g_money;
+    g_GOODS g_bag[BAG_SIZE];
 };
 //몬스터에 대한 정보
 struct g_MonsterInfo
