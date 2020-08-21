@@ -499,9 +499,9 @@ int main()
                         cout << "4. 아니 어떤 것도 필요하지 않다. " << endl;
                         cout << "" << endl;
                         cout << "무슨 무기가 필요한가?" << endl;
-                        int good_select;
-                        cin >> good_select;
-                        if (good_select == WP_EXIT) break;
+                        int weapon_select;
+                        cin >> weapon_select;
+                        if (weapon_select == WP_EXIT) break;
                         
                         break;
                     case ST_ARMOR :
@@ -532,9 +532,9 @@ int main()
                         cout << "4. 아니 어떤 것도 필요하지 않다. " << endl;
                         cout << "" << endl;
                         cout << "무슨 방어를 얻고 싶은가?" << endl;
-                        int good_select;
-                        cin >> good_select;
-                        if (good_select == WP_EXIT) break;
+                        int armor_select;
+                        cin >> armor_select;
+                        if (armor_select == WP_EXIT) break;
 
                         break;
                     case ST_HPLIQUID :
@@ -565,9 +565,9 @@ int main()
                         cout << "4. 아니 어떤 것도 필요하지 않다. " << endl;
                         cout << "" << endl;
                         cout << "무슨 주작의 힘을 얻고 싶은가?" << endl;
-                        int good_select;
-                        cin >> good_select;
-                        if (good_select == WP_EXIT) break;
+                        int hp_select;
+                        cin >> hp_select;
+                        if (hp_select == WP_EXIT) break;
                         break;
                     case ST_MPLIQUID :
                         system("cls");
@@ -597,14 +597,13 @@ int main()
                         cout << "4. 아니 어떤 것도 필요하지 않다. " << endl;
                         cout << "" << endl;
                         cout << "무슨 백호의 힘을 얻고 싶은가?" << endl;
-                        int good_select;
-                        cin >> good_select;
-                        if (good_select == WP_EXIT) break;
+                        int mp_select;
+                        cin >> mp_select;
+                        if (mp_select == WP_EXIT) break;
                         break;
                     default:
                         break;
                     }
-
 
                 }
             }
