@@ -41,6 +41,15 @@ enum ENEMYLIST
     ENE_DRAGON,
     ENE_COUNT
 };
+//상점 리스트
+enum STORELIST
+{
+    ST_NONE,
+    ST_WEAPON,
+    ST_ARMOR,
+    ST_LIQUID,
+    ST_EXIT
+};
 //플레이어에 대한 정보
 struct g_PlayerInfo
 {
@@ -83,7 +92,7 @@ int main()
     while (true)
     {   
         system("cls");
-        cout << "PRESS ANYKEY...";
+        cout << "PRESS ENTER...";
         getchar();
         system("cls");
         g_PlayerInfo yourinfo = {};
@@ -91,16 +100,19 @@ int main()
         yourinfo.g_level = 1;
         yourinfo.g_exp = 0;
         yourinfo.g_money = 10000;
-        cout << "★★★★★★★★★★★★★★★너에 대해 말해보거라★★★★★★★★★★★★★★★★★★★★" << endl;
+        cout << "★★★★★★★★★★★★★★★★너에 대해 말해보거라★★★★★★★★★★★★★★★★★★★" << endl;
         cout << "이름이 무엇이가요 용사님?" << endl;
         cin.getline(yourinfo.g_name, NAME_SIZE - 1);
         
 
         system("cls");
-        cout << "★★★★★★★★★★★★★★★전생에 무슨 직업을 가지고 있었느냐?★★★★★★★★★★★★★★★★★★★★" << endl;
+        cout << "★★★★★★★★★★★★★★★★전생에 무슨 직업을 가지고 있었느냐?★★★★★★★★★★★★★★★★★★★" << endl;
         cout << "1. 강인한 전사" << endl;
+        cout << "" << endl;
         cout << "2. 노련한 궁수" << endl;
+        cout << "" << endl;
         cout << "3. 베일에 가려진 법사" << endl;
+        cout << "" << endl;
         cout << "4. 이름 변경하기" << endl;
         cin >> yourinfo.g_job;
 
@@ -194,71 +206,171 @@ int main()
 
                 
 
-
-
-        system("cls");
-        cout << "★★★★★★★★★★★★★★★렁나하 게임★★★★★★★★★★★★★★★★★★★★" << endl;
-        cout << "1. 지도" << endl;
-        cout << "2. 상점" << endl;
-        cout << "3. 인벤토리" << endl;
-        cout << "4. 나가기" << endl;
-        cout << "용자여 원하는 게 무엇이냐?" << endl;
-
-
-        int main_select;
-        cin >> main_select;
-
-        if (cin.fail())
+        while (true)
         {
-            cin.clear();
-            cin.ignore(1024, '\n');
-            continue;
-        }
-        if (main_select == MAM_EXIT) break;
 
-        int map_select;
-        if (main_select == MAM_MAP)
-        {
-            while (true)
+
+
+            system("cls");
+            cout << "★★★★★★★★★★★★★★★★렁나하 게임★★★★★★★★★★★★★★★★★★★" << endl;
+            cout << "1. 지도" << endl;
+            cout << "" << endl;
+            cout << "2. 상점" << endl;
+            cout << "" << endl;
+            cout << "3. 인벤토리" << endl;
+            cout << "" << endl;
+            cout << "4. 게임 처음부터 다시 시작하기" << endl;
+            cout << "" << endl;
+            cout << "용자여 원하는 게 무엇이냐?" << endl;
+
+
+            int main_select;
+            cin >> main_select;
+
+            if (cin.fail())
             {
-                system("cls");
-                cout << "★★★★★★★★★★★★★★★난이도 선정★★★★★★★★★★★★★★★★★★★★★" << endl;
-                cout << "1. 평화의 숲" << endl;
-                cout << "2. 보이지 않는 위험" << endl;
-                cout << "3. 죽음의 늪" << endl;
-                cout << "어느 시련은 경험할 것이냐?" << endl;
+                cin.clear();
+                cin.ignore(1024, '\n');
+                continue;
+            }
+            if (main_select == MAM_EXIT) break;
 
-                cin >> map_select;
-                if (cin.fail())
+            int map_select;
+            if (main_select == MAM_MAP)
+            {
+                while (true)
                 {
-                    cin.clear();
-                    cin.ignore(1024, '\n');
-                    continue;
-                }
-                if (map_select == MPM_EXIT) break;
-                while (yourinfo.g_hp > 0 && enemyinfo[map_select].g_hp > 0)
-                {
-                    srand(time(NULL));
-                    int player_attack;
-                    int enemy_attack;
-                    int player_def;
-                    int enemy_def;
-                    int fight_select;
+                    system("cls");
+                    cout << "★★★★★★★★★★★★★★★★난이도 선정★★★★★★★★★★★★★★★★★★★★" << endl;
+                    cout << "1. 평화의 숲" << endl;
+                    cout << "" << endl;
+                    cout << "2. 보이지 않는 위험" << endl;
+                    cout << "" << endl;
+                    cout << "3. 죽음의 늪" << endl;
+                    cout << "" << endl;
+                    cout << "4. 꼬리 내리고 도망가기" << endl;
+                    cout << "" << endl;
+                    cout << "어느 시련은 경험할 것이냐?" << endl;
+
+                    cin >> map_select;
+                    if (cin.fail())
+                    {
+                        cin.clear();
+                        cin.ignore(1024, '\n');
+                        continue;
+                    }
+                    if (map_select == MPM_EXIT) break;
+                    while (yourinfo.g_hp > 0 && enemyinfo[map_select].g_hp > 0)
+                    {
+                        srand(time(NULL));
+                        int player_attack;
+                        int enemy_attack;
+                        int player_def;
+                        int enemy_def;
+                        int fight_select;
+
+                        system("cls");
+                        cout << "★★★★★★★★★★★★★★★★시련의 길★★★★★★★★★★★★★★★★★★★★" << endl;
+                        cout << "---------------------------------플레이어------------------------------------------" << endl;
+                        cout << "이름 : " << yourinfo.g_name << '\t' << "직업 : " << yourinfo.g_stringjob << '\t' << "LEVEL : " << yourinfo.g_level << endl;
+                        cout << "HP : " << yourinfo.g_hp << '\t' << "MP : " << yourinfo.g_mp << endl;
+                        cout << "공격력 : " << yourinfo.g_minattack << " ~ " << yourinfo.g_maxattack << '\t' << "방어력 : " << yourinfo.g_mindef << " ~ " << yourinfo.g_maxdef << endl;
+                        cout << "경험치 : " << yourinfo.g_exp << '\t' << "렁머니 : " << yourinfo.g_money << endl;
+                        cout << "" << endl;
+                        cout << "---------------------------------몬스터------------------------------------------" << endl;
+                        cout << "종류 : " << enemyinfo[map_select].g_name << '\t' << "LEVEL : " << enemyinfo[map_select].g_level << endl;
+                        cout << "HP : " << enemyinfo[map_select].g_hp << '\t' << "MP : " << enemyinfo[map_select].g_mp << endl;
+                        cout << "" << endl;
+                        cout << "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<너의 선택은?>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << endl;
+                        cout << "1. 공격" << endl;
+                        cout << "" << endl;
+                        cout << "2. 도망가기" << endl;
+                        cin >> fight_select;
+
+                        if (cin.fail())
+                        {
+                            cin.clear();
+                            cin.ignore(1024, '\n');
+                            continue;
+                        }
+                        if (fight_select == 1)
+                        {
+                            player_def = yourinfo.g_mindef + (rand() % (yourinfo.g_maxdef + 1));
+                            enemy_def = enemyinfo[map_select].g_mindef + (rand() % (enemyinfo[map_select].g_maxdef + 1));
+                            player_attack = (yourinfo.g_minattack + (rand() % (yourinfo.g_maxattack + 1))) - enemy_def;
+
+                            enemy_attack = (enemyinfo[map_select].g_minattack + (rand() % (enemyinfo[map_select].g_maxattack + 1))) - player_def;
+                            if (player_attack <= 0) player_attack = 1;
+                            if (enemy_attack <= 0) enemy_attack = 1;
+                            enemyinfo[map_select].g_hp = enemyinfo[map_select].g_hp - player_attack;
+                            yourinfo.g_hp = yourinfo.g_hp - enemy_attack;
+                            cout << "" << endl;
+                            cout << enemyinfo[map_select].g_name << "이 " << player_attack << "만큼 피해를 입었습니다." << endl;
+                            cout << "" << endl;
+                            cout << "당신이 " << enemy_attack << "만큼 피해를 입었습니다." << endl;
+                            system("pause");
+                        }
+                        else if (fight_select) break;
+                    }
 
                     system("cls");
-                    cout << "★★★★★★★★★★★★★★★시련의 길★★★★★★★★★★★★★★★★★★★★★" << endl;
-                    cout << "---------------------------------플레이어------------------------------------------" << endl;
-                    cout << "이름 : " << yourinfo.g_name << '\t' << "직업 : " << yourinfo.g_stringjob << '\t' << "LEVEL : " << yourinfo.g_level << endl;
-                    cout << "HP : " << yourinfo.g_hp << '\t' << "MP : " << yourinfo.g_mp << endl;
-                    cout << "공격력 : " << yourinfo.g_minattack << " ~ " << yourinfo.g_maxattack << '\t' << "방어력 : " << yourinfo.g_mindef << " ~ " << yourinfo.g_maxattack << endl;
-                    cout << "경험치 : " << yourinfo.g_exp << '\t' << "렁머니 : " << yourinfo.g_money << endl;
-                    cout << "---------------------------------몬스터------------------------------------------" << endl;
-                    cout << "종류 : " << enemyinfo[map_select].g_name << '\t' << "LEVEL : " << enemyinfo[map_select].g_level << endl;
-                    cout << "HP : " << enemyinfo[map_select].g_hp << '\t' << "MP : " << enemyinfo[map_select].g_mp << endl;
-                    cout << "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<너의 선택은?>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << endl;
-                    cout << "1. 공격" << endl;
-                    cout << "2. 도망가기" << endl;
-                    cin >> fight_select;
+                    cout << "★★★★★★★★★★★★★★★★전투 결과★★★★★★★★★★★★★★★★★★★★" << endl;
+                    if (enemyinfo[map_select].g_hp < 0)
+                    {
+                        enemyinfo[map_select].g_hp = enemyinfo[map_select].g_maxhp;
+                        yourinfo.g_exp = yourinfo.g_exp + enemyinfo[map_select].g_dropexp;
+                        yourinfo.g_money = yourinfo.g_money + enemyinfo[map_select].g_dropmoney;
+                        cout << enemyinfo[map_select].g_name << "을 처지했습니다." << endl;
+                        cout << "" << endl;
+                        cout << "당신이" << enemyinfo[map_select].g_dropmoney << " 렁머니와 " << enemyinfo[map_select].g_dropexp << " 경험치를 획득하였습니다." << endl;
+                    }
+                    else if (yourinfo.g_hp < 0)
+                    {
+                        yourinfo.g_hp = yourinfo.g_maxhp;
+                        yourinfo.g_exp = yourinfo.g_exp - (yourinfo.g_exp / 10);
+                        yourinfo.g_money = yourinfo.g_money - (yourinfo.g_money / 10);
+                        if (yourinfo.g_exp < 0) yourinfo.g_exp = 0;
+                        cout << "당신이 죽었습니다." << endl;
+                        cout << "" << endl;
+                        cout << (yourinfo.g_money / 10) << " 렁머니와 " << (yourinfo.g_exp) << " 경험치를 잃었습니다." << endl;
+                    }
+                    cout << "계속 모험하시겠습니까?" << endl;
+                    cout << "" << endl;
+                    cout << "1. 계속 모험을 이어나간다." << endl;
+                    cout << "" << endl;
+                    cout << "2. 나의 한계를 인정하고 그만한다." << endl;
+                    int battle_after_select;
+                    cin >> battle_after_select;
+                    if (cin.fail())
+                    {
+                        cin.clear();
+                        cin.ignore(1024, '\n');
+                        continue;
+                    }
+                    if (battle_after_select != 1) break;
+
+
+                }
+
+            }
+            if (main_select == MAM_STORE)
+            {
+                while (true)
+                {
+                    system("cls");
+                    cout << "★★★★★★★★★★★★★★★★비밀리에 숨겨진 상점★★★★★★★★★★★★★★★★★★★★" << endl;
+                    cout << "1. 청룡의 무기 상점" << endl;
+                    cout << "" << endl;
+                    cout << "2. 현무의 방어구 상점" << endl;
+                    cout << "" << endl;
+                    cout << "3. 주작의 물약 상점" << endl;
+                    cout << "" << endl;
+                    cout << "4. 상점에서 나가기" << endl;
+                    cout << "" << endl;
+                    cout << "누구와 거래를 해볼 것이냐?" << endl;
+
+                    int store_select;
+                    cin >> store_select;
 
                     if (cin.fail())
                     {
@@ -266,60 +378,12 @@ int main()
                         cin.ignore(1024, '\n');
                         continue;
                     }
-                    if (fight_select == 1)
-                    {
-                        player_def = yourinfo.g_mindef + (rand() % (yourinfo.g_maxdef + 1));
-                        enemy_def = enemyinfo[map_select].g_mindef + (rand() % (enemyinfo[map_select].g_maxdef + 1));
-                        player_attack = (yourinfo.g_minattack + (rand() % (yourinfo.g_maxattack + 1))) - enemy_def;
-                  
-                        enemy_attack = (enemyinfo[map_select].g_minattack + (rand() % (enemyinfo[map_select].g_maxattack + 1))) - player_def;
-                        if (player_attack <= 0) player_attack = 1;
-                        if (enemy_attack <= 0) enemy_attack = 1;
-                        enemyinfo[map_select].g_hp = enemyinfo[map_select].g_hp - player_attack;
-                        yourinfo.g_hp = yourinfo.g_hp - enemy_attack;
-                        cout << enemyinfo[map_select].g_name << "이 " << player_attack << "만큼 피해를 입었습니다." << endl;
-                        cout << "당신이 " << enemy_attack << "만큼 피해를 입었습니다." << endl;
-                        system("pause");
-                    }
-                    else if (fight_select) break;
-                }
-
-                system("cls");
-                cout << "★★★★★★★★★★★★★★★전투 결과★★★★★★★★★★★★★★★★★★★★★" << endl;
-                if (enemyinfo[map_select].g_hp < 0) 
-                {
-                    enemyinfo[map_select].g_hp = enemyinfo[map_select].g_maxhp;
-                    yourinfo.g_exp = yourinfo.g_exp + enemyinfo[map_select].g_dropexp;
-                    yourinfo.g_money = yourinfo.g_money + enemyinfo[map_select].g_dropmoney;
-                    cout << enemyinfo[map_select].g_name << "을 처지했습니다." << endl;
-                    cout << "당신이" << enemyinfo[map_select].g_dropmoney << " 렁머니와 " << enemyinfo[map_select].g_dropexp << " 경험치를 획득하였습니다." << endl;
-                }
-                else if (yourinfo.g_hp < 0)
-                {   
-                    yourinfo.g_hp = yourinfo.g_maxhp;
-                    yourinfo.g_exp = yourinfo.g_exp - (yourinfo.g_exp / 10);
-                    yourinfo.g_money = yourinfo.g_money - (yourinfo.g_money / 10);
-                    if (yourinfo.g_exp < 0) yourinfo.g_exp = 0;
-                    cout << "당신이 죽었습니다." << endl;  
-                    cout << (yourinfo.g_money / 10) << " 렁머니와 " << (yourinfo.g_exp) << " 경험치를 잃었습니다." << endl;
-                }
-                cout << "계속 모험하시겠습니까?" << endl;
-                cout << "1. 계속 모험을 이어나간다." << endl;
-                cout << "2. 나의 한계를 인정하고 그만한다." << endl;
-                int battle_after_select;
-                cin >> battle_after_select;
-                if (cin.fail())
-                {
-                    cin.clear();
-                    cin.ignore(1024, '\n');
-                    continue;
-                }
-                if (battle_after_select != 1) break;
+                    if (store_select == ST_EXIT) break;
 
 
+                }
             }
-            
-            
+
         }
         
     }
