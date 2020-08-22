@@ -5,6 +5,7 @@
 #define NAME_SIZE  32
 #define DESCRIPTION 1024
 #define BAG_SIZE 30
+#define SWAP (a,b,type) do{type temp; temp = a; a = b; b = temp;} while(0)
 
 using namespace std;
 //메인 메뉴 분류
@@ -87,7 +88,7 @@ struct g_PlayerInfo
     int g_exp;
     int g_level;
     int g_money;
-    int g_invencount = 30;
+    int g_invencount;
     struct g_GOODS g_bag[BAG_SIZE];
 };
 //몬스터에 대한 정보
@@ -513,7 +514,7 @@ int main()
                                 cout << "현재 보유하신 렁머니로는 해당 물건을 구입할 수 없습니다." << endl;
                                 cout << "전투를 통해 렁머니를 벌어서 다시 찾아주시기 바랍니다." << endl;
                             }
-                            else if (yourinfo.g_invencount == 0)
+                            else if (yourinfo.g_invencount == 30)
                             {
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★청룡의 방★★★★★★★★★★★★★★★★★★★★" << endl;
@@ -523,7 +524,7 @@ int main()
                             else
                             {
                                 yourinfo.g_money = yourinfo.g_money - wgoods[1].g_money;
-                                yourinfo.g_invencount--;
+                                yourinfo.g_invencount++;
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★청룡의 방★★★★★★★★★★★★★★★★★★★★" << endl;
                                 cout << "문제 없이" << wgoods[1].g_gname << "을 구입하였습니다." << endl;
@@ -540,7 +541,7 @@ int main()
                                 cout << "현재 보유하신 렁머니로는 해당 물건을 구입할 수 없습니다." << endl;
                                 cout << "전투를 통해 렁머니를 벌어서 다시 찾아주시기 바랍니다." << endl;
                             }
-                            else if (yourinfo.g_invencount == 0)
+                            else if (yourinfo.g_invencount == 30)
                             {
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★청룡의 방★★★★★★★★★★★★★★★★★★★★" << endl;
@@ -550,7 +551,7 @@ int main()
                             else
                             {
                                 yourinfo.g_money = yourinfo.g_money - wgoods[2].g_money;
-                                yourinfo.g_invencount--;
+                                yourinfo.g_invencount++;
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★청룡의 방★★★★★★★★★★★★★★★★★★★★" << endl;
                                 cout << "문제 없이" << wgoods[2].g_gname << "을 구입하였습니다." << endl;
@@ -567,7 +568,7 @@ int main()
                                 cout << "현재 보유하신 렁머니로는 해당 물건을 구입할 수 없습니다." << endl;
                                 cout << "전투를 통해 렁머니를 벌어서 다시 찾아주시기 바랍니다." << endl;
                             }
-                            else if (yourinfo.g_invencount == 0)
+                            else if (yourinfo.g_invencount == 30)
                             {
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★청룡의 방★★★★★★★★★★★★★★★★★★★★" << endl;
@@ -577,7 +578,7 @@ int main()
                             else
                             {
                                 yourinfo.g_money = yourinfo.g_money - wgoods[3].g_money;
-                                yourinfo.g_invencount--;
+                                yourinfo.g_invencount++;
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★청룡의 방★★★★★★★★★★★★★★★★★★★★" << endl;
                                 cout << "문제 없이" << wgoods[3].g_gname << "을 구입하였습니다." << endl;
@@ -631,7 +632,7 @@ int main()
                                 cout << "현재 보유하신 렁머니로는 해당 물건을 구입할 수 없습니다." << endl;
                                 cout << "전투를 통해 렁머니를 벌어서 다시 찾아주시기 바랍니다." << endl;
                             }
-                            else if (yourinfo.g_invencount == 0)
+                            else if (yourinfo.g_invencount == 30)
                             {
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★현무의 방★★★★★★★★★★★★★★★★★★★★" << endl;
@@ -641,7 +642,7 @@ int main()
                             else
                             {
                                 yourinfo.g_money = yourinfo.g_money - agoods[1].g_money;
-                                yourinfo.g_invencount--;
+                                yourinfo.g_invencount++;
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★현무의 방★★★★★★★★★★★★★★★★★★★★" << endl;
                                 cout << "문제 없이" << agoods[1].g_gname << "을 구입하였습니다." << endl;
@@ -658,7 +659,7 @@ int main()
                                 cout << "현재 보유하신 렁머니로는 해당 물건을 구입할 수 없습니다." << endl;
                                 cout << "전투를 통해 렁머니를 벌어서 다시 찾아주시기 바랍니다." << endl;
                             }
-                            else if (yourinfo.g_invencount == 0)
+                            else if (yourinfo.g_invencount == 30)
                             {
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★현무의 방★★★★★★★★★★★★★★★★★★★★" << endl;
@@ -668,7 +669,7 @@ int main()
                             else
                             {
                                 yourinfo.g_money = yourinfo.g_money - agoods[2].g_money;
-                                yourinfo.g_invencount--;
+                                yourinfo.g_invencount++;
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★현무의 방★★★★★★★★★★★★★★★★★★★★" << endl;
                                 cout << "문제 없이" << agoods[2].g_gname << "을 구입하였습니다." << endl;
@@ -685,7 +686,7 @@ int main()
                                 cout << "현재 보유하신 렁머니로는 해당 물건을 구입할 수 없습니다." << endl;
                                 cout << "전투를 통해 렁머니를 벌어서 다시 찾아주시기 바랍니다." << endl;
                             }
-                            else if (yourinfo.g_invencount == 0)
+                            else if (yourinfo.g_invencount == 30)
                             {
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★현무의 방★★★★★★★★★★★★★★★★★★★★" << endl;
@@ -695,7 +696,7 @@ int main()
                             else
                             {
                                 yourinfo.g_money = yourinfo.g_money - agoods[3].g_money;
-                                yourinfo.g_invencount--;
+                                yourinfo.g_invencount++;
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★현무의 방★★★★★★★★★★★★★★★★★★★★" << endl;
                                 cout << "문제 없이" << agoods[3].g_gname << "을 구입하였습니다." << endl;
@@ -750,7 +751,7 @@ int main()
                                 cout << "현재 보유하신 렁머니로는 해당 물건을 구입할 수 없습니다." << endl;
                                 cout << "전투를 통해 렁머니를 벌어서 다시 찾아주시기 바랍니다." << endl;
                             }
-                            else if (yourinfo.g_invencount == 0)
+                            else if (yourinfo.g_invencount == 30)
                             {
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★주작의 방★★★★★★★★★★★★★★★★★★★★" << endl;
@@ -760,7 +761,7 @@ int main()
                             else
                             {
                                 yourinfo.g_money = yourinfo.g_money - hlgoods[1].g_money;
-                                yourinfo.g_invencount--;
+                                yourinfo.g_invencount++;
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★주작의 방★★★★★★★★★★★★★★★★★★★★" << endl;
                                 cout << "문제 없이" << hlgoods[1].g_gname << "을 구입하였습니다." << endl;
@@ -777,7 +778,7 @@ int main()
                                 cout << "현재 보유하신 렁머니로는 해당 물건을 구입할 수 없습니다." << endl;
                                 cout << "전투를 통해 렁머니를 벌어서 다시 찾아주시기 바랍니다." << endl;
                             }
-                            else if (yourinfo.g_invencount == 0)
+                            else if (yourinfo.g_invencount == 30)
                             {
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★주작의 방★★★★★★★★★★★★★★★★★★★★" << endl;
@@ -787,7 +788,7 @@ int main()
                             else
                             {
                                 yourinfo.g_money = yourinfo.g_money - hlgoods[2].g_money;
-                                yourinfo.g_invencount--;
+                                yourinfo.g_invencount++;
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★주작의 방★★★★★★★★★★★★★★★★★★★★" << endl;
                                 cout << "문제 없이" << hlgoods[2].g_gname << "을 구입하였습니다." << endl;
@@ -804,7 +805,7 @@ int main()
                                 cout << "현재 보유하신 렁머니로는 해당 물건을 구입할 수 없습니다." << endl;
                                 cout << "전투를 통해 렁머니를 벌어서 다시 찾아주시기 바랍니다." << endl;
                             }
-                            else if (yourinfo.g_invencount == 0)
+                            else if (yourinfo.g_invencount == 30)
                             {
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★주작의 방★★★★★★★★★★★★★★★★★★★★" << endl;
@@ -814,7 +815,7 @@ int main()
                             else
                             {
                                 yourinfo.g_money = yourinfo.g_money - hlgoods[3].g_money;
-                                yourinfo.g_invencount--;
+                                yourinfo.g_invencount++;
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★주작의 방★★★★★★★★★★★★★★★★★★★★" << endl;
                                 cout << "문제 없이" << hlgoods[3].g_gname << "을 구입하였습니다." << endl;
@@ -868,7 +869,7 @@ int main()
                                 cout << "현재 보유하신 렁머니로는 해당 물건을 구입할 수 없습니다." << endl;
                                 cout << "전투를 통해 렁머니를 벌어서 다시 찾아주시기 바랍니다." << endl;
                             }
-                            else if (yourinfo.g_invencount == 0)
+                            else if (yourinfo.g_invencount == 30)
                             {
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★백호의 방★★★★★★★★★★★★★★★★★★★★" << endl;
@@ -878,7 +879,7 @@ int main()
                             else
                             {
                                 yourinfo.g_money = yourinfo.g_money - mlgoods[1].g_money;
-                                yourinfo.g_invencount--;
+                                yourinfo.g_invencount++;
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★백호의 방★★★★★★★★★★★★★★★★★★★★" << endl;
                                 cout << "문제 없이" << mlgoods[1].g_gname << "을 구입하였습니다." << endl;
@@ -895,7 +896,7 @@ int main()
                                 cout << "현재 보유하신 렁머니로는 해당 물건을 구입할 수 없습니다." << endl;
                                 cout << "전투를 통해 렁머니를 벌어서 다시 찾아주시기 바랍니다." << endl;
                             }
-                            else if (yourinfo.g_invencount == 0)
+                            else if (yourinfo.g_invencount == 30)
                             {
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★백호의 방★★★★★★★★★★★★★★★★★★★★" << endl;
@@ -905,7 +906,7 @@ int main()
                             else
                             {
                                 yourinfo.g_money = yourinfo.g_money - mlgoods[2].g_money;
-                                yourinfo.g_invencount--;
+                                yourinfo.g_invencount++;
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★백호의 방★★★★★★★★★★★★★★★★★★★★" << endl;
                                 cout << "문제 없이" << mlgoods[2].g_gname << "을 구입하였습니다." << endl;
@@ -922,7 +923,7 @@ int main()
                                 cout << "현재 보유하신 렁머니로는 해당 물건을 구입할 수 없습니다." << endl;
                                 cout << "전투를 통해 렁머니를 벌어서 다시 찾아주시기 바랍니다." << endl;
                             }
-                            else if (yourinfo.g_invencount == 0)
+                            else if (yourinfo.g_invencount == 30)
                             {
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★백호의 방★★★★★★★★★★★★★★★★★★★★" << endl;
@@ -932,7 +933,7 @@ int main()
                             else
                             {
                                 yourinfo.g_money = yourinfo.g_money - mlgoods[3].g_money;
-                                yourinfo.g_invencount--;
+                                yourinfo.g_invencount++;
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★백호의 방★★★★★★★★★★★★★★★★★★★★" << endl;
                                 cout << "문제 없이" << mlgoods[3].g_gname << "을 구입하였습니다." << endl;
@@ -949,6 +950,15 @@ int main()
                         break;
                     }
 
+                }
+            }
+            if (main_select == MAM_INVENTORY)
+            {
+                while (true) 
+                {
+                    system("cls");
+                    cout << "★★★★★★★★★★★★★★★★용사님의 가방★★★★★★★★★★★★★★★★★★★★" << '\t' << "공간 :" << yourinfo.g_invencount << " / 30" << endl;
+                    
                 }
             }
 
