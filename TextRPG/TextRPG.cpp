@@ -87,6 +87,7 @@ struct g_PlayerInfo
     int g_exp;
     int g_level;
     int g_money;
+    int g_invencount = 30;
     struct g_GOODS g_bag[BAG_SIZE];
 };
 //몬스터에 대한 정보
@@ -508,7 +509,26 @@ int main()
                             if (yourinfo.g_money < wgoods[1].g_money)
                             {
                                 system("cls");
+                                cout << "★★★★★★★★★★★★★★★★청룡의 방★★★★★★★★★★★★★★★★★★★★" << endl;
                                 cout << "현재 보유하신 렁머니로는 해당 물건을 구입할 수 없습니다." << endl;
+                                cout << "전투를 통해 렁머니를 벌어서 다시 찾아주시기 바랍니다." << endl;
+                            }
+                            else if (yourinfo.g_invencount == 0)
+                            {
+                                system("cls");
+                                cout << "★★★★★★★★★★★★★★★★청룡의 방★★★★★★★★★★★★★★★★★★★★" << endl;
+                                cout << "안타깝지만 가방에 크기가 가득차서 구매를 하실 수 없습니다." << endl;
+                                cout << "가방을 비워주시고 다시 찾아주시기 바랍니다." << endl;
+                            }
+                            else
+                            {
+                                yourinfo.g_money = yourinfo.g_money - wgoods[1].g_money;
+                                yourinfo.g_invencount--;
+                                system("cls");
+                                cout << "★★★★★★★★★★★★★★★★청룡의 방★★★★★★★★★★★★★★★★★★★★" << endl;
+                                cout << "문제 없이" << wgoods[1].g_gname << "을 구입하였습니다." << endl;
+                                cout << "현재 남은 잔액 : " << yourinfo.g_money << " 렁머니" << endl;
+                                cout << "용사님의 가방 상황 : " << yourinfo.g_invencount << " / 30" << endl;
                             }
                             system("pause");
                             break;
@@ -516,7 +536,26 @@ int main()
                             if (yourinfo.g_money < wgoods[2].g_money)
                             {
                                 system("cls");
+                                cout << "★★★★★★★★★★★★★★★★청룡의 방★★★★★★★★★★★★★★★★★★★★" << endl;
                                 cout << "현재 보유하신 렁머니로는 해당 물건을 구입할 수 없습니다." << endl;
+                                cout << "전투를 통해 렁머니를 벌어서 다시 찾아주시기 바랍니다." << endl;
+                            }
+                            else if (yourinfo.g_invencount == 0)
+                            {
+                                system("cls");
+                                cout << "★★★★★★★★★★★★★★★★청룡의 방★★★★★★★★★★★★★★★★★★★★" << endl;
+                                cout << "안타깝지만 가방에 크기가 가득차서 구매를 하실 수 없습니다." << endl;
+                                cout << "가방을 비워주시고 다시 찾아주시기 바랍니다." << endl;
+                            }
+                            else
+                            {
+                                yourinfo.g_money = yourinfo.g_money - wgoods[2].g_money;
+                                yourinfo.g_invencount--;
+                                system("cls");
+                                cout << "★★★★★★★★★★★★★★★★청룡의 방★★★★★★★★★★★★★★★★★★★★" << endl;
+                                cout << "문제 없이" << wgoods[2].g_gname << "을 구입하였습니다." << endl;
+                                cout << "현재 남은 잔액 : " << yourinfo.g_money << " 렁머니" << endl;
+                                cout << "용사님의 가방 상황 : " << yourinfo.g_invencount << " / 30" << endl;
                             }
                             system("pause");
                             break;
@@ -524,7 +563,26 @@ int main()
                             if (yourinfo.g_money < wgoods[3].g_money)
                             {
                                 system("cls");
+                                cout << "★★★★★★★★★★★★★★★★청룡의 방★★★★★★★★★★★★★★★★★★★★" << endl;
                                 cout << "현재 보유하신 렁머니로는 해당 물건을 구입할 수 없습니다." << endl;
+                                cout << "전투를 통해 렁머니를 벌어서 다시 찾아주시기 바랍니다." << endl;
+                            }
+                            else if (yourinfo.g_invencount == 0)
+                            {
+                                system("cls");
+                                cout << "★★★★★★★★★★★★★★★★청룡의 방★★★★★★★★★★★★★★★★★★★★" << endl;
+                                cout << "안타깝지만 가방에 크기가 가득차서 구매를 하실 수 없습니다." << endl;
+                                cout << "가방을 비워주시고 다시 찾아주시기 바랍니다." << endl;
+                            }
+                            else
+                            {
+                                yourinfo.g_money = yourinfo.g_money - wgoods[3].g_money;
+                                yourinfo.g_invencount--;
+                                system("cls");
+                                cout << "★★★★★★★★★★★★★★★★청룡의 방★★★★★★★★★★★★★★★★★★★★" << endl;
+                                cout << "문제 없이" << wgoods[3].g_gname << "을 구입하였습니다." << endl;
+                                cout << "현재 남은 잔액 : " << yourinfo.g_money << " 렁머니" << endl;
+                                cout << "용사님의 가방 상황 : " << yourinfo.g_invencount << " / 30" << endl;
                             }
                             system("pause");
                             break;
@@ -563,8 +621,93 @@ int main()
                         cout << "무슨 방어를 얻고 싶은가?" << endl;
                         int armor_select;
                         cin >> armor_select;
+                        switch (armor_select)
+                        {
+                        case WP_1:
+                            if (yourinfo.g_money < agoods[1].g_money)
+                            {
+                                system("cls");
+                                cout << "★★★★★★★★★★★★★★★★현무의 방★★★★★★★★★★★★★★★★★★★★" << endl;
+                                cout << "현재 보유하신 렁머니로는 해당 물건을 구입할 수 없습니다." << endl;
+                                cout << "전투를 통해 렁머니를 벌어서 다시 찾아주시기 바랍니다." << endl;
+                            }
+                            else if (yourinfo.g_invencount == 0)
+                            {
+                                system("cls");
+                                cout << "★★★★★★★★★★★★★★★★현무의 방★★★★★★★★★★★★★★★★★★★★" << endl;
+                                cout << "안타깝지만 가방에 크기가 가득차서 구매를 하실 수 없습니다." << endl;
+                                cout << "가방을 비워주시고 다시 찾아주시기 바랍니다." << endl;
+                            }
+                            else
+                            {
+                                yourinfo.g_money = yourinfo.g_money - agoods[1].g_money;
+                                yourinfo.g_invencount--;
+                                system("cls");
+                                cout << "★★★★★★★★★★★★★★★★현무의 방★★★★★★★★★★★★★★★★★★★★" << endl;
+                                cout << "문제 없이" << agoods[1].g_gname << "을 구입하였습니다." << endl;
+                                cout << "현재 남은 잔액 : " << yourinfo.g_money << " 렁머니" << endl;
+                                cout << "용사님의 가방 상황 : " << yourinfo.g_invencount << " / 30" << endl;
+                            }
+                            system("pause");
+                            break;
+                        case WP_2:
+                            if (yourinfo.g_money < agoods[2].g_money)
+                            {
+                                system("cls");
+                                cout << "★★★★★★★★★★★★★★★★현무의 방★★★★★★★★★★★★★★★★★★★★" << endl;
+                                cout << "현재 보유하신 렁머니로는 해당 물건을 구입할 수 없습니다." << endl;
+                                cout << "전투를 통해 렁머니를 벌어서 다시 찾아주시기 바랍니다." << endl;
+                            }
+                            else if (yourinfo.g_invencount == 0)
+                            {
+                                system("cls");
+                                cout << "★★★★★★★★★★★★★★★★현무의 방★★★★★★★★★★★★★★★★★★★★" << endl;
+                                cout << "안타깝지만 가방에 크기가 가득차서 구매를 하실 수 없습니다." << endl;
+                                cout << "가방을 비워주시고 다시 찾아주시기 바랍니다." << endl;
+                            }
+                            else
+                            {
+                                yourinfo.g_money = yourinfo.g_money - agoods[2].g_money;
+                                yourinfo.g_invencount--;
+                                system("cls");
+                                cout << "★★★★★★★★★★★★★★★★현무의 방★★★★★★★★★★★★★★★★★★★★" << endl;
+                                cout << "문제 없이" << agoods[2].g_gname << "을 구입하였습니다." << endl;
+                                cout << "현재 남은 잔액 : " << yourinfo.g_money << " 렁머니" << endl;
+                                cout << "용사님의 가방 상황 : " << yourinfo.g_invencount << " / 30" << endl;
+                            }
+                            system("pause");
+                            break;
+                        case WP_3:
+                            if (yourinfo.g_money < agoods[3].g_money)
+                            {
+                                system("cls");
+                                cout << "★★★★★★★★★★★★★★★★현무의 방★★★★★★★★★★★★★★★★★★★★" << endl;
+                                cout << "현재 보유하신 렁머니로는 해당 물건을 구입할 수 없습니다." << endl;
+                                cout << "전투를 통해 렁머니를 벌어서 다시 찾아주시기 바랍니다." << endl;
+                            }
+                            else if (yourinfo.g_invencount == 0)
+                            {
+                                system("cls");
+                                cout << "★★★★★★★★★★★★★★★★현무의 방★★★★★★★★★★★★★★★★★★★★" << endl;
+                                cout << "안타깝지만 가방에 크기가 가득차서 구매를 하실 수 없습니다." << endl;
+                                cout << "가방을 비워주시고 다시 찾아주시기 바랍니다." << endl;
+                            }
+                            else
+                            {
+                                yourinfo.g_money = yourinfo.g_money - agoods[3].g_money;
+                                yourinfo.g_invencount--;
+                                system("cls");
+                                cout << "★★★★★★★★★★★★★★★★현무의 방★★★★★★★★★★★★★★★★★★★★" << endl;
+                                cout << "문제 없이" << agoods[3].g_gname << "을 구입하였습니다." << endl;
+                                cout << "현재 남은 잔액 : " << yourinfo.g_money << " 렁머니" << endl;
+                                cout << "용사님의 가방 상황 : " << yourinfo.g_invencount << " / 30" << endl;
+                            }
+                            system("pause");
+                            break;
+                        default:
+                            break;
+                        }
                         if (armor_select == WP_EXIT) break;
-
                         break;
                     case ST_HPLIQUID :
                         system("cls");
@@ -597,6 +740,92 @@ int main()
                         int hp_select;
                         cin >> hp_select;
                         if (hp_select == WP_EXIT) break;
+                        switch (hp_select)
+                        {
+                        case WP_1:
+                            if (yourinfo.g_money < hlgoods[1].g_money)
+                            {
+                                system("cls");
+                                cout << "★★★★★★★★★★★★★★★★주작의 방★★★★★★★★★★★★★★★★★★★★" << endl;
+                                cout << "현재 보유하신 렁머니로는 해당 물건을 구입할 수 없습니다." << endl;
+                                cout << "전투를 통해 렁머니를 벌어서 다시 찾아주시기 바랍니다." << endl;
+                            }
+                            else if (yourinfo.g_invencount == 0)
+                            {
+                                system("cls");
+                                cout << "★★★★★★★★★★★★★★★★주작의 방★★★★★★★★★★★★★★★★★★★★" << endl;
+                                cout << "안타깝지만 가방에 크기가 가득차서 구매를 하실 수 없습니다." << endl;
+                                cout << "가방을 비워주시고 다시 찾아주시기 바랍니다." << endl;
+                            }
+                            else
+                            {
+                                yourinfo.g_money = yourinfo.g_money - hlgoods[1].g_money;
+                                yourinfo.g_invencount--;
+                                system("cls");
+                                cout << "★★★★★★★★★★★★★★★★주작의 방★★★★★★★★★★★★★★★★★★★★" << endl;
+                                cout << "문제 없이" << hlgoods[1].g_gname << "을 구입하였습니다." << endl;
+                                cout << "현재 남은 잔액 : " << yourinfo.g_money << " 렁머니" << endl;
+                                cout << "용사님의 가방 상황 : " << yourinfo.g_invencount << " / 30" << endl;
+                            }
+                            system("pause");
+                            break;
+                        case WP_2:
+                            if (yourinfo.g_money < hlgoods[2].g_money)
+                            {
+                                system("cls");
+                                cout << "★★★★★★★★★★★★★★★★주작의 방★★★★★★★★★★★★★★★★★★★★" << endl;
+                                cout << "현재 보유하신 렁머니로는 해당 물건을 구입할 수 없습니다." << endl;
+                                cout << "전투를 통해 렁머니를 벌어서 다시 찾아주시기 바랍니다." << endl;
+                            }
+                            else if (yourinfo.g_invencount == 0)
+                            {
+                                system("cls");
+                                cout << "★★★★★★★★★★★★★★★★주작의 방★★★★★★★★★★★★★★★★★★★★" << endl;
+                                cout << "안타깝지만 가방에 크기가 가득차서 구매를 하실 수 없습니다." << endl;
+                                cout << "가방을 비워주시고 다시 찾아주시기 바랍니다." << endl;
+                            }
+                            else
+                            {
+                                yourinfo.g_money = yourinfo.g_money - hlgoods[2].g_money;
+                                yourinfo.g_invencount--;
+                                system("cls");
+                                cout << "★★★★★★★★★★★★★★★★주작의 방★★★★★★★★★★★★★★★★★★★★" << endl;
+                                cout << "문제 없이" << hlgoods[2].g_gname << "을 구입하였습니다." << endl;
+                                cout << "현재 남은 잔액 : " << yourinfo.g_money << " 렁머니" << endl;
+                                cout << "용사님의 가방 상황 : " << yourinfo.g_invencount << " / 30" << endl;
+                            }
+                            system("pause");
+                            break;
+                        case WP_3:
+                            if (yourinfo.g_money < hlgoods[3].g_money)
+                            {
+                                system("cls");
+                                cout << "★★★★★★★★★★★★★★★★주작의 방★★★★★★★★★★★★★★★★★★★★" << endl;
+                                cout << "현재 보유하신 렁머니로는 해당 물건을 구입할 수 없습니다." << endl;
+                                cout << "전투를 통해 렁머니를 벌어서 다시 찾아주시기 바랍니다." << endl;
+                            }
+                            else if (yourinfo.g_invencount == 0)
+                            {
+                                system("cls");
+                                cout << "★★★★★★★★★★★★★★★★주작의 방★★★★★★★★★★★★★★★★★★★★" << endl;
+                                cout << "안타깝지만 가방에 크기가 가득차서 구매를 하실 수 없습니다." << endl;
+                                cout << "가방을 비워주시고 다시 찾아주시기 바랍니다." << endl;
+                            }
+                            else
+                            {
+                                yourinfo.g_money = yourinfo.g_money - hlgoods[3].g_money;
+                                yourinfo.g_invencount--;
+                                system("cls");
+                                cout << "★★★★★★★★★★★★★★★★주작의 방★★★★★★★★★★★★★★★★★★★★" << endl;
+                                cout << "문제 없이" << hlgoods[3].g_gname << "을 구입하였습니다." << endl;
+                                cout << "현재 남은 잔액 : " << yourinfo.g_money << " 렁머니" << endl;
+                                cout << "용사님의 가방 상황 : " << yourinfo.g_invencount << " / 30" << endl;
+                            }
+                            system("pause");
+                            break;
+                        default:
+                            break;
+                        }
                         break;
                     case ST_MPLIQUID :
                         system("cls");
@@ -629,6 +858,92 @@ int main()
                         int mp_select;
                         cin >> mp_select;
                         if (mp_select == WP_EXIT) break;
+                        switch (mp_select)
+                        {
+                        case WP_1:
+                            if (yourinfo.g_money < mlgoods[1].g_money)
+                            {
+                                system("cls");
+                                cout << "★★★★★★★★★★★★★★★★백호의 방★★★★★★★★★★★★★★★★★★★★" << endl;
+                                cout << "현재 보유하신 렁머니로는 해당 물건을 구입할 수 없습니다." << endl;
+                                cout << "전투를 통해 렁머니를 벌어서 다시 찾아주시기 바랍니다." << endl;
+                            }
+                            else if (yourinfo.g_invencount == 0)
+                            {
+                                system("cls");
+                                cout << "★★★★★★★★★★★★★★★★백호의 방★★★★★★★★★★★★★★★★★★★★" << endl;
+                                cout << "안타깝지만 가방에 크기가 가득차서 구매를 하실 수 없습니다." << endl;
+                                cout << "가방을 비워주시고 다시 찾아주시기 바랍니다." << endl;
+                            }
+                            else
+                            {
+                                yourinfo.g_money = yourinfo.g_money - mlgoods[1].g_money;
+                                yourinfo.g_invencount--;
+                                system("cls");
+                                cout << "★★★★★★★★★★★★★★★★백호의 방★★★★★★★★★★★★★★★★★★★★" << endl;
+                                cout << "문제 없이" << mlgoods[1].g_gname << "을 구입하였습니다." << endl;
+                                cout << "현재 남은 잔액 : " << yourinfo.g_money << " 렁머니" << endl;
+                                cout << "용사님의 가방 상황 : " << yourinfo.g_invencount << " / 30" << endl;
+                            }
+                            system("pause");
+                            break;
+                        case WP_2:
+                            if (yourinfo.g_money < mlgoods[2].g_money)
+                            {
+                                system("cls");
+                                cout << "★★★★★★★★★★★★★★★★백호의 방★★★★★★★★★★★★★★★★★★★★" << endl;
+                                cout << "현재 보유하신 렁머니로는 해당 물건을 구입할 수 없습니다." << endl;
+                                cout << "전투를 통해 렁머니를 벌어서 다시 찾아주시기 바랍니다." << endl;
+                            }
+                            else if (yourinfo.g_invencount == 0)
+                            {
+                                system("cls");
+                                cout << "★★★★★★★★★★★★★★★★백호의 방★★★★★★★★★★★★★★★★★★★★" << endl;
+                                cout << "안타깝지만 가방에 크기가 가득차서 구매를 하실 수 없습니다." << endl;
+                                cout << "가방을 비워주시고 다시 찾아주시기 바랍니다." << endl;
+                            }
+                            else
+                            {
+                                yourinfo.g_money = yourinfo.g_money - mlgoods[2].g_money;
+                                yourinfo.g_invencount--;
+                                system("cls");
+                                cout << "★★★★★★★★★★★★★★★★백호의 방★★★★★★★★★★★★★★★★★★★★" << endl;
+                                cout << "문제 없이" << mlgoods[2].g_gname << "을 구입하였습니다." << endl;
+                                cout << "현재 남은 잔액 : " << yourinfo.g_money << " 렁머니" << endl;
+                                cout << "용사님의 가방 상황 : " << yourinfo.g_invencount << " / 30" << endl;
+                            }
+                            system("pause");
+                            break;
+                        case WP_3:
+                            if (yourinfo.g_money < mlgoods[3].g_money)
+                            {
+                                system("cls");
+                                cout << "★★★★★★★★★★★★★★★★백호의 방★★★★★★★★★★★★★★★★★★★★" << endl;
+                                cout << "현재 보유하신 렁머니로는 해당 물건을 구입할 수 없습니다." << endl;
+                                cout << "전투를 통해 렁머니를 벌어서 다시 찾아주시기 바랍니다." << endl;
+                            }
+                            else if (yourinfo.g_invencount == 0)
+                            {
+                                system("cls");
+                                cout << "★★★★★★★★★★★★★★★★백호의 방★★★★★★★★★★★★★★★★★★★★" << endl;
+                                cout << "안타깝지만 가방에 크기가 가득차서 구매를 하실 수 없습니다." << endl;
+                                cout << "가방을 비워주시고 다시 찾아주시기 바랍니다." << endl;
+                            }
+                            else
+                            {
+                                yourinfo.g_money = yourinfo.g_money - mlgoods[3].g_money;
+                                yourinfo.g_invencount--;
+                                system("cls");
+                                cout << "★★★★★★★★★★★★★★★★백호의 방★★★★★★★★★★★★★★★★★★★★" << endl;
+                                cout << "문제 없이" << mlgoods[3].g_gname << "을 구입하였습니다." << endl;
+                                cout << "현재 남은 잔액 : " << yourinfo.g_money << " 렁머니" << endl;
+                                cout << "용사님의 가방 상황 : " << yourinfo.g_invencount << " / 30" << endl;
+                            }
+                            system("pause");
+                            break;
+                        default:
+                            break;
+                        }
                         break;
                     default:
                         break;
@@ -641,6 +956,5 @@ int main()
         
     }
 
-    
 }
 
