@@ -61,6 +61,15 @@ enum WEAPON
     WP_3,
     WP_EXIT
 };
+//상점 상품들에 대한 정보
+struct g_GOODS
+{
+    char g_gname[NAME_SIZE];
+    char g_gdes[DESCRIPTION];
+    char g_geffect[DESCRIPTION];
+    int g_money;
+
+};
 //플레이어에 대한 정보
 struct g_PlayerInfo
 {
@@ -78,7 +87,7 @@ struct g_PlayerInfo
     int g_exp;
     int g_level;
     int g_money;
-    g_GOODS g_bag[BAG_SIZE];
+    struct g_GOODS g_bag[BAG_SIZE];
 };
 //몬스터에 대한 정보
 struct g_MonsterInfo
@@ -96,15 +105,7 @@ struct g_MonsterInfo
     int g_dropmoney;
     int g_dropexp;
 };
-//상점 상품들에 대한 정보
-struct g_GOODS
-{
-    char g_gname[NAME_SIZE];
-    char g_gdes[DESCRIPTION];
-    char g_geffect[DESCRIPTION];
-    int g_money;
-    
-};
+
 
 
 int main()
@@ -400,7 +401,7 @@ int main()
 
                     system("cls");
                     cout << "★★★★★★★★★★★★★★★★전투 결과★★★★★★★★★★★★★★★★★★★★" << endl;
-                    if (enemyinfo[map_select].g_hp < 0)
+                    if (enemyinfo[map_select].g_hp <= 0)
                     {
                         enemyinfo[map_select].g_hp = enemyinfo[map_select].g_maxhp;
                         yourinfo.g_exp = yourinfo.g_exp + enemyinfo[map_select].g_dropexp;
@@ -409,7 +410,7 @@ int main()
                         cout << "" << endl;
                         cout << "당신이" << enemyinfo[map_select].g_dropmoney << " 렁머니와 " << enemyinfo[map_select].g_dropexp << " 경험치를 획득하였습니다." << endl;
                     }
-                    else if (yourinfo.g_hp < 0)
+                    else if (yourinfo.g_hp <= 0)
                     {
                         yourinfo.g_hp = yourinfo.g_maxhp;
                         yourinfo.g_exp = yourinfo.g_exp - (yourinfo.g_exp / 10);
@@ -443,7 +444,7 @@ int main()
                 while (true)
                 {   
                     system("cls");
-                    cout << "★★★★★★★★★★★★★★★★비밀리에 숨겨진 상점★★★★★★★★★★★★★★★★★★★★" << endl;
+                    cout << "★★★★★★★★★★★★★★★★비밀리에 숨겨진 상점★★★★★★★★★★★★★★★★★★★★" << '\t' << "보유 렁머니:" << yourinfo.g_money << endl;
                     cout << "1. 청룡의 무기 상점" << endl;
                     cout << "" << endl;
                     cout << "2. 현무의 방어구 상점" << endl;
@@ -467,15 +468,13 @@ int main()
                     }
                     if (store_select == ST_EXIT) break;
                     
-                    
-                    
+                  
                     switch (store_select)
                     {
                     case ST_WEAPON :
                         
-
                         system("cls");
-                        cout << "★★★★★★★★★★★★★★★★청룡의 방★★★★★★★★★★★★★★★★★★★★" << endl;
+                        cout << "★★★★★★★★★★★★★★★★청룡의 방★★★★★★★★★★★★★★★★★★★★" << '\t' << "보유 렁머니:" << yourinfo.g_money << endl;
                         cout << "" << endl;
                         cout << "1. " << wgoods[1].g_gname << endl;
                         cout << wgoods[1].g_gdes << endl;
@@ -503,12 +502,40 @@ int main()
                         cout << "무슨 무기가 필요한가?" << endl;
                         int weapon_select;
                         cin >> weapon_select;
+                        switch (weapon_select)
+                        {
+                        case WP_1:
+                            if (yourinfo.g_money < wgoods[1].g_money)
+                            {
+                                system("cls");
+                                cout << "현재 보유하신 렁머니로는 해당 물건을 구입할 수 없습니다." << endl;
+                            }
+                            system("pause");
+                            break;
+                        case WP_2:
+                            if (yourinfo.g_money < wgoods[2].g_money)
+                            {
+                                system("cls");
+                                cout << "현재 보유하신 렁머니로는 해당 물건을 구입할 수 없습니다." << endl;
+                            }
+                            system("pause");
+                            break;
+                        case WP_3:
+                            if (yourinfo.g_money < wgoods[3].g_money)
+                            {
+                                system("cls");
+                                cout << "현재 보유하신 렁머니로는 해당 물건을 구입할 수 없습니다." << endl;
+                            }
+                            system("pause");
+                            break;
+                        default:
+                            break;
+                        }
                         if (weapon_select == WP_EXIT) break;
-                        
                         break;
                     case ST_ARMOR :
                         system("cls");
-                        cout << "★★★★★★★★★★★★★★★★현무의 방★★★★★★★★★★★★★★★★★★★★" << endl;
+                        cout << "★★★★★★★★★★★★★★★★현무의 방★★★★★★★★★★★★★★★★★★★★" << '\t' << "보유 렁머니:" << yourinfo.g_money << endl;
                         cout << "" << endl;
                         cout << "1. " << agoods[1].g_gname << endl;
                         cout << agoods[1].g_gdes << endl;
@@ -541,7 +568,7 @@ int main()
                         break;
                     case ST_HPLIQUID :
                         system("cls");
-                        cout << "★★★★★★★★★★★★★★★★주작의 방★★★★★★★★★★★★★★★★★★★★" << endl;
+                        cout << "★★★★★★★★★★★★★★★★주작의 방★★★★★★★★★★★★★★★★★★★★" << '\t' << "보유 렁머니:" << yourinfo.g_money << endl;
                         cout << "" << endl;
                         cout << "1. " << hlgoods[1].g_gname << endl;
                         cout << hlgoods[1].g_gdes << endl;
@@ -566,14 +593,14 @@ int main()
                         cout << "" << endl;
                         cout << "4. 아니 어떤 것도 필요하지 않다. " << endl;
                         cout << "" << endl;
-                        cout << "무슨 주작의 힘을 얻고 싶은가?" << endl;
+                        cout << "무슨 주작의 기운을 얻고 싶은가?" << endl;
                         int hp_select;
                         cin >> hp_select;
                         if (hp_select == WP_EXIT) break;
                         break;
                     case ST_MPLIQUID :
                         system("cls");
-                        cout << "★★★★★★★★★★★★★★★★백호의 방★★★★★★★★★★★★★★★★★★★★" << endl;
+                        cout << "★★★★★★★★★★★★★★★★백호의 방★★★★★★★★★★★★★★★★★★★★" << '\t' << "보유 렁머니:" << yourinfo.g_money << endl;
                         cout << "" << endl;
                         cout << "1. " << mlgoods[1].g_gname << endl;
                         cout << mlgoods[1].g_gdes << endl;
@@ -598,7 +625,7 @@ int main()
                         cout << "" << endl;
                         cout << "4. 아니 어떤 것도 필요하지 않다. " << endl;
                         cout << "" << endl;
-                        cout << "무슨 백호의 힘을 얻고 싶은가?" << endl;
+                        cout << "무슨 백호의 기운을 얻고 싶은가?" << endl;
                         int mp_select;
                         cin >> mp_select;
                         if (mp_select == WP_EXIT) break;
