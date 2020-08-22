@@ -123,7 +123,7 @@ int main()
         g_MonsterInfo enemyinfo[ENE_COUNT];
         yourinfo.g_level = 1;
         yourinfo.g_exp = 0;
-        yourinfo.g_money = 10000;
+        yourinfo.g_money = 1000000;
         cout << "★★★★★★★★★★★★★★★★너에 대해 말해보거라★★★★★★★★★★★★★★★★★★★" << endl;
         cout << "이름이 무엇이가요 용사님?" << endl;
         cin.getline(yourinfo.g_name, NAME_SIZE - 1);
@@ -524,6 +524,7 @@ int main()
                             else
                             {
                                 yourinfo.g_money = yourinfo.g_money - wgoods[1].g_money;
+                                yourinfo.g_bag[yourinfo.g_invencount] = wgoods[1];
                                 yourinfo.g_invencount++;
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★청룡의 방★★★★★★★★★★★★★★★★★★★★" << endl;
@@ -551,6 +552,7 @@ int main()
                             else
                             {
                                 yourinfo.g_money = yourinfo.g_money - wgoods[2].g_money;
+                                yourinfo.g_bag[yourinfo.g_invencount] = wgoods[2];
                                 yourinfo.g_invencount++;
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★청룡의 방★★★★★★★★★★★★★★★★★★★★" << endl;
@@ -578,6 +580,7 @@ int main()
                             else
                             {
                                 yourinfo.g_money = yourinfo.g_money - wgoods[3].g_money;
+                                yourinfo.g_bag[yourinfo.g_invencount] = wgoods[3];
                                 yourinfo.g_invencount++;
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★청룡의 방★★★★★★★★★★★★★★★★★★★★" << endl;
@@ -642,6 +645,7 @@ int main()
                             else
                             {
                                 yourinfo.g_money = yourinfo.g_money - agoods[1].g_money;
+                                yourinfo.g_bag[yourinfo.g_invencount] = agoods[1];
                                 yourinfo.g_invencount++;
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★현무의 방★★★★★★★★★★★★★★★★★★★★" << endl;
@@ -669,6 +673,7 @@ int main()
                             else
                             {
                                 yourinfo.g_money = yourinfo.g_money - agoods[2].g_money;
+                                yourinfo.g_bag[yourinfo.g_invencount] = agoods[2];
                                 yourinfo.g_invencount++;
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★현무의 방★★★★★★★★★★★★★★★★★★★★" << endl;
@@ -696,6 +701,7 @@ int main()
                             else
                             {
                                 yourinfo.g_money = yourinfo.g_money - agoods[3].g_money;
+                                yourinfo.g_bag[yourinfo.g_invencount] = agoods[3];
                                 yourinfo.g_invencount++;
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★현무의 방★★★★★★★★★★★★★★★★★★★★" << endl;
@@ -761,6 +767,7 @@ int main()
                             else
                             {
                                 yourinfo.g_money = yourinfo.g_money - hlgoods[1].g_money;
+                                yourinfo.g_bag[yourinfo.g_invencount] = hlgoods[1];
                                 yourinfo.g_invencount++;
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★주작의 방★★★★★★★★★★★★★★★★★★★★" << endl;
@@ -788,6 +795,7 @@ int main()
                             else
                             {
                                 yourinfo.g_money = yourinfo.g_money - hlgoods[2].g_money;
+                                yourinfo.g_bag[yourinfo.g_invencount] = hlgoods[2];
                                 yourinfo.g_invencount++;
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★주작의 방★★★★★★★★★★★★★★★★★★★★" << endl;
@@ -815,6 +823,7 @@ int main()
                             else
                             {
                                 yourinfo.g_money = yourinfo.g_money - hlgoods[3].g_money;
+                                yourinfo.g_bag[yourinfo.g_invencount] = hlgoods[3];
                                 yourinfo.g_invencount++;
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★주작의 방★★★★★★★★★★★★★★★★★★★★" << endl;
@@ -879,6 +888,7 @@ int main()
                             else
                             {
                                 yourinfo.g_money = yourinfo.g_money - mlgoods[1].g_money;
+                                yourinfo.g_bag[yourinfo.g_invencount] = mlgoods[1];
                                 yourinfo.g_invencount++;
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★백호의 방★★★★★★★★★★★★★★★★★★★★" << endl;
@@ -906,6 +916,7 @@ int main()
                             else
                             {
                                 yourinfo.g_money = yourinfo.g_money - mlgoods[2].g_money;
+                                yourinfo.g_bag[yourinfo.g_invencount] = mlgoods[2];
                                 yourinfo.g_invencount++;
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★백호의 방★★★★★★★★★★★★★★★★★★★★" << endl;
@@ -933,6 +944,7 @@ int main()
                             else
                             {
                                 yourinfo.g_money = yourinfo.g_money - mlgoods[3].g_money;
+                                yourinfo.g_bag[yourinfo.g_invencount] = mlgoods[3];
                                 yourinfo.g_invencount++;
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★백호의 방★★★★★★★★★★★★★★★★★★★★" << endl;
@@ -958,7 +970,24 @@ int main()
                 {
                     system("cls");
                     cout << "★★★★★★★★★★★★★★★★용사님의 가방★★★★★★★★★★★★★★★★★★★★" << '\t' << "공간 :" << yourinfo.g_invencount << " / 30" << endl;
+                    cout << "01." << yourinfo.g_bag[0].g_gname  << '\t' << "02." << yourinfo.g_bag[1].g_gname << endl;
+                    cout << "03." << yourinfo.g_bag[2].g_gname  << '\t' << "04." << yourinfo.g_bag[3].g_gname << endl;
+                    cout << "05." << yourinfo.g_bag[4].g_gname  << '\t' << "06." << yourinfo.g_bag[5].g_gname << endl;
+                    cout << "07." << yourinfo.g_bag[6].g_gname  << '\t' << "08." << yourinfo.g_bag[7].g_gname << endl;
+                    cout << "09." << yourinfo.g_bag[8].g_gname  << '\t' << "10." << yourinfo.g_bag[9].g_gname << endl;
+                    cout << "11." << yourinfo.g_bag[10].g_gname  << '\t' << "12." << yourinfo.g_bag[11].g_gname << endl;
+                    cout << "13." << yourinfo.g_bag[12].g_gname  << '\t' << "14." << yourinfo.g_bag[13].g_gname << endl;
+                    cout << "15." << yourinfo.g_bag[14].g_gname  << '\t' << "16." << yourinfo.g_bag[15].g_gname << endl;
+                    cout << "17." << yourinfo.g_bag[16].g_gname  << '\t' << "18." << yourinfo.g_bag[17].g_gname << endl;
+                    cout << "19." << yourinfo.g_bag[18].g_gname  << '\t' << "20." << yourinfo.g_bag[19].g_gname << endl;
+                    cout << "21." << yourinfo.g_bag[20].g_gname  << '\t' << "22." << yourinfo.g_bag[21].g_gname << endl;
+                    cout << "23." << yourinfo.g_bag[22].g_gname  << '\t' << "24." << yourinfo.g_bag[23].g_gname << endl;
+                    cout << "25." << yourinfo.g_bag[24].g_gname  << '\t' << "26." << yourinfo.g_bag[25].g_gname << endl;
+                    cout << "27." << yourinfo.g_bag[26].g_gname  << '\t' << "28." << yourinfo.g_bag[27].g_gname << endl;
+                    cout << "29." << yourinfo.g_bag[28].g_gname  << '\t' << "30." << yourinfo.g_bag[29].g_gname << endl;
                     
+
+                    system("pause");
                 }
             }
 
