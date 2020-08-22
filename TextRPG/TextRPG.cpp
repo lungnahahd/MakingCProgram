@@ -504,6 +504,12 @@ int main()
                         cout << "무슨 무기가 필요한가?" << endl;
                         int weapon_select;
                         cin >> weapon_select;
+                        if (cin.fail())
+                        {
+                            cin.clear();
+                            cin.ignore(1024, '\n');
+                            continue;
+                        }
                         switch (weapon_select)
                         {
                         case WP_1:
@@ -625,6 +631,12 @@ int main()
                         cout << "무슨 방어를 얻고 싶은가?" << endl;
                         int armor_select;
                         cin >> armor_select;
+                        if (cin.fail())
+                        {
+                            cin.clear();
+                            cin.ignore(1024, '\n');
+                            continue;
+                        }
                         switch (armor_select)
                         {
                         case WP_1:
@@ -746,6 +758,12 @@ int main()
                         cout << "무슨 주작의 기운을 얻고 싶은가?" << endl;
                         int hp_select;
                         cin >> hp_select;
+                        if (cin.fail())
+                        {
+                            cin.clear();
+                            cin.ignore(1024, '\n');
+                            continue;
+                        }
                         if (hp_select == WP_EXIT) break;
                         switch (hp_select)
                         {
@@ -867,6 +885,12 @@ int main()
                         cout << "무슨 백호의 기운을 얻고 싶은가?" << endl;
                         int mp_select;
                         cin >> mp_select;
+                        if (cin.fail())
+                        {
+                            cin.clear();
+                            cin.ignore(1024, '\n');
+                            continue;
+                        }
                         if (mp_select == WP_EXIT) break;
                         switch (mp_select)
                         {
@@ -967,25 +991,60 @@ int main()
             if (main_select == MAM_INVENTORY)
             {
                 while (true) 
-                {
+                {   
+                    int select_bag;
                     system("cls");
                     cout << "★★★★★★★★★★★★★★★★용사님의 가방★★★★★★★★★★★★★★★★★★★★" << '\t' << "공간 :" << yourinfo.g_invencount << " / 30" << endl;
-                    cout << "01." << yourinfo.g_bag[0].g_gname  << '\t' << "02." << yourinfo.g_bag[1].g_gname << endl;
-                    cout << "03." << yourinfo.g_bag[2].g_gname  << '\t' << "04." << yourinfo.g_bag[3].g_gname << endl;
-                    cout << "05." << yourinfo.g_bag[4].g_gname  << '\t' << "06." << yourinfo.g_bag[5].g_gname << endl;
-                    cout << "07." << yourinfo.g_bag[6].g_gname  << '\t' << "08." << yourinfo.g_bag[7].g_gname << endl;
-                    cout << "09." << yourinfo.g_bag[8].g_gname  << '\t' << "10." << yourinfo.g_bag[9].g_gname << endl;
-                    cout << "11." << yourinfo.g_bag[10].g_gname  << '\t' << "12." << yourinfo.g_bag[11].g_gname << endl;
-                    cout << "13." << yourinfo.g_bag[12].g_gname  << '\t' << "14." << yourinfo.g_bag[13].g_gname << endl;
-                    cout << "15." << yourinfo.g_bag[14].g_gname  << '\t' << "16." << yourinfo.g_bag[15].g_gname << endl;
-                    cout << "17." << yourinfo.g_bag[16].g_gname  << '\t' << "18." << yourinfo.g_bag[17].g_gname << endl;
-                    cout << "19." << yourinfo.g_bag[18].g_gname  << '\t' << "20." << yourinfo.g_bag[19].g_gname << endl;
-                    cout << "21." << yourinfo.g_bag[20].g_gname  << '\t' << "22." << yourinfo.g_bag[21].g_gname << endl;
-                    cout << "23." << yourinfo.g_bag[22].g_gname  << '\t' << "24." << yourinfo.g_bag[23].g_gname << endl;
-                    cout << "25." << yourinfo.g_bag[24].g_gname  << '\t' << "26." << yourinfo.g_bag[25].g_gname << endl;
-                    cout << "27." << yourinfo.g_bag[26].g_gname  << '\t' << "28." << yourinfo.g_bag[27].g_gname << endl;
-                    cout << "29." << yourinfo.g_bag[28].g_gname  << '\t' << "30." << yourinfo.g_bag[29].g_gname << endl;
-                    
+                    cout << "각 품목의 설명을 보려면 각 물건의 번호를 입력하시오." << endl;
+                    cout << "가방을 그만 보려면 0번을 눌러 주세요." << endl;
+                    cout << "---------------------------------------------------------------------------------------------" << endl;
+                    cout << "01." << yourinfo.g_bag[0].g_gname << endl;
+                    cout << "02." << yourinfo.g_bag[1].g_gname << endl;
+                    cout << "03." << yourinfo.g_bag[2].g_gname << endl; 
+                    cout << "04." << yourinfo.g_bag[3].g_gname << endl;
+                    cout << "05." << yourinfo.g_bag[4].g_gname << endl; 
+                    cout << "06." << yourinfo.g_bag[5].g_gname << endl;
+                    cout << "07." << yourinfo.g_bag[6].g_gname << endl; 
+                    cout << "08." << yourinfo.g_bag[7].g_gname << endl;
+                    cout << "09." << yourinfo.g_bag[8].g_gname << endl; 
+                    cout << "10." << yourinfo.g_bag[9].g_gname << endl;
+                    cout << "11." << yourinfo.g_bag[10].g_gname << endl; 
+                    cout << "12." << yourinfo.g_bag[11].g_gname << endl;
+                    cout << "13." << yourinfo.g_bag[12].g_gname << endl; 
+                    cout << "14." << yourinfo.g_bag[13].g_gname << endl;
+                    cout << "15." << yourinfo.g_bag[14].g_gname << endl; 
+                    cout << "16." << yourinfo.g_bag[15].g_gname << endl;
+                    cout << "17." << yourinfo.g_bag[16].g_gname << endl; 
+                    cout << "18." << yourinfo.g_bag[17].g_gname << endl;
+                    cout << "19." << yourinfo.g_bag[18].g_gname << endl; 
+                    cout << "20." << yourinfo.g_bag[19].g_gname << endl;
+                    cout << "21." << yourinfo.g_bag[20].g_gname << endl; 
+                    cout << "22." << yourinfo.g_bag[21].g_gname << endl;
+                    cout << "23." << yourinfo.g_bag[22].g_gname << endl; 
+                    cout << "24." << yourinfo.g_bag[23].g_gname << endl;
+                    cout << "25." << yourinfo.g_bag[24].g_gname << endl; 
+                    cout << "26." << yourinfo.g_bag[25].g_gname << endl;
+                    cout << "27." << yourinfo.g_bag[26].g_gname << endl; 
+                    cout << "28." << yourinfo.g_bag[27].g_gname << endl;
+                    cout << "29." << yourinfo.g_bag[28].g_gname << endl; 
+                    cout << "30." << yourinfo.g_bag[29].g_gname << endl;
+                    cin >> select_bag;
+                    if (cin.fail())
+                    {
+                        cin.clear();
+                        cin.ignore(1024, '\n');
+                        continue;
+                    }
+                    select_bag--;
+                    if (select_bag == -1) break;
+                    else {
+                        system("cls");
+                        cout << "물건명 : " << yourinfo.g_bag[select_bag].g_gname << endl;
+                        cout << "효과 : " << yourinfo.g_bag[select_bag].g_geffect << endl;
+                        cout << "설명 : " << yourinfo.g_bag[select_bag].g_gdes << endl;
+                        system("pause");
+                        continue;
+                    }
 
                     system("pause");
                 }
@@ -997,3 +1056,21 @@ int main()
 
 }
 
+
+
+
+//cout << "01." << yourinfo.g_bag[0].g_gname << '\t' << "02." << yourinfo.g_bag[1].g_gname << endl;
+//cout << "03." << yourinfo.g_bag[2].g_gname << '\t' << "04." << yourinfo.g_bag[3].g_gname << endl;
+//cout << "05." << yourinfo.g_bag[4].g_gname << '\t' << "06." << yourinfo.g_bag[5].g_gname << endl;
+//cout << "07." << yourinfo.g_bag[6].g_gname << '\t' << "08." << yourinfo.g_bag[7].g_gname << endl;
+//cout << "09." << yourinfo.g_bag[8].g_gname << '\t' << "10." << yourinfo.g_bag[9].g_gname << endl;
+//cout << "11." << yourinfo.g_bag[10].g_gname << '\t' << "12." << yourinfo.g_bag[11].g_gname << endl;
+//cout << "13." << yourinfo.g_bag[12].g_gname << '\t' << "14." << yourinfo.g_bag[13].g_gname << endl;
+//cout << "15." << yourinfo.g_bag[14].g_gname << '\t' << "16." << yourinfo.g_bag[15].g_gname << endl;
+//cout << "17." << yourinfo.g_bag[16].g_gname << '\t' << "18." << yourinfo.g_bag[17].g_gname << endl;
+//cout << "19." << yourinfo.g_bag[18].g_gname << '\t' << "20." << yourinfo.g_bag[19].g_gname << endl;
+//cout << "21." << yourinfo.g_bag[20].g_gname << '\t' << "22." << yourinfo.g_bag[21].g_gname << endl;
+//cout << "23." << yourinfo.g_bag[22].g_gname << '\t' << "24." << yourinfo.g_bag[23].g_gname << endl;
+//cout << "25." << yourinfo.g_bag[24].g_gname << '\t' << "26." << yourinfo.g_bag[25].g_gname << endl;
+//cout << "27." << yourinfo.g_bag[26].g_gname << '\t' << "28." << yourinfo.g_bag[27].g_gname << endl;
+//cout << "29." << yourinfo.g_bag[28].g_gname << '\t' << "30." << yourinfo.g_bag[29].g_gname << endl;
