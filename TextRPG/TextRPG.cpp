@@ -1028,6 +1028,8 @@ int main()
                     cout << "28." << yourinfo.g_bag[27].g_gname << endl;
                     cout << "29." << yourinfo.g_bag[28].g_gname << endl; 
                     cout << "30." << yourinfo.g_bag[29].g_gname << endl;
+                    cout << "---------------------------------------------------------------------------------------------" << endl;
+                    cout << "확인하고 싶은 번호를 입력해주시기 바랍니다.(0번은 가방 닫기) : ";
                     cin >> select_bag;
                     if (cin.fail())
                     {
@@ -1038,12 +1040,30 @@ int main()
                     select_bag--;
                     if (select_bag == -1) break;
                     else {
+                        g_GOODS trash[BAG_SIZE] = {};
                         system("cls");
                         cout << "물건명 : " << yourinfo.g_bag[select_bag].g_gname << endl;
                         cout << "효과 : " << yourinfo.g_bag[select_bag].g_geffect << endl;
                         cout << "설명 : " << yourinfo.g_bag[select_bag].g_gdes << endl;
-                        system("pause");
-                        continue;
+                        cout << "---------------------------------------------------------------------------------------------" << endl;
+                        cout << "1. 나가기" << endl;
+                        cout << "2. 해당 물건 기부하기"<<endl;
+                        int select_item;
+                        cin >> select_item;
+                        if (cin.fail())
+                        {
+                            cin.clear();
+                            cin.ignore(1024, '\n');
+                            continue;
+                        }
+                        if (select_item == 1) continue;
+                        else if(select_item == 2) {
+                            yourinfo.g_bag[select_bag] = yourinfo.g_bag[yourinfo.g_invencount - 1];
+                            yourinfo.g_bag[yourinfo.g_invencount - 1] = trash[0];
+                            yourinfo.g_invencount--;
+                            continue;
+                        }
+                         
                     }
 
                     system("pause");
@@ -1055,22 +1075,3 @@ int main()
     }
 
 }
-
-
-
-
-//cout << "01." << yourinfo.g_bag[0].g_gname << '\t' << "02." << yourinfo.g_bag[1].g_gname << endl;
-//cout << "03." << yourinfo.g_bag[2].g_gname << '\t' << "04." << yourinfo.g_bag[3].g_gname << endl;
-//cout << "05." << yourinfo.g_bag[4].g_gname << '\t' << "06." << yourinfo.g_bag[5].g_gname << endl;
-//cout << "07." << yourinfo.g_bag[6].g_gname << '\t' << "08." << yourinfo.g_bag[7].g_gname << endl;
-//cout << "09." << yourinfo.g_bag[8].g_gname << '\t' << "10." << yourinfo.g_bag[9].g_gname << endl;
-//cout << "11." << yourinfo.g_bag[10].g_gname << '\t' << "12." << yourinfo.g_bag[11].g_gname << endl;
-//cout << "13." << yourinfo.g_bag[12].g_gname << '\t' << "14." << yourinfo.g_bag[13].g_gname << endl;
-//cout << "15." << yourinfo.g_bag[14].g_gname << '\t' << "16." << yourinfo.g_bag[15].g_gname << endl;
-//cout << "17." << yourinfo.g_bag[16].g_gname << '\t' << "18." << yourinfo.g_bag[17].g_gname << endl;
-//cout << "19." << yourinfo.g_bag[18].g_gname << '\t' << "20." << yourinfo.g_bag[19].g_gname << endl;
-//cout << "21." << yourinfo.g_bag[20].g_gname << '\t' << "22." << yourinfo.g_bag[21].g_gname << endl;
-//cout << "23." << yourinfo.g_bag[22].g_gname << '\t' << "24." << yourinfo.g_bag[23].g_gname << endl;
-//cout << "25." << yourinfo.g_bag[24].g_gname << '\t' << "26." << yourinfo.g_bag[25].g_gname << endl;
-//cout << "27." << yourinfo.g_bag[26].g_gname << '\t' << "28." << yourinfo.g_bag[27].g_gname << endl;
-//cout << "29." << yourinfo.g_bag[28].g_gname << '\t' << "30." << yourinfo.g_bag[29].g_gname << endl;
