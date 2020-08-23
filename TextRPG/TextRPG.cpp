@@ -69,6 +69,8 @@ struct g_GOODS
     char g_gdes[DESCRIPTION];
     char g_geffect[DESCRIPTION];
     int g_money;
+    int g_use;
+    int g_realplus;
 
 };
 //플레이어에 대한 정보
@@ -243,61 +245,87 @@ int main()
             strcpy_s(wgoods[1].g_gdes, "대충 만든 것처럼 보이지만 강인한 힘을 지녔다.");
             strcpy_s(wgoods[1].g_geffect, "공격력 + 10");
             wgoods[1].g_money = 30000;
+            wgoods[1].g_use = 1;
+            wgoods[1].g_realplus = 10;
+            
 
             strcpy_s(wgoods[2].g_gname, "무거운 대리석 검");
             strcpy_s(wgoods[2].g_gdes, "들기는 힘들지만 엄청난 파괴력을 가졌다.");
             strcpy_s(wgoods[2].g_geffect, "공격력 + 30");
             wgoods[2].g_money = 50000;
-
+            wgoods[2].g_use = 1;
+            wgoods[2].g_realplus = 30;
+            
             strcpy_s(wgoods[3].g_gname, "청룡의 검");
             strcpy_s(wgoods[3].g_gdes, "청룡의 힘을 지닌 절대 비기의 검");
             strcpy_s(wgoods[3].g_geffect, "공격력 + 50");
             wgoods[3].g_money = 70000;
-
+            wgoods[3].g_use = 1;
+            wgoods[3].g_realplus = 50;
+            
             strcpy_s(agoods[1].g_gname, "야생동물의 가죽 옷");
             strcpy_s(agoods[1].g_gdes, "질긴 가죽으로 만들어 간단한 공격들을 흡수할 수 있다.");
             strcpy_s(agoods[1].g_geffect, "방어력 + 10");
             agoods[1].g_money = 30000;
+            agoods[1].g_use = 2;
+            agoods[1].g_realplus = 10;
 
             strcpy_s(agoods[2].g_gname, "단단한 청동 갑옷");
             strcpy_s(agoods[2].g_gdes, "청동으로 웬만한 공격들을 튕겨내 준다.");
             strcpy_s(agoods[2].g_geffect, "방어력 + 30");
             agoods[2].g_money = 50000;
+            agoods[2].g_use = 2;
+            agoods[2].g_realplus = 30;
 
             strcpy_s(agoods[3].g_gname, "현무의 등");
             strcpy_s(agoods[3].g_gdes, "현무의 힘을 지닌 절대 비기의 갑옷");
             strcpy_s(agoods[3].g_geffect, "방어력 + 50");
             agoods[3].g_money = 70000;
+            agoods[3].g_use = 2;
+            agoods[3].g_realplus = 50;
 
             strcpy_s(hlgoods[1].g_gname, "HP물약(소)");
             strcpy_s(hlgoods[1].g_gdes, "HP를 일정량 회복 시켜 준다.");
             strcpy_s(hlgoods[1].g_geffect, "HP + 50");
             hlgoods[1].g_money = 2000;
-            
+            hlgoods[1].g_use = 3;
+            hlgoods[1].g_realplus = 50;
+
+
             strcpy_s(hlgoods[2].g_gname, "HP물약(대)");
             strcpy_s(hlgoods[2].g_gdes, "HP를 많이 회복 시켜 준다.");
             strcpy_s(hlgoods[2].g_geffect, "HP + 200");
             hlgoods[2].g_money = 5000;
+            hlgoods[2].g_use = 3;
+            hlgoods[2].g_realplus = 200;
 
             strcpy_s(hlgoods[3].g_gname, "주작의 축복");
             strcpy_s(hlgoods[3].g_gdes, "주작의 힘으로 HP를 전부 회복 시켜 준다.");
             strcpy_s(hlgoods[3].g_geffect, "MAX HP");
             hlgoods[3].g_money = 7000;
+            hlgoods[3].g_use = 3;
+            hlgoods[3].g_realplus = yourinfo.g_maxhp;
 
             strcpy_s(mlgoods[1].g_gname, "MP물약(소)");
             strcpy_s(mlgoods[1].g_gdes, "MP를 일정량 회복 시켜 준다.");
             strcpy_s(mlgoods[1].g_geffect, "MP + 50");
             mlgoods[1].g_money = 2000;
+            mlgoods[1].g_use = 4;
+            mlgoods[1].g_realplus = 50;
 
             strcpy_s(mlgoods[2].g_gname, "MP물약(대)");
             strcpy_s(mlgoods[2].g_gdes, "MP를 많이 회복 시켜 준다.");
             strcpy_s(mlgoods[2].g_geffect, "MP + 200");
             mlgoods[2].g_money = 5000;
+            mlgoods[2].g_use = 4;
+            mlgoods[2].g_realplus = 200;
 
             strcpy_s(mlgoods[3].g_gname, "백호의 축복");
             strcpy_s(mlgoods[3].g_gdes, "백호의 힘으로 MP를 전부 회복 시켜 준다.");
             strcpy_s(mlgoods[3].g_geffect, "MAX MP");
             mlgoods[3].g_money = 7000;
+            mlgoods[3].g_use = 4;
+            mlgoods[3].g_use = yourinfo.g_maxmp;
 
             system("cls");
             cout << "★★★★★★★★★★★★★★★★렁나하 게임★★★★★★★★★★★★★★★★★★★" << endl;
