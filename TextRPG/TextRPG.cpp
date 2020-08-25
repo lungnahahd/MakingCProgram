@@ -71,6 +71,7 @@ struct g_GOODS
     int g_money;
     int g_use;
     int g_realplus;
+    bool g_put;
 
 };
 //플레이어에 대한 정보
@@ -92,6 +93,13 @@ struct g_PlayerInfo
     int g_money;
     int g_invencount;
     struct g_GOODS g_bag[BAG_SIZE];
+};
+//플레이어 장비 착용 상태 내용
+struct g_Wear
+{
+    g_GOODS g_weapon[1];
+    g_GOODS g_armor[1];
+    
 };
 //몬스터에 대한 정보
 struct g_MonsterInfo
@@ -1103,3 +1111,5 @@ int main()
     }
 
 }
+
+// 장비 사용 기능 구현하기
