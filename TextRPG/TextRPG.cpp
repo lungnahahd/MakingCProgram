@@ -373,10 +373,10 @@ int main()
                     cout << "★★★★★★★★★★★★★★★★너의 상태를 잘 살펴 보아리★★★★★★★★★★★★★★★★★★★★" << endl;
                     cout << "□□□□□□□■■■□□□□□□□□" << endl;
                     cout << "□□□□□□■■■■■□□□□□□□" << endl;
-                    cout << "□□□□□■■■■■■■□□□□□□         1. 방어구" << endl;
+                    cout << "□□□□□■■■■■■■□□□□□□         1. 무기" << endl;
                     cout << "□□□□□□■■■■■□□□□□□□" << endl;
                     cout << "□□□□□□□■■■□□□□□□□□" << endl;
-                    cout << "□□□□□□□□■□□□□□□□□□         2. 무기" << endl;
+                    cout << "□□□□□□□□■□□□□□□□□□         2. 방어구" << endl;
                     cout << "□□■■■■■■■■■■■■■■□□" << endl;
                     cout << "□□■■■■■■■■■■■■■■□□" << endl;
                     cout << "□■□■■■■■■■■■■■■□■□         3. HP 물약" << endl;
@@ -401,7 +401,7 @@ int main()
                     if (select_body == ST_EXIT) break;
                     if (select_body == ST_WEAPON) {
                         bool check_1 = false;
-                        for (int i; i < BAG_SIZE; i++) {
+                        for (int i = 0; i < BAG_SIZE; i++) {
                             if (yourinfo.g_bag[i].g_use == 1 && yourinfo.g_bag[i].g_put == true) {
                                 cout << "물건명 : " << yourinfo.g_bag[i].g_gname << endl;
                                 cout << "효과 : " << yourinfo.g_bag[i].g_geffect << endl;
@@ -421,13 +421,12 @@ int main()
                         }
                         if (!check_1) {
                             cout << "현재 장착하고 있는 장비가 존재하지 않습니다." << endl;
-                            system("pause");
                         } 
                         
                     }
                     if (select_body == ST_ARMOR) {
                         bool check_2 = false;
-                        for (int i; i < BAG_SIZE; i++) {
+                        for (int i = 0; i < BAG_SIZE; i++) {
                             if (yourinfo.g_bag[i].g_use == 2 && yourinfo.g_bag[i].g_put == true) {
                                 cout << "물건명 : " << yourinfo.g_bag[i].g_gname << endl;
                                 cout << "효과 : " << yourinfo.g_bag[i].g_geffect << endl;
@@ -446,18 +445,15 @@ int main()
                             }
                         }
                         if (!check_2) {
-                            cout >> "현재 장착하고 있는 장비가 존재하지 않습니다." << endl;
-                            system("pause");
+                            cout << "현재 장착하고 있는 장비가 존재하지 않습니다." << endl;
                         }
                     }
                     if (select_body == ST_HPLIQUID) {
-                        cout >> "해당 장비는 소비용입니다. 장착하실 수 없습니다." >> endl;
-                        system("pause");
+                        cout << "해당 장비는 소비용입니다. 장착하실 수 없습니다." << endl;
 
                     }
                     if (select_body == ST_MPLIQUID) {
-                        cout >> "해당 장비는 소비용입니다. 장착하실 수 없습니다." >> endl;
-                        system("pause");
+                        cout << "해당 장비는 소비용입니다. 장착하실 수 없습니다." << endl;
                     }
                     system("pause");
                 }
@@ -1220,7 +1216,6 @@ int main()
                                         wearing.g_weapon[1] = yourinfo.g_bag[select_bag];
                                         cout << "변경이 완료되었습니다." << endl;
                                         cout << "공격력이 " << yourinfo.g_bag[select_bag].g_realplus - wearing.g_weapon[1].g_realplus << " 만큼 변경되었습니다." << endl;
-                                        system("pause");
                                         break;
                                     }
                                     if (select_w_weapon == 2) break;
@@ -1235,7 +1230,6 @@ int main()
                                     cout << "" << endl;
                                     cout << "---------------------------------------------------------------------------------------------" << endl;
                                     cout << "공격력이 " << yourinfo.g_bag[select_bag].g_realplus << " 만큼 상승했습니다." << endl;
-                                    system("pause");
                                     break;
                                 }
                             case 2:
@@ -1253,7 +1247,6 @@ int main()
                                         wearing.g_armor[1] = yourinfo.g_bag[select_bag];
                                         cout << "변경이 완료되었습니다." << endl;
                                         cout << "방어력이 " << yourinfo.g_bag[select_bag].g_realplus - wearing.g_armor[1].g_realplus << " 만큼 변경되었습니다." << endl;
-                                        system("pause");
                                         break;
                                     }
                                     if (select_w_armor == 2) break;
@@ -1268,7 +1261,6 @@ int main()
                                     cout << "" << endl;
                                     cout << "---------------------------------------------------------------------------------------------" << endl;
                                     cout << "방어력이 " << yourinfo.g_bag[select_bag].g_realplus << " 만큼 상승했습니다." << endl;
-                                    system("pause");
                                     break;
                                 }
 
@@ -1279,7 +1271,9 @@ int main()
                                 cout << "---------------------------------------------------------------------------------------------" << endl;
                                 cout << "HP가 " << yourinfo.g_bag[select_bag].g_realplus << "만큼 상승했습니다." << endl;
                                 cout << "현재 HP : " << yourinfo.g_hp << endl;
-                                system("pause");
+                                yourinfo.g_bag[select_bag] = yourinfo.g_bag[yourinfo.g_invencount - 1];
+                                yourinfo.g_bag[yourinfo.g_invencount - 1] = trash[0];
+                                yourinfo.g_invencount--;
                                 break;
 
                                
@@ -1290,7 +1284,9 @@ int main()
                                 cout << "---------------------------------------------------------------------------------------------" << endl;
                                 cout << "MP가 " << yourinfo.g_bag[select_bag].g_realplus << "만큼 상승했습니다." << endl;
                                 cout << "현재 MP : " << yourinfo.g_hp << endl;
-                                system("pause");
+                                yourinfo.g_bag[select_bag] = yourinfo.g_bag[yourinfo.g_invencount - 1];
+                                yourinfo.g_bag[yourinfo.g_invencount - 1] = trash[0];
+                                yourinfo.g_invencount--;
                                 break;
                             default:
                                 break;
