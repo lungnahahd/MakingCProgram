@@ -1213,16 +1213,18 @@ int main()
                                     if (select_w_weapon == 1) {
                                         yourinfo.g_maxattack = yourinfo.g_maxattack - wearing.g_weapon[1].g_realplus + yourinfo.g_bag[select_bag].g_realplus;
                                         yourinfo.g_minattack = yourinfo.g_minattack - wearing.g_weapon[1].g_realplus + yourinfo.g_bag[select_bag].g_realplus;
-                                        wearing.g_weapon[1] = yourinfo.g_bag[select_bag];
                                         cout << "변경이 완료되었습니다." << endl;
                                         cout << "공격력이 " << yourinfo.g_bag[select_bag].g_realplus - wearing.g_weapon[1].g_realplus << " 만큼 변경되었습니다." << endl;
-                                        break;
+                                        wearing.g_weapon[1] = yourinfo.g_bag[select_bag];
+                                        system("pause");
+                                        continue;
                                     }
-                                    if (select_w_weapon == 2) break;
+                                    if (select_w_weapon == 2) continue;
 
                                 }
                                 else
                                 {
+                                    yourinfo.g_weapon = true;
                                     wearing.g_weapon[1] = yourinfo.g_bag[select_bag];
                                     yourinfo.g_maxattack = yourinfo.g_maxattack + yourinfo.g_bag[select_bag].g_realplus;
                                     yourinfo.g_minattack = yourinfo.g_minattack + yourinfo.g_bag[select_bag].g_realplus;
@@ -1230,7 +1232,8 @@ int main()
                                     cout << "" << endl;
                                     cout << "---------------------------------------------------------------------------------------------" << endl;
                                     cout << "공격력이 " << yourinfo.g_bag[select_bag].g_realplus << " 만큼 상승했습니다." << endl;
-                                    break;
+                                    system("pause");
+                                    continue;
                                 }
                             case 2:
                                 if (yourinfo.g_armor) {
@@ -1244,16 +1247,18 @@ int main()
                                     if (select_w_armor == 1) {
                                         yourinfo.g_maxdef = yourinfo.g_maxdef - wearing.g_armor[1].g_realplus + yourinfo.g_bag[select_bag].g_realplus;
                                         yourinfo.g_mindef = yourinfo.g_mindef - wearing.g_armor[1].g_realplus + yourinfo.g_bag[select_bag].g_realplus;
-                                        wearing.g_armor[1] = yourinfo.g_bag[select_bag];
                                         cout << "변경이 완료되었습니다." << endl;
                                         cout << "방어력이 " << yourinfo.g_bag[select_bag].g_realplus - wearing.g_armor[1].g_realplus << " 만큼 변경되었습니다." << endl;
-                                        break;
+                                        wearing.g_armor[1] = yourinfo.g_bag[select_bag];
+                                        system("pause");
+                                        continue;
                                     }
-                                    if (select_w_armor == 2) break;
+                                    if (select_w_armor == 2) continue;
 
                                 }
                                 else
                                 {
+                                    yourinfo.g_armor = true;
                                     wearing.g_armor[1] = yourinfo.g_bag[select_bag];
                                     yourinfo.g_maxdef = yourinfo.g_maxdef + yourinfo.g_bag[select_bag].g_realplus;
                                     yourinfo.g_mindef = yourinfo.g_mindef + yourinfo.g_bag[select_bag].g_realplus;
@@ -1261,7 +1266,8 @@ int main()
                                     cout << "" << endl;
                                     cout << "---------------------------------------------------------------------------------------------" << endl;
                                     cout << "방어력이 " << yourinfo.g_bag[select_bag].g_realplus << " 만큼 상승했습니다." << endl;
-                                    break;
+                                    system("pause");
+                                    continue;
                                 }
 
                             case 3:
@@ -1274,7 +1280,8 @@ int main()
                                 yourinfo.g_bag[select_bag] = yourinfo.g_bag[yourinfo.g_invencount - 1];
                                 yourinfo.g_bag[yourinfo.g_invencount - 1] = trash[0];
                                 yourinfo.g_invencount--;
-                                break;
+                                system("pause");
+                                continue;
 
                                
                             case 4:
@@ -1287,7 +1294,10 @@ int main()
                                 yourinfo.g_bag[select_bag] = yourinfo.g_bag[yourinfo.g_invencount - 1];
                                 yourinfo.g_bag[yourinfo.g_invencount - 1] = trash[0];
                                 yourinfo.g_invencount--;
-                                break;
+                                system("pause");
+                                continue;
+                            
+                            
                             default:
                                 break;
                             }
@@ -1300,7 +1310,6 @@ int main()
                         }
                          
                     }
-
                     system("pause");
                 }
             }
