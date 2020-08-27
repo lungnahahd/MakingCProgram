@@ -4,7 +4,7 @@
 #include <conio.h>
 #define NAME_SIZE  32
 #define DESCRIPTION 1024
-#define BAG_SIZE 30
+#define BAG_SIZE 10
 #define SWAP (a,b,type) do{type temp; temp = a; a = b; b = temp;} while(0)
 
 using namespace std;
@@ -93,15 +93,17 @@ struct g_PlayerInfo
     int g_level;
     int g_money;
     int g_invencount;
+    int g_liquidcount;
     struct g_GOODS g_bag[BAG_SIZE];
+    g_GOODS g_liquid[BAG_SIZE];
     bool g_weapon = false;
     bool g_armor = false;
 };
 //플레이어 장비 착용 상태 내용
 struct g_Wear
 {
-    g_GOODS g_weapon[1];
-    g_GOODS g_armor[1];
+    g_GOODS g_weapon[BAG_SIZE];
+    g_GOODS g_armor[BAG_SIZE];
     
 };
 //몬스터에 대한 정보
@@ -659,12 +661,12 @@ int main()
                                 cout << "현재 보유하신 렁머니로는 해당 물건을 구입할 수 없습니다." << endl;
                                 cout << "전투를 통해 렁머니를 벌어서 다시 찾아주시기 바랍니다." << endl;
                             }
-                            else if (yourinfo.g_invencount == 30)
+                            else if (yourinfo.g_invencount == 10)
                             {
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★청룡의 방★★★★★★★★★★★★★★★★★★★★" << endl;
-                                cout << "안타깝지만 가방에 크기가 가득차서 구매를 하실 수 없습니다." << endl;
-                                cout << "가방을 비워주시고 다시 찾아주시기 바랍니다." << endl;
+                                cout << "안타깝지만 무기 가방에 크기가 가득차서 구매를 하실 수 없습니다." << endl;
+                                cout << "무기 가방을 비워주시고 다시 찾아주시기 바랍니다." << endl;
                             }
                             else
                             {
@@ -675,7 +677,7 @@ int main()
                                 cout << "★★★★★★★★★★★★★★★★청룡의 방★★★★★★★★★★★★★★★★★★★★" << endl;
                                 cout << "문제 없이" << wgoods[1].g_gname << "을 구입하였습니다." << endl;
                                 cout << "현재 남은 잔액 : " << yourinfo.g_money << " 렁머니" << endl;
-                                cout << "용사님의 가방 상황 : " << yourinfo.g_invencount << " / 30" << endl;
+                                cout << "용사님의 무기 가방 상황 : " << yourinfo.g_invencount << " / 10" << endl;
                             }
                             system("pause");
                             break;
@@ -687,12 +689,12 @@ int main()
                                 cout << "현재 보유하신 렁머니로는 해당 물건을 구입할 수 없습니다." << endl;
                                 cout << "전투를 통해 렁머니를 벌어서 다시 찾아주시기 바랍니다." << endl;
                             }
-                            else if (yourinfo.g_invencount == 30)
+                            else if (yourinfo.g_invencount == 10)
                             {
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★청룡의 방★★★★★★★★★★★★★★★★★★★★" << endl;
-                                cout << "안타깝지만 가방에 크기가 가득차서 구매를 하실 수 없습니다." << endl;
-                                cout << "가방을 비워주시고 다시 찾아주시기 바랍니다." << endl;
+                                cout << "안타깝지만 무기 가방에 크기가 가득차서 구매를 하실 수 없습니다." << endl;
+                                cout << "무기 가방을 비워주시고 다시 찾아주시기 바랍니다." << endl;
                             }
                             else
                             {
@@ -703,7 +705,7 @@ int main()
                                 cout << "★★★★★★★★★★★★★★★★청룡의 방★★★★★★★★★★★★★★★★★★★★" << endl;
                                 cout << "문제 없이" << wgoods[2].g_gname << "을 구입하였습니다." << endl;
                                 cout << "현재 남은 잔액 : " << yourinfo.g_money << " 렁머니" << endl;
-                                cout << "용사님의 가방 상황 : " << yourinfo.g_invencount << " / 30" << endl;
+                                cout << "용사님의 무기 가방 상황 : " << yourinfo.g_invencount << " / 10" << endl;
                             }
                             system("pause");
                             break;
@@ -715,12 +717,12 @@ int main()
                                 cout << "현재 보유하신 렁머니로는 해당 물건을 구입할 수 없습니다." << endl;
                                 cout << "전투를 통해 렁머니를 벌어서 다시 찾아주시기 바랍니다." << endl;
                             }
-                            else if (yourinfo.g_invencount == 30)
+                            else if (yourinfo.g_invencount == 10)
                             {
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★청룡의 방★★★★★★★★★★★★★★★★★★★★" << endl;
-                                cout << "안타깝지만 가방에 크기가 가득차서 구매를 하실 수 없습니다." << endl;
-                                cout << "가방을 비워주시고 다시 찾아주시기 바랍니다." << endl;
+                                cout << "안타깝지만 무기 가방에 크기가 가득차서 구매를 하실 수 없습니다." << endl;
+                                cout << "무기 가방을 비워주시고 다시 찾아주시기 바랍니다." << endl;
                             }
                             else
                             {
@@ -731,7 +733,7 @@ int main()
                                 cout << "★★★★★★★★★★★★★★★★청룡의 방★★★★★★★★★★★★★★★★★★★★" << endl;
                                 cout << "문제 없이" << wgoods[3].g_gname << "을 구입하였습니다." << endl;
                                 cout << "현재 남은 잔액 : " << yourinfo.g_money << " 렁머니" << endl;
-                                cout << "용사님의 가방 상황 : " << yourinfo.g_invencount << " / 30" << endl;
+                                cout << "용사님의 무기 가방 상황 : " << yourinfo.g_invencount << " / 10" << endl;
                             }
                             system("pause");
                             break;
@@ -786,12 +788,12 @@ int main()
                                 cout << "현재 보유하신 렁머니로는 해당 물건을 구입할 수 없습니다." << endl;
                                 cout << "전투를 통해 렁머니를 벌어서 다시 찾아주시기 바랍니다." << endl;
                             }
-                            else if (yourinfo.g_invencount == 30)
+                            else if (yourinfo.g_invencount == 10)
                             {
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★현무의 방★★★★★★★★★★★★★★★★★★★★" << endl;
-                                cout << "안타깝지만 가방에 크기가 가득차서 구매를 하실 수 없습니다." << endl;
-                                cout << "가방을 비워주시고 다시 찾아주시기 바랍니다." << endl;
+                                cout << "안타깝지만 무기 가방에 크기가 가득차서 구매를 하실 수 없습니다." << endl;
+                                cout << "무기 가방을 비워주시고 다시 찾아주시기 바랍니다." << endl;
                             }
                             else
                             {
@@ -802,7 +804,7 @@ int main()
                                 cout << "★★★★★★★★★★★★★★★★현무의 방★★★★★★★★★★★★★★★★★★★★" << endl;
                                 cout << "문제 없이" << agoods[1].g_gname << "을 구입하였습니다." << endl;
                                 cout << "현재 남은 잔액 : " << yourinfo.g_money << " 렁머니" << endl;
-                                cout << "용사님의 가방 상황 : " << yourinfo.g_invencount << " / 30" << endl;
+                                cout << "용사님의 무기 가방 상황 : " << yourinfo.g_invencount << " / 10" << endl;
                             }
                             system("pause");
                             break;
@@ -814,12 +816,12 @@ int main()
                                 cout << "현재 보유하신 렁머니로는 해당 물건을 구입할 수 없습니다." << endl;
                                 cout << "전투를 통해 렁머니를 벌어서 다시 찾아주시기 바랍니다." << endl;
                             }
-                            else if (yourinfo.g_invencount == 30)
+                            else if (yourinfo.g_invencount == 10)
                             {
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★현무의 방★★★★★★★★★★★★★★★★★★★★" << endl;
-                                cout << "안타깝지만 가방에 크기가 가득차서 구매를 하실 수 없습니다." << endl;
-                                cout << "가방을 비워주시고 다시 찾아주시기 바랍니다." << endl;
+                                cout << "안타깝지만 무기 가방에 크기가 가득차서 구매를 하실 수 없습니다." << endl;
+                                cout << "무기 가방을 비워주시고 다시 찾아주시기 바랍니다." << endl;
                             }
                             else
                             {
@@ -830,7 +832,7 @@ int main()
                                 cout << "★★★★★★★★★★★★★★★★현무의 방★★★★★★★★★★★★★★★★★★★★" << endl;
                                 cout << "문제 없이" << agoods[2].g_gname << "을 구입하였습니다." << endl;
                                 cout << "현재 남은 잔액 : " << yourinfo.g_money << " 렁머니" << endl;
-                                cout << "용사님의 가방 상황 : " << yourinfo.g_invencount << " / 30" << endl;
+                                cout << "용사님의 가방 상황 : " << yourinfo.g_invencount << " / 10" << endl;
                             }
                             system("pause");
                             break;
@@ -842,12 +844,12 @@ int main()
                                 cout << "현재 보유하신 렁머니로는 해당 물건을 구입할 수 없습니다." << endl;
                                 cout << "전투를 통해 렁머니를 벌어서 다시 찾아주시기 바랍니다." << endl;
                             }
-                            else if (yourinfo.g_invencount == 30)
+                            else if (yourinfo.g_invencount == 10)
                             {
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★현무의 방★★★★★★★★★★★★★★★★★★★★" << endl;
-                                cout << "안타깝지만 가방에 크기가 가득차서 구매를 하실 수 없습니다." << endl;
-                                cout << "가방을 비워주시고 다시 찾아주시기 바랍니다." << endl;
+                                cout << "안타깝지만 무기 가방에 크기가 가득차서 구매를 하실 수 없습니다." << endl;
+                                cout << "무기 가방을 비워주시고 다시 찾아주시기 바랍니다." << endl;
                             }
                             else
                             {
@@ -858,7 +860,7 @@ int main()
                                 cout << "★★★★★★★★★★★★★★★★현무의 방★★★★★★★★★★★★★★★★★★★★" << endl;
                                 cout << "문제 없이" << agoods[3].g_gname << "을 구입하였습니다." << endl;
                                 cout << "현재 남은 잔액 : " << yourinfo.g_money << " 렁머니" << endl;
-                                cout << "용사님의 가방 상황 : " << yourinfo.g_invencount << " / 30" << endl;
+                                cout << "용사님의 무기 가방 상황 : " << yourinfo.g_invencount << " / 10" << endl;
                             }
                             system("pause");
                             break;
@@ -914,23 +916,23 @@ int main()
                                 cout << "현재 보유하신 렁머니로는 해당 물건을 구입할 수 없습니다." << endl;
                                 cout << "전투를 통해 렁머니를 벌어서 다시 찾아주시기 바랍니다." << endl;
                             }
-                            else if (yourinfo.g_invencount == 30)
+                            else if (yourinfo.g_liquidcount == 10)
                             {
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★주작의 방★★★★★★★★★★★★★★★★★★★★" << endl;
-                                cout << "안타깝지만 가방에 크기가 가득차서 구매를 하실 수 없습니다." << endl;
-                                cout << "가방을 비워주시고 다시 찾아주시기 바랍니다." << endl;
+                                cout << "안타깝지만 물약 가방에 크기가 가득차서 구매를 하실 수 없습니다." << endl;
+                                cout << "물약 가방을 비워주시고 다시 찾아주시기 바랍니다." << endl;
                             }
                             else
                             {
                                 yourinfo.g_money = yourinfo.g_money - hlgoods[1].g_money;
-                                yourinfo.g_bag[yourinfo.g_invencount] = hlgoods[1];
-                                yourinfo.g_invencount++;
+                                yourinfo.g_liquid[yourinfo.g_liquidcount] = hlgoods[1];
+                                yourinfo.g_liquidcount++;
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★주작의 방★★★★★★★★★★★★★★★★★★★★" << endl;
                                 cout << "문제 없이" << hlgoods[1].g_gname << "을 구입하였습니다." << endl;
                                 cout << "현재 남은 잔액 : " << yourinfo.g_money << " 렁머니" << endl;
-                                cout << "용사님의 가방 상황 : " << yourinfo.g_invencount << " / 30" << endl;
+                                cout << "용사님의 물약 가방 상황 : " << yourinfo.g_liquidcount << " / 10" << endl;
                             }
                             system("pause");
                             break;
@@ -942,23 +944,23 @@ int main()
                                 cout << "현재 보유하신 렁머니로는 해당 물건을 구입할 수 없습니다." << endl;
                                 cout << "전투를 통해 렁머니를 벌어서 다시 찾아주시기 바랍니다." << endl;
                             }
-                            else if (yourinfo.g_invencount == 30)
+                            else if (yourinfo.g_liquidcount == 10)
                             {
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★주작의 방★★★★★★★★★★★★★★★★★★★★" << endl;
-                                cout << "안타깝지만 가방에 크기가 가득차서 구매를 하실 수 없습니다." << endl;
-                                cout << "가방을 비워주시고 다시 찾아주시기 바랍니다." << endl;
+                                cout << "안타깝지만 물약 가방에 크기가 가득차서 구매를 하실 수 없습니다." << endl;
+                                cout << "물약 가방을 비워주시고 다시 찾아주시기 바랍니다." << endl;
                             }
                             else
                             {
                                 yourinfo.g_money = yourinfo.g_money - hlgoods[2].g_money;
-                                yourinfo.g_bag[yourinfo.g_invencount] = hlgoods[2];
-                                yourinfo.g_invencount++;
+                                yourinfo.g_liquid[yourinfo.g_liquidcount] = hlgoods[2];
+                                yourinfo.g_liquidcount++;
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★주작의 방★★★★★★★★★★★★★★★★★★★★" << endl;
                                 cout << "문제 없이" << hlgoods[2].g_gname << "을 구입하였습니다." << endl;
                                 cout << "현재 남은 잔액 : " << yourinfo.g_money << " 렁머니" << endl;
-                                cout << "용사님의 가방 상황 : " << yourinfo.g_invencount << " / 30" << endl;
+                                cout << "용사님의 물약 가방 상황 : " << yourinfo.g_liquidcount << " / 10" << endl;
                             }
                             system("pause");
                             break;
@@ -970,23 +972,23 @@ int main()
                                 cout << "현재 보유하신 렁머니로는 해당 물건을 구입할 수 없습니다." << endl;
                                 cout << "전투를 통해 렁머니를 벌어서 다시 찾아주시기 바랍니다." << endl;
                             }
-                            else if (yourinfo.g_invencount == 30)
+                            else if (yourinfo.g_liquidcount == 10)
                             {
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★주작의 방★★★★★★★★★★★★★★★★★★★★" << endl;
-                                cout << "안타깝지만 가방에 크기가 가득차서 구매를 하실 수 없습니다." << endl;
-                                cout << "가방을 비워주시고 다시 찾아주시기 바랍니다." << endl;
+                                cout << "안타깝지만 물약 가방에 크기가 가득차서 구매를 하실 수 없습니다." << endl;
+                                cout << "물약 가방을 비워주시고 다시 찾아주시기 바랍니다." << endl;
                             }
                             else
                             {
                                 yourinfo.g_money = yourinfo.g_money - hlgoods[3].g_money;
-                                yourinfo.g_bag[yourinfo.g_invencount] = hlgoods[3];
-                                yourinfo.g_invencount++;
+                                yourinfo.g_liquid[yourinfo.g_liquidcount] = hlgoods[3];
+                                yourinfo.g_liquidcount++;
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★주작의 방★★★★★★★★★★★★★★★★★★★★" << endl;
                                 cout << "문제 없이" << hlgoods[3].g_gname << "을 구입하였습니다." << endl;
                                 cout << "현재 남은 잔액 : " << yourinfo.g_money << " 렁머니" << endl;
-                                cout << "용사님의 가방 상황 : " << yourinfo.g_invencount << " / 30" << endl;
+                                cout << "용사님의 가방 상황 : " << yourinfo.g_liquidcount << " / 10" << endl;
                             }
                             system("pause");
                             break;
@@ -1041,23 +1043,23 @@ int main()
                                 cout << "현재 보유하신 렁머니로는 해당 물건을 구입할 수 없습니다." << endl;
                                 cout << "전투를 통해 렁머니를 벌어서 다시 찾아주시기 바랍니다." << endl;
                             }
-                            else if (yourinfo.g_invencount == 30)
+                            else if (yourinfo.g_liquidcount == 10)
                             {
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★백호의 방★★★★★★★★★★★★★★★★★★★★" << endl;
-                                cout << "안타깝지만 가방에 크기가 가득차서 구매를 하실 수 없습니다." << endl;
-                                cout << "가방을 비워주시고 다시 찾아주시기 바랍니다." << endl;
+                                cout << "안타깝지만 물약 가방에 크기가 가득차서 구매를 하실 수 없습니다." << endl;
+                                cout << "물약 가방을 비워주시고 다시 찾아주시기 바랍니다." << endl;
                             }
                             else
                             {
                                 yourinfo.g_money = yourinfo.g_money - mlgoods[1].g_money;
-                                yourinfo.g_bag[yourinfo.g_invencount] = mlgoods[1];
-                                yourinfo.g_invencount++;
+                                yourinfo.g_liquid[yourinfo.g_liquidcount] = mlgoods[1];
+                                yourinfo.g_liquidcount++;
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★백호의 방★★★★★★★★★★★★★★★★★★★★" << endl;
                                 cout << "문제 없이" << mlgoods[1].g_gname << "을 구입하였습니다." << endl;
                                 cout << "현재 남은 잔액 : " << yourinfo.g_money << " 렁머니" << endl;
-                                cout << "용사님의 가방 상황 : " << yourinfo.g_invencount << " / 30" << endl;
+                                cout << "용사님의 물약 가방 상황 : " << yourinfo.g_liquidcount << " / 10" << endl;
                             }
                             system("pause");
                             break;
@@ -1069,23 +1071,23 @@ int main()
                                 cout << "현재 보유하신 렁머니로는 해당 물건을 구입할 수 없습니다." << endl;
                                 cout << "전투를 통해 렁머니를 벌어서 다시 찾아주시기 바랍니다." << endl;
                             }
-                            else if (yourinfo.g_invencount == 30)
+                            else if (yourinfo.g_liquidcount == 10)
                             {
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★백호의 방★★★★★★★★★★★★★★★★★★★★" << endl;
-                                cout << "안타깝지만 가방에 크기가 가득차서 구매를 하실 수 없습니다." << endl;
-                                cout << "가방을 비워주시고 다시 찾아주시기 바랍니다." << endl;
+                                cout << "안타깝지만 물약 가방에 크기가 가득차서 구매를 하실 수 없습니다." << endl;
+                                cout << "물약 가방을 비워주시고 다시 찾아주시기 바랍니다." << endl;
                             }
                             else
                             {
                                 yourinfo.g_money = yourinfo.g_money - mlgoods[2].g_money;
-                                yourinfo.g_bag[yourinfo.g_invencount] = mlgoods[2];
-                                yourinfo.g_invencount++;
+                                yourinfo.g_liquid[yourinfo.g_liquidcount] = mlgoods[2];
+                                yourinfo.g_liquidcount++;
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★백호의 방★★★★★★★★★★★★★★★★★★★★" << endl;
                                 cout << "문제 없이" << mlgoods[2].g_gname << "을 구입하였습니다." << endl;
                                 cout << "현재 남은 잔액 : " << yourinfo.g_money << " 렁머니" << endl;
-                                cout << "용사님의 가방 상황 : " << yourinfo.g_invencount << " / 30" << endl;
+                                cout << "용사님의 가방 상황 : " << yourinfo.g_liquidcount << " / 10" << endl;
                             }
                             system("pause");
                             break;
@@ -1101,19 +1103,19 @@ int main()
                             {
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★백호의 방★★★★★★★★★★★★★★★★★★★★" << endl;
-                                cout << "안타깝지만 가방에 크기가 가득차서 구매를 하실 수 없습니다." << endl;
-                                cout << "가방을 비워주시고 다시 찾아주시기 바랍니다." << endl;
+                                cout << "안타깝지만 물약 가방에 크기가 가득차서 구매를 하실 수 없습니다." << endl;
+                                cout << "물약 가방을 비워주시고 다시 찾아주시기 바랍니다." << endl;
                             }
                             else
                             {
                                 yourinfo.g_money = yourinfo.g_money - mlgoods[3].g_money;
-                                yourinfo.g_bag[yourinfo.g_invencount] = mlgoods[3];
-                                yourinfo.g_invencount++;
+                                yourinfo.g_liquid[yourinfo.g_liquidcount] = mlgoods[3];
+                                yourinfo.g_liquidcount++;
                                 system("cls");
                                 cout << "★★★★★★★★★★★★★★★★백호의 방★★★★★★★★★★★★★★★★★★★★" << endl;
                                 cout << "문제 없이" << mlgoods[3].g_gname << "을 구입하였습니다." << endl;
                                 cout << "현재 남은 잔액 : " << yourinfo.g_money << " 렁머니" << endl;
-                                cout << "용사님의 가방 상황 : " << yourinfo.g_invencount << " / 30" << endl;
+                                cout << "용사님의 물약 가방 상황 : " << yourinfo.g_liquidcount << " / 10" << endl;
                             }
                             system("pause");
                             break;
@@ -1129,193 +1131,258 @@ int main()
             }
             if (main_select == MAM_INVENTORY)
             {
-                while (true) 
-                {   
-                    int select_bag;
+                while (true)
+                {
                     system("cls");
-                    cout << "★★★★★★★★★★★★★★★★용사님의 가방★★★★★★★★★★★★★★★★★★★★" << '\t' << "공간 :" << yourinfo.g_invencount << " / 30" << endl;
-                    cout << "각 품목의 설명을 보려면 각 물건의 번호를 입력하시오." << endl;
-                    cout << "가방을 그만 보려면 0번을 눌러 주세요." << endl;
-                    cout << "---------------------------------------------------------------------------------------------" << endl;
-                    cout << "01." << yourinfo.g_bag[0].g_gname << endl;
-                    cout << "02." << yourinfo.g_bag[1].g_gname << endl;
-                    cout << "03." << yourinfo.g_bag[2].g_gname << endl; 
-                    cout << "04." << yourinfo.g_bag[3].g_gname << endl;
-                    cout << "05." << yourinfo.g_bag[4].g_gname << endl; 
-                    cout << "06." << yourinfo.g_bag[5].g_gname << endl;
-                    cout << "07." << yourinfo.g_bag[6].g_gname << endl; 
-                    cout << "08." << yourinfo.g_bag[7].g_gname << endl;
-                    cout << "09." << yourinfo.g_bag[8].g_gname << endl; 
-                    cout << "10." << yourinfo.g_bag[9].g_gname << endl;
-                    cout << "11." << yourinfo.g_bag[10].g_gname << endl; 
-                    cout << "12." << yourinfo.g_bag[11].g_gname << endl;
-                    cout << "13." << yourinfo.g_bag[12].g_gname << endl; 
-                    cout << "14." << yourinfo.g_bag[13].g_gname << endl;
-                    cout << "15." << yourinfo.g_bag[14].g_gname << endl; 
-                    cout << "16." << yourinfo.g_bag[15].g_gname << endl;
-                    cout << "17." << yourinfo.g_bag[16].g_gname << endl; 
-                    cout << "18." << yourinfo.g_bag[17].g_gname << endl;
-                    cout << "19." << yourinfo.g_bag[18].g_gname << endl; 
-                    cout << "20." << yourinfo.g_bag[19].g_gname << endl;
-                    cout << "21." << yourinfo.g_bag[20].g_gname << endl; 
-                    cout << "22." << yourinfo.g_bag[21].g_gname << endl;
-                    cout << "23." << yourinfo.g_bag[22].g_gname << endl; 
-                    cout << "24." << yourinfo.g_bag[23].g_gname << endl;
-                    cout << "25." << yourinfo.g_bag[24].g_gname << endl; 
-                    cout << "26." << yourinfo.g_bag[25].g_gname << endl;
-                    cout << "27." << yourinfo.g_bag[26].g_gname << endl; 
-                    cout << "28." << yourinfo.g_bag[27].g_gname << endl;
-                    cout << "29." << yourinfo.g_bag[28].g_gname << endl; 
-                    cout << "30." << yourinfo.g_bag[29].g_gname << endl;
-                    cout << "---------------------------------------------------------------------------------------------" << endl;
-                    cout << "확인하고 싶은 번호를 입력해주시기 바랍니다.(0번은 가방 닫기) : ";
-                    cin >> select_bag;
-                    if (cin.fail())
-                    {
-                        cin.clear();
-                        cin.ignore(1024, '\n');
-                        continue;
-                    }
-                    select_bag--;
-                    if (select_bag == -1) break;
-                    else {
-                        g_GOODS trash[BAG_SIZE] = {};
-                        system("cls");
-                        cout << "물건명 : " << yourinfo.g_bag[select_bag].g_gname << endl;
-                        cout << "효과 : " << yourinfo.g_bag[select_bag].g_geffect << endl;
-                        cout << "설명 : " << yourinfo.g_bag[select_bag].g_gdes << endl;
-                        cout << "---------------------------------------------------------------------------------------------" << endl;
-                        cout << "1. 나가기" << endl;
-                        cout << "2. 물건 사용(장착)하기" << endl;
-                        cout << "3. 물건 기부하기"<<endl;
-                        int select_item;
-                        cin >> select_item;
-                        if (cin.fail())
+                    cout << "★★★★★★★★★★★★★★★★용사님의 가방★★★★★★★★★★★★★★★★★★★★" << endl;
+                    cout << "1. 무기 가방 ( " << yourinfo.g_invencount << " / 10 )" << endl;
+                    cout << "2. 물약 가방 ( " << yourinfo.g_liquidcount << " / 10 )" << endl;
+                    cout << "3. 나가기" << endl;
+                    int select_kind;
+                    cin >> select_kind;
+                    cout << "" << endl;
+                    if (select_kind == 3) break;
+
+                    if (select_kind == 1) {
+                        while (true)
                         {
-                            cin.clear();
-                            cin.ignore(1024, '\n');
-                            continue;
-                        }
-                        if (select_item == 1) continue;
-                        else if(select_item == 2)
-                        {
-                            switch (yourinfo.g_bag[select_bag].g_use)
+                            int select_bag;
+                            system("cls");
+                            cout << "★★★★★★★★★★★★★★★★용사님의 무기 가방★★★★★★★★★★★★★★★★★★★★" << '\t' << "공간 :" << yourinfo.g_invencount << " / 10" << endl;
+                            cout << "각 품목의 설명을 보려면 각 물건의 번호를 입력하시오." << endl;
+                            cout << "가방을 그만 보려면 0번을 눌러 주세요." << endl;
+                            cout << "---------------------------------------------------------------------------------------------" << endl;
+                            cout << "01." << yourinfo.g_bag[0].g_gname << endl;
+                            cout << "02." << yourinfo.g_bag[1].g_gname << endl;
+                            cout << "03." << yourinfo.g_bag[2].g_gname << endl;
+                            cout << "04." << yourinfo.g_bag[3].g_gname << endl;
+                            cout << "05." << yourinfo.g_bag[4].g_gname << endl;
+                            cout << "06." << yourinfo.g_bag[5].g_gname << endl;
+                            cout << "07." << yourinfo.g_bag[6].g_gname << endl;
+                            cout << "08." << yourinfo.g_bag[7].g_gname << endl;
+                            cout << "09." << yourinfo.g_bag[8].g_gname << endl;
+                            cout << "10." << yourinfo.g_bag[9].g_gname << endl;
+                            cout << "---------------------------------------------------------------------------------------------" << endl;
+                            cout << "확인하고 싶은 번호를 입력해주시기 바랍니다.(0번은 가방 닫기) : ";
+                            cin >> select_bag;
+                            if (cin.fail())
                             {
-                            case 1:
-                                if (yourinfo.g_weapon) {
-                                    cout << "" << endl;
-                                    cout << "---------------------------------------------------------------------------------------------" << endl;
-                                    cout << "이미 착용중인 장비가 있습니다." << endl;
-                                    cout << "1. 현재 장비로 바꾸기" << endl;
-                                    cout << "2. 변경사항 없이 나가기" << endl;
-                                    int select_w_weapon;
-                                    cin >> select_w_weapon;
-                                    if (select_w_weapon == 1) {
-                                        yourinfo.g_maxattack = yourinfo.g_maxattack - wearing.g_weapon[1].g_realplus + yourinfo.g_bag[select_bag].g_realplus;
-                                        yourinfo.g_minattack = yourinfo.g_minattack - wearing.g_weapon[1].g_realplus + yourinfo.g_bag[select_bag].g_realplus;
-                                        cout << "변경이 완료되었습니다." << endl;
-                                        cout << "공격력이 " << yourinfo.g_bag[select_bag].g_realplus - wearing.g_weapon[1].g_realplus << " 만큼 변경되었습니다." << endl;
-                                        wearing.g_weapon[1] = yourinfo.g_bag[select_bag];
-                                        system("pause");
-                                        continue;
-                                    }
-                                    if (select_w_weapon == 2) continue;
-
-                                }
-                                else
-                                {
-                                    yourinfo.g_weapon = true;
-                                    wearing.g_weapon[1] = yourinfo.g_bag[select_bag];
-                                    yourinfo.g_maxattack = yourinfo.g_maxattack + yourinfo.g_bag[select_bag].g_realplus;
-                                    yourinfo.g_minattack = yourinfo.g_minattack + yourinfo.g_bag[select_bag].g_realplus;
-                                    yourinfo.g_bag[select_bag].g_put = true;
-                                    cout << "" << endl;
-                                    cout << "---------------------------------------------------------------------------------------------" << endl;
-                                    cout << "공격력이 " << yourinfo.g_bag[select_bag].g_realplus << " 만큼 상승했습니다." << endl;
-                                    system("pause");
-                                    continue;
-                                }
-                            case 2:
-                                if (yourinfo.g_armor) {
-                                    cout << "" << endl;
-                                    cout << "---------------------------------------------------------------------------------------------" << endl;
-                                    cout << "이미 착용중인 장비가 있습니다." << endl;
-                                    cout << "1. 현재 장비로 바꾸기" << endl;
-                                    cout << "2. 변경사항 없이 나가기" << endl;
-                                    int select_w_armor;
-                                    cin >> select_w_armor;
-                                    if (select_w_armor == 1) {
-                                        yourinfo.g_maxdef = yourinfo.g_maxdef - wearing.g_armor[1].g_realplus + yourinfo.g_bag[select_bag].g_realplus;
-                                        yourinfo.g_mindef = yourinfo.g_mindef - wearing.g_armor[1].g_realplus + yourinfo.g_bag[select_bag].g_realplus;
-                                        cout << "변경이 완료되었습니다." << endl;
-                                        cout << "방어력이 " << yourinfo.g_bag[select_bag].g_realplus - wearing.g_armor[1].g_realplus << " 만큼 변경되었습니다." << endl;
-                                        wearing.g_armor[1] = yourinfo.g_bag[select_bag];
-                                        system("pause");
-                                        continue;
-                                    }
-                                    if (select_w_armor == 2) continue;
-
-                                }
-                                else
-                                {
-                                    yourinfo.g_armor = true;
-                                    wearing.g_armor[1] = yourinfo.g_bag[select_bag];
-                                    yourinfo.g_maxdef = yourinfo.g_maxdef + yourinfo.g_bag[select_bag].g_realplus;
-                                    yourinfo.g_mindef = yourinfo.g_mindef + yourinfo.g_bag[select_bag].g_realplus;
-                                    yourinfo.g_bag[select_bag].g_put = true;
-                                    cout << "" << endl;
-                                    cout << "---------------------------------------------------------------------------------------------" << endl;
-                                    cout << "방어력이 " << yourinfo.g_bag[select_bag].g_realplus << " 만큼 상승했습니다." << endl;
-                                    system("pause");
-                                    continue;
-                                }
-
-                            case 3:
-                                yourinfo.g_hp = yourinfo.g_hp + yourinfo.g_bag[select_bag].g_realplus;
-                                if (yourinfo.g_hp > yourinfo.g_maxhp) yourinfo.g_hp = yourinfo.g_maxhp;
-                                cout << "" << endl;
-                                cout << "---------------------------------------------------------------------------------------------" << endl;
-                                cout << "HP가 " << yourinfo.g_bag[select_bag].g_realplus << "만큼 상승했습니다." << endl;
-                                cout << "현재 HP : " << yourinfo.g_hp << endl;
-                                yourinfo.g_bag[select_bag] = yourinfo.g_bag[yourinfo.g_invencount - 1];
-                                yourinfo.g_bag[yourinfo.g_invencount - 1] = trash[0];
-                                yourinfo.g_invencount--;
-                                system("pause");
+                                cin.clear();
+                                cin.ignore(1024, '\n');
                                 continue;
-
-                               
-                            case 4:
-                                yourinfo.g_mp = yourinfo.g_mp + yourinfo.g_bag[select_bag].g_realplus;
-                                if (yourinfo.g_mp > yourinfo.g_maxmp) yourinfo.g_mp = yourinfo.g_maxmp;
-                                cout << "" << endl;
-                                cout << "---------------------------------------------------------------------------------------------" << endl;
-                                cout << "MP가 " << yourinfo.g_bag[select_bag].g_realplus << "만큼 상승했습니다." << endl;
-                                cout << "현재 MP : " << yourinfo.g_hp << endl;
-                                yourinfo.g_bag[select_bag] = yourinfo.g_bag[yourinfo.g_invencount - 1];
-                                yourinfo.g_bag[yourinfo.g_invencount - 1] = trash[0];
-                                yourinfo.g_invencount--;
-                                system("pause");
-                                continue;
-                            
-                            
-                            default:
-                                break;
                             }
+                            select_bag--;
+                            if (select_bag == -1) break;
+                            else {
+                                g_GOODS trash[BAG_SIZE] = {};
+                                system("cls");
+                                cout << "물건명 : " << yourinfo.g_bag[select_bag].g_gname << endl;
+                                cout << "효과 : " << yourinfo.g_bag[select_bag].g_geffect << endl;
+                                cout << "설명 : " << yourinfo.g_bag[select_bag].g_gdes << endl;
+                                cout << "---------------------------------------------------------------------------------------------" << endl;
+                                cout << "1. 나가기" << endl;
+                                cout << "2. 물건 장착하기" << endl;
+                                cout << "3. 물건 기부하기" << endl;
+                                int select_item;
+                                cin >> select_item;
+                                if (cin.fail())
+                                {
+                                    cin.clear();
+                                    cin.ignore(1024, '\n');
+                                    continue;
+                                }
+                                if (select_item == 1) continue;
+                                else if (select_item == 2)
+                                {
+                                    switch (yourinfo.g_bag[select_bag].g_use)
+                                    {
+                                    case 1:
+                                        if (yourinfo.g_weapon) {
+                                            cout << "" << endl;
+                                            cout << "---------------------------------------------------------------------------------------------" << endl;
+                                            cout << "이미 착용중인 장비가 있습니다." << endl;
+                                            cout << "1. 현재 장비로 바꾸기" << endl;
+                                            cout << "2. 변경사항 없이 나가기" << endl;
+                                            int select_w_weapon;
+                                            cin >> select_w_weapon;
+                                            if (select_w_weapon == 1) {
+                                                yourinfo.g_maxattack = yourinfo.g_maxattack - wearing.g_weapon[1].g_realplus + yourinfo.g_bag[select_bag].g_realplus;
+                                                yourinfo.g_minattack = yourinfo.g_minattack - wearing.g_weapon[1].g_realplus + yourinfo.g_bag[select_bag].g_realplus;
+                                                cout << "변경이 완료되었습니다." << endl;
+                                                cout << "공격력이 " << yourinfo.g_bag[select_bag].g_realplus - wearing.g_weapon[1].g_realplus << " 만큼 변경되었습니다." << endl;
+                                                wearing.g_weapon[1] = yourinfo.g_bag[select_bag];
+                                                system("pause");
+                                                continue;
+                                            }
+                                            if (select_w_weapon == 2) continue;
+
+                                        }
+                                        else
+                                        {
+                                            yourinfo.g_weapon = true;
+                                            wearing.g_weapon[1] = yourinfo.g_bag[select_bag];
+                                            yourinfo.g_maxattack = yourinfo.g_maxattack + yourinfo.g_bag[select_bag].g_realplus;
+                                            yourinfo.g_minattack = yourinfo.g_minattack + yourinfo.g_bag[select_bag].g_realplus;
+                                            yourinfo.g_bag[select_bag].g_put = true;
+                                            cout << "" << endl;
+                                            cout << "---------------------------------------------------------------------------------------------" << endl;
+                                            cout << "공격력이 " << yourinfo.g_bag[select_bag].g_realplus << " 만큼 상승했습니다." << endl;
+                                            system("pause");
+                                            continue;
+                                        }
+                                    case 2:
+                                        if (yourinfo.g_armor) {
+                                            cout << "" << endl;
+                                            cout << "---------------------------------------------------------------------------------------------" << endl;
+                                            cout << "이미 착용중인 장비가 있습니다." << endl;
+                                            cout << "1. 현재 장비로 바꾸기" << endl;
+                                            cout << "2. 변경사항 없이 나가기" << endl;
+                                            int select_w_armor;
+                                            cin >> select_w_armor;
+                                            if (select_w_armor == 1) {
+                                                yourinfo.g_maxdef = yourinfo.g_maxdef - wearing.g_armor[1].g_realplus + yourinfo.g_bag[select_bag].g_realplus;
+                                                yourinfo.g_mindef = yourinfo.g_mindef - wearing.g_armor[1].g_realplus + yourinfo.g_bag[select_bag].g_realplus;
+                                                cout << "변경이 완료되었습니다." << endl;
+                                                cout << "방어력이 " << yourinfo.g_bag[select_bag].g_realplus - wearing.g_armor[1].g_realplus << " 만큼 변경되었습니다." << endl;
+                                                wearing.g_armor[1] = yourinfo.g_bag[select_bag];
+                                                system("pause");
+                                                continue;
+                                            }
+                                            if (select_w_armor == 2) continue;
+
+                                        }
+                                        else
+                                        {
+                                            yourinfo.g_armor = true;
+                                            wearing.g_armor[1] = yourinfo.g_bag[select_bag];
+                                            yourinfo.g_maxdef = yourinfo.g_maxdef + yourinfo.g_bag[select_bag].g_realplus;
+                                            yourinfo.g_mindef = yourinfo.g_mindef + yourinfo.g_bag[select_bag].g_realplus;
+                                            yourinfo.g_bag[select_bag].g_put = true;
+                                            cout << "" << endl;
+                                            cout << "---------------------------------------------------------------------------------------------" << endl;
+                                            cout << "방어력이 " << yourinfo.g_bag[select_bag].g_realplus << " 만큼 상승했습니다." << endl;
+                                            system("pause");
+                                            continue;
+                                        }
+
+                                    default:
+                                        break;
+                                    }
+                                }
+                                else if (select_item == 3) {
+                                    yourinfo.g_bag[select_bag] = yourinfo.g_bag[yourinfo.g_invencount - 1];
+                                    yourinfo.g_bag[yourinfo.g_invencount - 1] = trash[0];
+                                    yourinfo.g_invencount--;
+                                    continue;
+                                }
+
+                            }
+                            system("pause");
                         }
-                        else if(select_item == 3) {
-                            yourinfo.g_bag[select_bag] = yourinfo.g_bag[yourinfo.g_invencount - 1];
-                            yourinfo.g_bag[yourinfo.g_invencount - 1] = trash[0];
-                            yourinfo.g_invencount--;
-                            continue;
-                        }
-                         
                     }
-                    system("pause");
+                    if (select_kind == 2) {
+                        while (true)
+                        {
+                            int select_bag;
+                            system("cls");
+                            cout << "★★★★★★★★★★★★★★★★용사님의 물약 가방★★★★★★★★★★★★★★★★★★★★" << '\t' << "공간 :" << yourinfo.g_liquidcount << " / 10" << endl;
+                            cout << "각 품목의 설명을 보려면 각 물건의 번호를 입력하시오." << endl;
+                            cout << "가방을 그만 보려면 0번을 눌러 주세요." << endl;
+                            cout << "---------------------------------------------------------------------------------------------" << endl;
+                            cout << "01." << yourinfo.g_liquid[0].g_gname << endl;
+                            cout << "02." << yourinfo.g_liquid[1].g_gname << endl;
+                            cout << "03." << yourinfo.g_liquid[2].g_gname << endl;
+                            cout << "04." << yourinfo.g_liquid[3].g_gname << endl;
+                            cout << "05." << yourinfo.g_liquid[4].g_gname << endl;
+                            cout << "06." << yourinfo.g_liquid[5].g_gname << endl;
+                            cout << "07." << yourinfo.g_liquid[6].g_gname << endl;
+                            cout << "08." << yourinfo.g_liquid[7].g_gname << endl;
+                            cout << "09." << yourinfo.g_liquid[8].g_gname << endl;
+                            cout << "10." << yourinfo.g_liquid[9].g_gname << endl;
+                            cout << "---------------------------------------------------------------------------------------------" << endl;
+                            cout << "확인하고 싶은 번호를 입력해주시기 바랍니다.(0번은 가방 닫기) : ";
+                            cin >> select_bag;
+                            if (cin.fail())
+                            {
+                                cin.clear();
+                                cin.ignore(1024, '\n');
+                                continue;
+                            }
+                            select_bag--;
+                            if (select_bag == -1) break;
+                            else {
+                                g_GOODS trash[BAG_SIZE] = {};
+                                system("cls");
+                                cout << "물건명 : " << yourinfo.g_liquid[select_bag].g_gname << endl;
+                                cout << "효과 : " << yourinfo.g_liquid[select_bag].g_geffect << endl;
+                                cout << "설명 : " << yourinfo.g_liquid[select_bag].g_gdes << endl;
+                                cout << "---------------------------------------------------------------------------------------------" << endl;
+                                cout << "1. 나가기" << endl;
+                                cout << "2. 물건 사용하기" << endl;
+                                cout << "3. 물건 기부하기" << endl;
+                                int select_item;
+                                cin >> select_item;
+                                if (cin.fail())
+                                {
+                                    cin.clear();
+                                    cin.ignore(1024, '\n');
+                                    continue;
+                                }
+                                if (select_item == 1) continue;
+                                else if (select_item == 2)
+                                {
+                                    switch (yourinfo.g_liquid[select_bag].g_use)
+                                    {
+                                    case 3:
+                                        yourinfo.g_hp = yourinfo.g_hp + yourinfo.g_liquid[select_bag].g_realplus;
+                                        if (yourinfo.g_hp > yourinfo.g_maxhp) yourinfo.g_hp = yourinfo.g_maxhp;
+                                        cout << "" << endl;
+                                        cout << "---------------------------------------------------------------------------------------------" << endl;
+                                        cout << "HP가 " << yourinfo.g_liquid[select_bag].g_realplus << "만큼 상승했습니다." << endl;
+                                        cout << "현재 HP : " << yourinfo.g_hp << endl;
+                                        yourinfo.g_liquid[select_bag].g_realplus = 0;
+                                        strcpy_s(yourinfo.g_liquid[select_bag].g_gname, "빈 병");
+                                        strcpy_s(yourinfo.g_liquid[select_bag].g_geffect, "HP + 0");
+                                        system("pause");
+                                        continue;
+
+
+                                    case 4:
+                                        yourinfo.g_mp = yourinfo.g_mp + yourinfo.g_liquid[select_bag].g_realplus;
+                                        if (yourinfo.g_mp > yourinfo.g_maxmp) yourinfo.g_mp = yourinfo.g_maxmp;
+                                        cout << "" << endl;
+                                        cout << "---------------------------------------------------------------------------------------------" << endl;
+                                        cout << "MP가 " << yourinfo.g_liquid[select_bag].g_realplus << "만큼 상승했습니다." << endl;
+                                        cout << "현재 MP : " << yourinfo.g_hp << endl;
+                                        yourinfo.g_liquid[select_bag].g_realplus = 0;
+                                        strcpy_s(yourinfo.g_liquid[select_bag].g_gname, "빈 병");
+                                        strcpy_s(yourinfo.g_liquid[select_bag].g_geffect, "MP + 0");
+                                        system("pause");
+                                        continue;
+
+
+                                    default:
+                                        break;
+                                    }
+                                }
+                                else if (select_item == 3) {
+                                    yourinfo.g_liquid[select_bag] = yourinfo.g_liquid[yourinfo.g_liquidcount - 1];
+                                    yourinfo.g_liquid[yourinfo.g_liquidcount - 1] = trash[0];
+                                    yourinfo.g_liquidcount--;
+                                    continue;
+                                }
+                                system("pause");
+                        }
+                        
+                    }
                 }
+                
+                
             }
 
         }
         
     }
 
+}
 }
