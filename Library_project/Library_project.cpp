@@ -6,7 +6,7 @@
 #define NUM 50
 #define SIZE 100
 
-
+//책 정보를 담는 구조체
 struct LM
 {
     char book_id[NUM];
@@ -16,15 +16,12 @@ struct LM
     char author_email_address[NUM];
 };
 
-int checkpoint = -1;
-FILE* myfile;
-FILE* temp;
-int count = 0;
+FILE* myfile; // 실제 파일 루트
+FILE* temp; // 복사를 위한 예비 파일 루트
 struct LM book_information;
-char blank[1] = { '\n' };
-char buff[50];
-char check[];
-
+char blank[1] = { '\n' }; //공백 삽입을 위한 변수
+char buff[50]; // 파일의 문자열을 받기 위한 버퍼
+// 책의 정보를 입력하는 함수
 int addinfo()
 {
 
@@ -43,6 +40,7 @@ int addinfo()
     fclose(myfile);
     fopen_s(&myfile, "C:\\Users\\ASUS\\Documents\\information.txt", "r+");
     int check_id = 0;
+    //실제 book_id에 입력된 내용만 카운트 해주는 size 변수
     int size = 0;
     for (int i = 0; i < 50; i++)
     {
@@ -52,6 +50,7 @@ int addinfo()
         }
         size++;
     }
+    //id가 중복되는지 중복되지 않는지 확인하는 과정
     while (!feof(myfile))
     {
 
@@ -94,15 +93,12 @@ int addinfo()
     fputs(book_information.author_email_address, myfile);
     fputc(blank[0], myfile);
     fclose(myfile);
-    count++;
     system("pause");
     return 0;
 
 }
 
-
-int standard;
-
+//화면에 전체 책 리스트를 출력해서 보여주는 함수
 int displaylist()
 {
     int check = 0;
@@ -144,7 +140,7 @@ int displaylist()
     fclose(myfile);
     return 0;
 }
-
+// 파일 전체를 삭제하는 어찌보면 위험한 함수
 int deletefile()
 {
     system("cls");
@@ -166,6 +162,9 @@ int deletefile()
 }
 
 int choice;
+//changedata()에서 사용되는 변수(어느 부분을 변경해야 할지 기준이 되어주는 역할 수행)
+int standard;
+// 선택된 책에 상세 정보를 화면에 보여주는 함수
 int searchdata()
 {
     int find = 0;
@@ -210,7 +209,7 @@ int searchdata()
     return 0;
 }
 
-
+//상세정보 중, 원하는 데이터를 수정하는 함수
 int changedata()
 {
     searchdata();
