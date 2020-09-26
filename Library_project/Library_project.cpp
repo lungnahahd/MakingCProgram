@@ -2,9 +2,10 @@
 #include <conio.h>
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <string.h>
 #define NUM 50
 #define SIZE 100
+
 
 struct LM
 {
@@ -20,9 +21,9 @@ FILE* myfile;
 FILE* temp;
 int count = 0;
 struct LM book_information;
-
-
 char blank[1] = { '\n' };
+char buff[50];
+char check[];
 
 int addinfo()
 {
@@ -39,6 +40,37 @@ int addinfo()
     printf("1. BOOK ID : ");
     scanf_s("%[^\n]s\n", book_information.book_id, 50);
     getchar();
+    fclose(myfile);
+    fopen_s(&myfile, "C:\\Users\\ASUS\\Documents\\information.txt", "r+");
+    int check_id = 0;
+    int size = 0;
+    for (int i = 0; i < 50; i++)
+    {
+        if (book_information.book_id[i] == NULL)
+        {
+            break;
+        }
+        size++;
+    }
+    while (!feof(myfile))
+    {
+
+        fgets(buff, 50, myfile);
+        if (check_id % 5 == 0)
+        {
+            int test = strncmp(buff, book_information.book_id, size);
+            if (test == 0)
+            {
+                printf("This id is already in Library!!!!!!\n");
+                system("pause");
+                fclose(myfile);
+                return 0;
+            }
+        }
+        check_id++;
+    }
+    fclose(myfile);
+    fopen_s(&myfile, "C:\\Users\\ASUS\\Documents\\information.txt", "a");
     fputs(book_information.book_id, myfile);
     fputc(blank[0], myfile);
     printf("2. BOOK NAME : ");
@@ -61,9 +93,6 @@ int addinfo()
     getchar();
     fputs(book_information.author_email_address, myfile);
     fputc(blank[0], myfile);
-
-
-
     fclose(myfile);
     count++;
     system("pause");
@@ -71,10 +100,8 @@ int addinfo()
 
 }
 
-char buff[50];
 
 int standard;
-
 
 int displaylist()
 {
@@ -159,7 +186,6 @@ int searchdata()
     printf("( 1 = Book ID, 2 = Book Name, 3 = Publication Date, 4 = Author Name, 5 = Author Email Address )\n");
     printf("---------------------------------------------------------\n");
 
-
     int checkdetail = 1;
     while (!feof(myfile))
     {
@@ -227,7 +253,14 @@ int changedata()
             }
             else
             {
-                fputs(buff, temp);
+                if (!feof(myfile))
+                {
+                    fputs(buff, temp);
+                }
+                else
+                {
+                    break;
+                }
             }
             change1++;
         }
@@ -253,7 +286,14 @@ int changedata()
             }
             else
             {
-                fputs(buff, temp);
+                if (!feof(myfile))
+                {
+                    fputs(buff, temp);
+                }
+                else
+                {
+                    break;
+                }
             }
             change2++;
         }
@@ -279,7 +319,14 @@ int changedata()
             }
             else
             {
-                fputs(buff, temp);
+                if (!feof(myfile))
+                {
+                    fputs(buff, temp);
+                }
+                else
+                {
+                    break;
+                }
             }
             change3++;
         }
@@ -305,7 +352,14 @@ int changedata()
             }
             else
             {
-                fputs(buff, temp);
+                if (!feof(myfile))
+                {
+                    fputs(buff, temp);
+                }
+                else
+                {
+                    break;
+                }
             }
             change4++;
         }
@@ -331,7 +385,14 @@ int changedata()
             }
             else
             {
-                fputs(buff, temp);
+                if (!feof(myfile))
+                {
+                    fputs(buff, temp);
+                }
+                else
+                {
+                    break;
+                }
             }
             change5++;
         }
@@ -346,11 +407,9 @@ int changedata()
 }
 
 
-
 int main()
 {
-
-    while (true)
+    while (1)
     {
         system("cls");
         printf("SELECT MENU\n");
@@ -394,8 +453,5 @@ int main()
             break;
         }
     }
-
-
-
     return 0;
 }
