@@ -15,11 +15,14 @@ struct Books books[20];
 
 int myIndex = 0;
 
+//파일과 연동하는 함수
 int readfile()
 {
+    
     int rerror = fopen_s(&myfile, "C:\\Users\\ASUS\\Documents\\information.txt", "r+");
     for (int i = 0; i < 20; i++)
     {
+        //파일이 존재하지 않을 경우 동작
         if (rerror != 0) break;
         if (feof(myfile))
         {
@@ -73,7 +76,7 @@ int main() {
 
         _write(1, "\nWould you like to add another book? \n<< Enter 1 to continue and 0 to exit>> ", 78);
 
-        //professor I can't use 'read' function at next's scanf! Please help me.
+       
         scanf("%d", &next);
         getchar();
 
@@ -92,7 +95,7 @@ int main() {
         printf("ERROR! PLEASE CHECK AGAIN");
         exit(1);
     }
-
+    //불러온 파일 뿐만 아니라 새로 입력한 파일 전부를 출력하는 코드
     for (i = 0; i < myIndex - 1; i++)
     {
         if (feof(myfile))
