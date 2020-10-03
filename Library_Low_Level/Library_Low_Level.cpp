@@ -15,8 +15,31 @@ struct Books books[20];
 
 int myIndex = 0;
 
+int readfile()
+{
+    int rerror = fopen_s(&myfile, "C:\\Users\\ASUS\\Documents\\information.txt", "r+");
+    for (int i = 0; i < 20; i++)
+    {
+        if (rerror != 0) break;
+        if (feof(myfile))
+        {
+            fclose(myfile);
+
+            break;
+        }
+        fread(books[i].ID, sizeof(books[i].ID), 1, myfile);
+        fread(books[i].name, sizeof(books[i].name), 1, myfile);
+        fread(books[i].publisher, sizeof(books[i].publisher), 1, myfile);
+        myIndex++;
+    }
+
+    return 0;
+}
+
 int main() {
 
+    readfile();
+    _write(1, "Finish Read File!!  \n", 22);
     int error = fopen_s(&myfile, "C:\\Users\\ASUS\\Documents\\information.txt", "a");
     if (error != 0)
     {
@@ -70,12 +93,19 @@ int main() {
         exit(1);
     }
 
-    for (i = 0; i < myIndex; i++)
+    for (i = 0; i < myIndex - 1; i++)
     {
-        fread(&list[i], sizeof(struct Books), 1, myfile);
+        if (feof(myfile))
+        {
+            break;
+        }
+        fread(list[i].ID, sizeof(list[i].ID), 1, myfile);
+        fread(list[i].name, sizeof(list[i].name), 1, myfile);
+        fread(list[i].publisher, sizeof(list[i].publisher), 1, myfile);
         printf("\n              \n");
         printf("\nID %s     \n", list[i].ID);
         printf("\nName %s     \n", list[i].name);
         printf("\nAddress %s\n  ", list[i].publisher);
+
     }
 }
