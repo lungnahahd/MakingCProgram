@@ -1,0 +1,95 @@
+#include <stdio.h>
+#include <string.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <stdlib.h>
+
+struct Books {
+	char name[60];
+	int ID;
+	char date[40];
+	char author[60];
+	char address[100];
+	char publisher[60];
+	char p_num[40];
+};
+
+struct Books storeDataInBooksStruct(char line[]) {
+
+	struct Books bk;
+	char seps[] = ",";
+    	char* token = NULL;
+
+	token = strtok(line, seps);
+
+	int IDTemp;
+	sscanf(token, "%d", &IDTemp);
+
+	bk.ID = IDTemp;
+
+	token = strtok(NULL, seps);
+	strcpy(bk.name, token);
+	
+	token = strtok(NULL, seps);
+	strcpy(bk.date, token);
+	
+	token = strtok(NULL, seps);
+	strcpy(bk.author, token);
+	
+	token = strtok(NULL, seps);
+	strcpy(bk.publisher, token);
+
+	token = strtok(NULL, seps);
+	strcpy(bk.address, token);
+		
+	token = strtok(NULL, seps);
+	strcpy(bk.p_num, token);
+
+	token = strtok(NULL, seps);
+		
+	return bk;	
+}
+
+int main()
+{
+	int fd2;
+	char* myfifo = "/tmp/myfifo";
+	mkfifo(myfifo,0666);
+	char sendID[30], getData[300];
+	struct Books bk;
+	int searchID;
+	
+	while(1)
+	{
+		fd2 = open(myfifo, O_RDONLY);
+		read(fd2,sendID,30);
+		searchID = atoi(sendID);
+		close(fd2);
+		FILE* fBookPtr;
+		fBookPtr = fopen("Books.txt", "r+");
+		if (fBookPtr == NULL) {
+			perror("Error! opening file");
+			break;
+		}
+		while(fgets(getData, 300, fBookPtr) != NULL)
+		{
+			bk = storeDataInBooksStruct(getData);
+			if(bk.ID == searchID)
+			{
+				fd2 = open(myfifo, O_WRONLY);
+				write(fd2,getData,strlen(getData));
+				close(fd2);
+			}
+			
+		}
+		fclose(fBookPtr);
+		
+	}
+	
+	return 0;
+
+
+	
+}
