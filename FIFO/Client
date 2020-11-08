@@ -1,0 +1,103 @@
+#include <stdio.h>
+#include <string.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <unistd.h>
+
+struct Books {
+	char name[60];
+	int ID;
+	char date[40];
+	char author[60];
+	char address[100];
+	char publisher[60];
+	char p_num[40];
+};
+
+struct Books storeDataInBooksStruct(char line[]) {
+
+	struct Books bk;
+	char seps[] = ",";
+    	char* token = NULL;
+
+	token = strtok(line, seps);
+
+	int IDTemp;
+	sscanf(token, "%d", &IDTemp);
+
+	bk.ID = IDTemp;
+
+	token = strtok(NULL, seps);
+	strcpy(bk.name, token);
+	
+	token = strtok(NULL, seps);
+	strcpy(bk.date, token);
+	
+	token = strtok(NULL, seps);
+	strcpy(bk.author, token);
+	
+	token = strtok(NULL, seps);
+	strcpy(bk.publisher, token);
+
+	token = strtok(NULL, seps);
+	strcpy(bk.address, token);
+		
+	token = strtok(NULL, seps);
+	strcpy(bk.p_num, token);
+
+	token = strtok(NULL, seps);
+		
+	return bk;	
+}
+
+int main()
+{
+	int fd1;
+	char* myfifo = "/tmp/myfifo";
+	mkfifo(myfifo,0666);
+	char sendID[30], getData[300];
+	struct Books bk;
+	char seps[] = ",";
+    	char* token = NULL;
+    	char line[300];
+    	int select = 0;
+	
+	while(1)
+	{
+		fd1 = open(myfifo,O_WRONLY);
+		printf("What do you want to see the Book?\n");
+		printf("Input Book ID : ");
+		fgets(sendID,30,stdin);
+		write(fd1, sendID,strlen(sendID));
+		close(fd1);
+		
+		fd1 = open(myfifo, O_RDONLY);
+		read(fd1, getData, sizeof(getData));
+		close(fd1);
+		bk = storeDataInBooksStruct(getData);
+		
+		
+		
+		printf("[Select Book Data]\n");
+		printf("\n\n");
+		printf("\nID : %d", bk.ID);
+		printf("\nName : %s", bk.name);
+		printf("\nPublication date : %s", bk.date);
+		printf("\nAuthor name : %s", bk.author);
+		printf("\nPublisher : %s", bk.publisher);
+		printf("\nAuthor E-mail Address : %s", bk.address);
+		printf("\nPhone Number : %s", bk.p_num);
+		printf("\n\n");
+		
+		printf("If you don't want find anthor book, Press 1\n");
+		scanf("%d",&select);
+		if(select == 1)
+		{
+			break;
+		}
+		
+	}
+	
+	return 0;
+}
