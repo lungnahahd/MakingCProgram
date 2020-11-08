@@ -25,11 +25,7 @@ void* threadCount()
 
 void* threadRead()
 {
-	int total = 0;
-	int start = 1;
-	int count = 0;
-	char buf[257];
-	//char* token = NULL;
+	
 	printf("[Thread2] Waiting I'm Working...\n");
 	FILE* threadfile;
 	threadfile = fopen("randomNum.dat","r+");
@@ -38,43 +34,22 @@ void* threadRead()
 		printf("[Thread2] Sorry, File has Error!!\n");
 		return NULL;
 	}
-	while(!feof(threadfile))
+	int numcheck;
+	int even = 0;
+	int odd = 0;
+	while(fscanf(threadfile,"%d", &numcheck)!=EOF)
 	{
-		fgets(buf,sizeof(buf),threadfile);
-		if(strlen(buf)==0) break;
-		if(start % 2 == 1 && buf != NULL)
-		{	
-			count++;	
-		}
-		start++;
-		buf[0] = '\0';
-	}
-	printf("[Thread2] Odd Count = %d\n",count);
-	fclose(threadfile);
-	
-	threadfile = fopen("randomNum.dat","r+");
-	if(threadfile == NULL)
-	{
-		printf("[Thread2] Sorry, File has Error!!\n");
-		return NULL;
-	}
-	total = 0;
-	start = 1;
-	count = 0;
-	buf[0] = '\0';
-	while(!feof(threadfile))
-	{
-		total++;
-		fgets(buf,sizeof(buf),threadfile);
-		if(strlen(buf) == 0) break;
-		if(total % 2 == 0)
+		if(numcheck % 2 == 0)
 		{
-			count++;
+			even++;
+		}else
+		{
+			odd++;
 		}
-		buf[0] = '\0';
 	}
 	fclose(threadfile);
-	printf("[Thread2] Even Count = %d\n",count);
+	printf("[Thread2] Odd Count = %d\n",odd);
+	printf("[Thread2] Even Count = %d\n",even);
 	printf("[Thread2] Okay! I'm done...\n");
 	pthread_exit(NULL);
 }
