@@ -58,37 +58,67 @@ int main()
 	char* myfifo = "/tmp/myfifo";
 	mkfifo(myfifo,0666);
 	char sendID[30], getData[300];
+	char line[400];
 	struct Books bk;
 	int searchID;
-	
 	while(1)
 	{
 		fd2 = open(myfifo, O_RDONLY);
 		read(fd2,sendID,30);
-		searchID = atoi(sendID);
+		//printf("good\n");
+		sscanf(sendID,"%d",&searchID);
+		//searchID = atoi(sendID);
+		//printf("%d\n", searchID);
 		close(fd2);
+		char *blank = " ,";
 		FILE* fBookPtr;
 		fBookPtr = fopen("Books.txt", "r+");
 		if (fBookPtr == NULL) {
 			perror("Error! opening file");
-			break;
+			return 0;
 		}
+		int flag = 0;
 		while(fgets(getData, 300, fBookPtr) != NULL)
 		{
 			bk = storeDataInBooksStruct(getData);
 			if(bk.ID == searchID)
 			{
-				fd2 = open(myfifo, O_WRONLY);
-				write(fd2,getData,strlen(getData));
-				close(fd2);
+				
+				sprintf(line,"%d%s%s%s%s%s%s%s%s%s%s%s%s",bk.ID,blank,bk.name,blank,bk.date,blank,bk.author,blank,bk.publisher,blank,bk.address,blank,bk.p_num);
+			//strcat(getData,bk.name);
+			//strcat(getData,bk.date);
+			//strcat(getData,bk.author);
+			//strcat(getData,bk.publisher);
+			//strcat(getData,bk.address);
+			//strcat(getData,bk.p_num);
+				flag = 1;
+				break;
 			}
+			//printf("Hello in while\n");
 			
 		}
-		fclose(fBookPtr);
 		
+		fclose(fBookPtr);
+		fd2 = open(myfifo,O_WRONLY);
+		if(flag == 0)
+		{
+			char empty[400] = "NULL";
+			write(fd2,empty,400);
+		}else if(flag == 1)
+		{
+			
+			write(fd2,line,400);
+		}
+		//fd2 = open(myfifo,O_WRONLY);
+		//write(fd2,line,400);
+	
+		//printf("Hi out\n");
+		//printf("%s\n",line);
+		close(fd2);	
+		flag = 0;
 	}
 	
-	return 0;
+		return 0;
 
 
 	
