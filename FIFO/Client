@@ -56,7 +56,7 @@ int main()
 	int fd1;
 	char* myfifo = "/tmp/myfifo";
 	mkfifo(myfifo,0666);
-	char sendID[30], getData[300];
+	char sendID[30], getData[400];
 	struct Books bk;
 	char seps[] = ",";
     	char* token = NULL;
@@ -71,33 +71,31 @@ int main()
 		fgets(sendID,30,stdin);
 		write(fd1, sendID,strlen(sendID));
 		close(fd1);
-		
+	
 		fd1 = open(myfifo, O_RDONLY);
 		read(fd1, getData, sizeof(getData));
 		close(fd1);
-		bk = storeDataInBooksStruct(getData);
-		
-		
-		
-		printf("[Select Book Data]\n");
-		printf("\n\n");
-		printf("\nID : %d", bk.ID);
-		printf("\nName : %s", bk.name);
-		printf("\nPublication date : %s", bk.date);
-		printf("\nAuthor name : %s", bk.author);
-		printf("\nPublisher : %s", bk.publisher);
-		printf("\nAuthor E-mail Address : %s", bk.address);
-		printf("\nPhone Number : %s", bk.p_num);
-		printf("\n\n");
-		
-		printf("If you don't want find anthor book, Press 1\n");
-		scanf("%d",&select);
-		if(select == 1)
+		if(strcmp(getData,"NULL") == 0)
 		{
-			break;
-		}
+			printf("NO BOOK ID YOU INPUT!!\n");
+		}else{
+			bk = storeDataInBooksStruct(getData);
 		
-	}
 	
-	return 0;
+	
+	//printf("%s",getData);
+			printf("[Select Book Data]\n");
+			printf("\n\n");
+			printf("\nID : %d", bk.ID);
+			printf("\nName : %s", bk.name);
+			printf("\nPublication date : %s", bk.date);
+			printf("\nAuthor name : %s", bk.author);
+			printf("\nPublisher : %s", bk.publisher);
+			printf("\nAuthor E-mail Address : %s", bk.address);
+			printf("\nPhone Number : %s", bk.p_num);
+			printf("\n\n");
+			//close(fd1);
+		}
+	}		
+		return 0;
 }
