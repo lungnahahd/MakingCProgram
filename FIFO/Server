@@ -65,10 +65,7 @@ int main()
 	{
 		fd2 = open(myfifo, O_RDONLY);
 		read(fd2,sendID,30);
-		//printf("good\n");
 		sscanf(sendID,"%d",&searchID);
-		//searchID = atoi(sendID);
-		//printf("%d\n", searchID);
 		close(fd2);
 		char *blank = " ,";
 		FILE* fBookPtr;
@@ -83,19 +80,10 @@ int main()
 			bk = storeDataInBooksStruct(getData);
 			if(bk.ID == searchID)
 			{
-				
 				sprintf(line,"%d%s%s%s%s%s%s%s%s%s%s%s%s",bk.ID,blank,bk.name,blank,bk.date,blank,bk.author,blank,bk.publisher,blank,bk.address,blank,bk.p_num);
-			//strcat(getData,bk.name);
-			//strcat(getData,bk.date);
-			//strcat(getData,bk.author);
-			//strcat(getData,bk.publisher);
-			//strcat(getData,bk.address);
-			//strcat(getData,bk.p_num);
 				flag = 1;
 				break;
-			}
-			//printf("Hello in while\n");
-			
+			}		
 		}
 		
 		fclose(fBookPtr);
@@ -103,17 +91,12 @@ int main()
 		if(flag == 0)
 		{
 			char empty[400] = "NULL";
-			write(fd2,empty,400);
+			write(fd2,empty,strlen(empty)+1);
 		}else if(flag == 1)
 		{
 			
-			write(fd2,line,400);
+			write(fd2,line,strlen(line)+1);
 		}
-		//fd2 = open(myfifo,O_WRONLY);
-		//write(fd2,line,400);
-	
-		//printf("Hi out\n");
-		//printf("%s\n",line);
 		close(fd2);	
 		flag = 0;
 	}
