@@ -108,49 +108,32 @@ int main(int argc, char const *argv[])
 } 
 
 
-void add_info(char msgFromClient[MSG_SIZE], char msgToClient[MSG_SIZE], connection_t * conn)//[]안에 헷갈림.
-{	
-	
-	
-	//char msgToClient[MSG_SIZE];
-	//msgToClient[0] = '\0';
-	  //char *result = "추가를 원하는 정보를 보내주세요\n";
-	 //strcat(msgToClient, result);
-	write(conn->sock , msgToClient , sizeof(msgToClient));
-	msgToClient[0] = '\0';
-	msgFromClient[0] = '\0';
-	read(conn->sock, msgFromClient, sizeof(msgFromClient));
+void add_info(char msgFromClient[MSG_SIZE], connection_t * conn)
+{
+	char msgToClient[MSG_SIZE];
 	FILE* fBookPtr;
 	fBookPtr = fopen("Books.txt", "a+");
 	if (fBookPtr == NULL) 
-    {
-        perror("Error! opening file");
+	{
+	    perror("Error! opening file");
 	}
-    fprintf(fBookPtr,"%s",msgFromClient);
+	fprintf(fBookPtr,"%s",msgFromClient);
 	fclose(fBookPtr);
-	char *result2 = "정보 추가를 완료했습니다.\n";
+	char *result2 = "Finish Add Information\n";
 	strcat(msgToClient, result2);
 	write(conn->sock , msgToClient , sizeof(msgToClient));
 }
 
-void update_info( char msgFromClient[MSG_SIZE], char msgToClient[MSG_SIZE],connection_t * conn)
+void update_info(char msgFromClient[MSG_SIZE], connection_t * conn)
 {
-			
-			//char msgToClient[MSG_SIZE];
-    			//msgToClient[0] = '\0';
+			char msgToClient[MSG_SIZE];
+			//char msgToClient2[MSG_SIZE];
 			char line[300];
-			//char *result = "Please insert your information\n";
-			//char *result = "수정을 원하는 id를 입력해주세요\n";
-			//strcat(msgToClient, result);
-			write(conn->sock , msgToClient , sizeof(msgToClient));
-			msgToClient[0] = '\0';
-			msgFromClient[0] = '\0';
-			read(conn->sock, msgFromClient, sizeof(msgFromClient));
-			char sep1[] = " ";
-			char sep2[] = " ";
+			char sep[] = " ";
+			//char sep2[] = " ";
 			char *fileid = NULL;
 			char *msgid = NULL;
-			msgid = strtok(msgFromClient, sep2);
+			msgid = strtok(msgFromClient, sep);
 			FILE* fBookPtr;
 			fBookPtr = fopen("Books.txt", "r");
 
@@ -161,36 +144,38 @@ void update_info( char msgFromClient[MSG_SIZE], char msgToClient[MSG_SIZE],conne
 
 			int checkflag = 0;
 			char cpline[300];
-			//char cpline2[300];
 
 			while (fgets(line, 300, fBookPtr) != NULL) 
 			{
 				strcpy(cpline,line);
-				fileid = strtok(cpline,sep1);
-				if(!strcmp(fileid, msgid))
+				fileid = strtok(cpline,sep);
+				if(!strcmp(fileid, msgid)) // 찾는 id 정보가 파일에 저장되어 있는 경우
 				{
 					checkflag = 1;
+					break;
 				}
 			}
 
-			if(checkflag == 0)
+			if(checkflag == 0) // 찾는 id에 대한 정보가 없는 경우
 			{
 				fclose(fBookPtr);
-				char *result2 = "해당 id의 정보는 존재하지 않습니다.\n";
+				char *result2 = "No Book Information that you want\n";
 				strcat(msgToClient, result2);
 				write(conn->sock , msgToClient , sizeof(msgToClient));
 			}
 
-			else
+			else // 찾는 id가 있는 경우에 수행할 코드
 			{
-				char *result4 = "수정 정보를 입력해주세요!\n";
+				char *result4 = "Input New Information\n";
 				strcat(msgToClient,result4);
 				write(conn->sock , msgToClient , sizeof(msgToClient));				
+				char msgToClient[MSG_SIZE];
+				char msgFromClient[MSG_SIZE];
 				read(conn->sock, msgFromClient, sizeof(msgFromClient));
 				char cpmsg[MSG_SIZE];
 				strcpy(cpmsg,msgFromClient);
-				msgid = strtok(cpmsg, sep2);
-				rewind(fBookPtr);
+				//msgid = strtok(cpmsg, sep);
+				rewind(fBookPtr); //다시 파일의 원래 위치로 포인터 옮기기
 				FILE* tempfBookPtr;
 				tempfBookPtr = fopen("tempBooks.txt", "w");
 
@@ -203,8 +188,8 @@ void update_info( char msgFromClient[MSG_SIZE], char msgToClient[MSG_SIZE],conne
 				while(fgets(line,300,fBookPtr) != NULL)
 				{
 					strcpy(cpline,line);
-					fileid = strtok(cpline,sep1);
-					if(!strcmp(fileid, msgid))
+					fileid = strtok(cpline,sep);
+					if(!strcmp(fileid, msgid)) 
 					{
 						fprintf(tempfBookPtr,"%s",msgFromClient);
 						continue;
@@ -223,23 +208,16 @@ void update_info( char msgFromClient[MSG_SIZE], char msgToClient[MSG_SIZE],conne
 				if (flag != 0) perror("Unable to remove ");
 				int flagR = rename("tempBooks.txt", "Books.txt");
 				if (flagR != 0) perror("Unable to remove ");
-				char * result3 = "정보 수정이 완료되었습니다.\n";
+				char * result3 = "Finish Update Information\n";
 				strcat(msgToClient, result3);
 				write(conn->sock , msgToClient , sizeof(msgToClient));
 			}
 }
 
-void search_info(char msgFromClient[MSG_SIZE],char msgToClient[MSG_SIZE], connection_t * conn)
-{	
-			//char msgToClient[MSG_SIZE];
-			//msgToClient[0] = '\0';
+void search_info( char msgFromClient[MSG_SIZE], connection_t * conn)
+{		
+			char msgToClient[MSG_SIZE];
 			char line[300];
-			//char *result = "검색을 원하는 id를 입력해주세요\n";
-			//strcat(msgToClient, result);
-			write(conn->sock , msgToClient , sizeof(msgToClient));
-			msgToClient[0] = '\0';
-			msgFromClient[0] = '\0';
-			read(conn->sock, msgFromClient, sizeof(msgFromClient));
 			char sep1[] = " ";
 			char sep2[] = " ";
 			char *fileid = NULL;
@@ -248,65 +226,89 @@ void search_info(char msgFromClient[MSG_SIZE],char msgToClient[MSG_SIZE], connec
 			FILE* fBookPtr;
 			fBookPtr = fopen("Books.txt", "r");
 			if (fBookPtr == NULL) 
-            {
+            			{
 				perror("Error! opening file");
 			}
 			int checkflag = 0;
 			char cpline[300];
 			while (fgets(line, 300, fBookPtr) != NULL) 
-            {
+         			{
 				strcpy(cpline,line);
 				fileid = strtok(cpline,sep1);
 				if(!strcmp(fileid, msgid))
-                {
+                			{
 					strcat(msgToClient, line);
 					write(conn->sock , msgToClient , sizeof(msgToClient));
 					checkflag = 1;
-			    }
-		    }
+			    	}
+		   	 }	
 			
             fclose(fBookPtr);
             if(checkflag == 0)
             {
-                char *result2 = "해당 id의 정보는 존재하지 않습니다.\n";
+                char *result2 = "No Book Information that you want\n";
                 strcat(msgToClient, result2);
                 write(conn->sock , msgToClient , sizeof(msgToClient));
             }
 }
 
-void display_all_info( char msgFromClient[MSG_SIZE],char msgToClient[MSG_SIZE], connection_t * conn)
+void display_all_info(connection_t * conn)
 {
-	//char msgToClient[MSG_SIZE];
-    	//msgToClient[0] = '\0';
-	//char line[300];
-	//FILE* fBookPtr;
-	//fBookPtr = fopen("Books.txt", "r");
-	//if (fBookPtr == NULL) 
-	//{
-	//	perror("Error! opening file");
-	//}
-	//while (fgets(line, 300, fBookPtr) != NULL) 
-	//{
-	//	strcat(msgToClient,line);
-	//}
-	write(conn->sock , msgToClient , sizeof(msgToClient));
-	//fclose(fBookPtr);
+	char msgToClient[MSG_SIZE];
+  	char line[300];
+	char *more = "\nDo you want more information(Y / N)?\n";
+	int showsize = strlen(more);
+	int check = 0;
+	FILE* fBookPtr;
+	fBookPtr = fopen("Books.txt", "r");
+	if (fBookPtr == NULL) 
+	{
+		perror("Error! opening file");
+	}
+	while (fgets(line, 300, fBookPtr) != NULL) 
+	{
+		showsize = showsize + strlen(line);
+		if(check ==1){
+			msgToClient[0] = '\0';
+			check = 0;
+		}
+		if(showsize > sizeof(msgToClient)){
+			check = 1;
+			strcat(msgToClient,more);
+			write(conn->sock , msgToClient , sizeof(msgToClient));
+			char msgFromClient[MSG_SIZE];
+			showsize = strlen(more);
+			read(conn->sock, msgFromClient, sizeof(msgFromClient));
+			//if(!strncmp(msgFromClient, "Y\n",2)){
+				continue;
+			//}
+			
+			if(!strncmp(msgFromClient, "N\n",2)){
+				char msgToClient[MSG_SIZE];
+				char *end = "Thank you\n";
+				strcat(msgToClient,end);
+				write(conn->sock , msgToClient , sizeof(msgToClient));
+				break;
+			}
+			continue;	
+		}
+		strcat(msgToClient,line);
+	}
+	if(check !=1){	
+		write(conn->sock , msgToClient , sizeof(msgToClient));
+	}
+	fclose(fBookPtr);
 }
 
-void delete_info( )
-{	
-	//char msgToClient[MSG_SIZE];
-	//msgToClient[0] = '\0';
-	     if(chmod("Books.txt",07777)<0)
+void delete_info()
+{
+     if(chmod("Books.txt",07777)<0)
                 perror("Permission ERROR");
             int flag = remove("Books.txt");
             if(flag != 0) perror("Unable to delete file");
             FILE *fBookPtr;
             fBookPtr = fopen("Books.txt", "a+");
             fclose(fBookPtr);
-           // char *result = "데이터베이스 내용이 삭제되었습니다.\n";
-            //strcat(msgToClient, result);
-            //write(conn->sock , msgToClient , sizeof(msgToClient));
 }
 // This will handle connection for each client
 void *connection_handler( void *clientsocket)
@@ -317,71 +319,67 @@ void *connection_handler( void *clientsocket)
 
     while(1)
     {
-		
 		char msgFromClient[MSG_SIZE];
 		char msgToClient[MSG_SIZE];
-		msgFromClient[0] = '\0';
-        		msgToClient[0] = '\0';
-		read(conn->sock, msgFromClient, sizeof(msgFromClient)); 
-       		 printf("CLIENT: %s\n",msgFromClient );
 
-		if(!strncmp(msgFromClient,"1\n",2))
+        read(conn->sock, msgFromClient, sizeof(msgFromClient));
+        printf("CLIENT: %s\n",msgFromClient );
+
+		//add 기능 구현
+		if(!strncmp(msgFromClient,"1",2))
 		{
-	   		char *result = "추가를 원하는 정보를 보내주세요\n";
-	 		strcat(msgToClient, result);
-          			add_info(msgFromClient,msgToClient, conn);
-		}
-
-       		 else if(!strncmp(msgFromClient,"2\n",2))
-		{	
-			//char *result = "Please insert your information\n";
-			char *result = "수정을 원하는 id를 입력해주세요\n";
+			char *result = "Input New Book Information\n";
 			strcat(msgToClient, result);
-			update_info( msgFromClient,msgToClient ,conn);
-		}
-
-		else if(!strncmp(msgFromClient,"3\n",2))
-		{
-			char *result = "검색을 원하는 id를 입력해주세요\n";
-			strcat(msgToClient, result);
-		            search_info( msgFromClient,msgToClient ,conn);
-		}
-
-	           else if(!strncmp(msgFromClient, "4\n",2))
-		{	
-            			char line[300];
-			FILE* fBookPtr;
-			fBookPtr = fopen("Books.txt", "r");
-			if (fBookPtr == NULL) 
-			{
-				perror("Error! opening file");
-			}
-			while (fgets(line, 300, fBookPtr) != NULL) 
-			{
-				strcat(msgToClient,line);
-			}
 			write(conn->sock , msgToClient , sizeof(msgToClient));
-			fclose(fBookPtr);
-			//display_all_info( msgFromClient,msgToClient ,conn);
+			msgToClient[0] = '\0';
+			msgFromClient[0] = '\0';
+			read(conn->sock, msgFromClient, sizeof(msgFromClient));
+            add_info(msgFromClient, conn);
 		}
 
-	        	else if(!strncmp(msgFromClient,"5\n",2))
-	    	{
-	           		 delete_info();
-			 char *result = "데이터베이스 내용이 삭제되었습니다.\n";
-            			  strcat(msgToClient, result);
-            			write(conn->sock , msgToClient , sizeof(msgToClient));
-	    	}	
+        else if(!strncmp(msgFromClient,"2",2))
+		{
+			char *result = "Please Input ID for Update:)\n";
+			strcat(msgToClient, result);
+			write(conn->sock , msgToClient , sizeof(msgToClient));
+			msgToClient[0] = '\0';
+			msgFromClient[0] = '\0';
+			read(conn->sock, msgFromClient, sizeof(msgFromClient));
+			update_info(msgFromClient, conn);
+		}
 
-      		  else
-	   	 {	
-			char msgToClient[MSG_SIZE];
-			    printf("\nSERVER_ ");
-            			fgets(msgToClient, sizeof(msgToClient), stdin);
-            			write(conn->sock , msgToClient , sizeof(msgToClient));
-	   	 }
+		else if(!strncmp(msgFromClient,"3",2))
+		{
+            char *result = "Please Input ID for Search :)\n";
+			strcat(msgToClient, result);
+			write(conn->sock , msgToClient , sizeof(msgToClient));
+			msgToClient[0] = '\0';
+			msgFromClient[0] = '\0';
+			read(conn->sock, msgFromClient, sizeof(msgFromClient));
+			search_info(msgFromClient, conn);
+		}
+
+        else if(!strncmp(msgFromClient, "4",2))
+		{
+           	display_all_info(conn);
+		}
+
+        else if(!strncmp(msgFromClient,"5",2))
+	    {
+			delete_info(msgToClient, conn);
+			char *result = "Delete all information\n";
+            strcat(msgToClient, result);
+            write(conn->sock , msgToClient , sizeof(msgToClient));
+	    }
+
+        else
+	    {
+		    printf("\nSERVER_ ");
+           	fgets(msgToClient, sizeof(msgToClient), stdin);
+           	write(conn->sock , msgToClient , sizeof(msgToClient));
+	    }
         
     }
-	printf("Client served\n");
-      	  return 0;
+printf("Client served\n");
+ return 0;
 }
