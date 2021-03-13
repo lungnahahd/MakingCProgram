@@ -1,0 +1,82 @@
+//Standard includes. 
+#include <stdio.h>
+#include <unistd.h>
+//Kernel includes. 
+#include <pthread.h>
+#include <time.h>
+#define MAX_RUN_COUNT 3
+
+//Task function prototypes. 
+static void *hufsTaskX( void * arg )
+{
+    int runCount = 0;
+    int taskIndex = *(int*) arg;
+    printf("hufsTask%d started.\n", taskIndex);
+    fflush(stdout);
+    while(1) {
+                printf("hufsTask%d [%d] is running.\n", taskIndex, ++runCount);
+                fflush(stdout);
+                sleep(taskIndex *1);
+                if(runCount >= MAX_RUN_COUNT) break;
+    }
+}
+//----------------------------------------------------------
+
+int main( void )
+{
+        int status[5];
+	int arg[5];
+        int i;
+	int count = 0;
+        pthread_t thread_t[5];
+	
+	for(i=0; i < 5; i++){
+		arg[i] = i+1;
+	}
+
+        printf("Start\n");
+        fflush(stdout);
+	
+	printf("Before creating hufsTask1.\n");
+	fflush(stdout);
+	if(pthread_create(&thread_t[count],NULL,hufsTaskX, &arg[count]) <0){
+		printf("Error : was failed to create thread.");
+	}
+	count++;
+	
+	printf("Before creating hufsTask2.\n");
+	fflush(stdout);
+	if(pthread_create(&thread_t[count],NULL,hufsTaskX, &arg[count]) <0){
+		printf("Error : was failed to create thread.");
+	}
+	count++;
+	
+	printf("Before creating hufsTask3.\n");
+	fflush(stdout);
+	if(pthread_create(&thread_t[count],NULL,hufsTaskX, &arg[count]) <0){
+		printf("Error : was failed to create thread.");
+	}
+	count++;
+	
+	printf("Before creating hufsTask4.\n");
+	fflush(stdout);
+	if(pthread_create(&thread_t[count],NULL,hufsTaskX, &arg[count]) <0){
+		printf("Error : was failed to create thread.");
+	}
+	count++;
+	
+	printf("Before creating hufsTask5.\n");
+	fflush(stdout);
+	if(pthread_create(&thread_t[count],NULL,hufsTaskX, &arg[count]) <0){
+		printf("Error : was failed to create thread.");
+	}
+
+        printf("After creating all tasks: now joining...\n");
+        fflush(stdout);
+
+        for(i=0 ; i<5 ; i++)
+                pthread_join(thread_t[i],(void**)&status[i]);
+
+    printf("The End\n");
+	return 0;
+}
